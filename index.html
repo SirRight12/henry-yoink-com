@@ -1,0 +1,79 @@
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <title>Work</title>
+    <link href="Scripts/fonts.css" rel="stylesheet" type="text/css">
+    <link href="Scripts/theme.css" rel="stylesheet" type="text/css">
+    <link href="Scripts/style.css" rel="stylesheet" type="text/css">
+    <link id="customFont" href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <style id="customFontCSS"></style>
+
+<body class="dark" style="transition-duration: 350ms;">
+    <div id="settingsMenu">
+        <div class="settingsContainer">
+            <input class="settings" id="navbarColor" type="color" value="#202124" onfocus="autoUpdNavbar(this)"/> <label class="setText">Navbar Color</label>
+        </div>
+        <div class="settingsContainer">
+            <input class="settings" id="bg" type="color" value="#202124" onfocus="autoUpd(this)"/> <label class="setText">Background Color</label>
+        </div>
+        <div class="settingsContainer">
+            <input class="settings" id="textism" type="color" value="#ffffff" onfocus="autoUpdText(this)"/> <label class="setText">Text Color</label>
+        </div>
+        <div class="settingsContainer">
+            <select class="settings" id="fonts" onchange="changeFont(this)">
+                <option class="optionSettings Default"><p>Default</p></option>
+                <option class="optionSettings Hylian"><p>Hylian</p></option>
+                <option class="optionSettings Apple"><p>Apple</p></option>
+                <option class="optionSettings Mason"><p>Mason</p></option>
+                <option class="optionSettings Kirby"><p>Kirby</p></option>
+                <option class="optionSettings GameboySmall"><p>Gameboy</p></option>
+                <option class="optionSettings LOTR" style="font-size: unset !important;"><p>LOTR</p></option>
+                <option class="optionSettings Minecraft"><p>Minecraft</p></option>
+                <option style="font-family: 'Unknown';" class="optionSettings"><p>Unknown</p></option>
+                <option class="optionSettings" style="font-family: 'Enchanting';"><p>Enchanting</p></option>
+                <option class="optionSettings Demon"><p>Demon</p></option>
+                <option class="optionSettings OnePiece"><p>OnePiece</p></option>
+            </select> <label class="setText">Font Style</label>
+        </div>
+        <input type="checkbox" id="span" value="false"><label class="setText">Use Spanish</label>
+
+
+    </div>
+    <div class="navbar" id="navbarspace"></div>
+    <div class="navbar" id="navbar">
+        <a href="../index.html" title="Home">
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+            </svg>
+        </a>
+        </div>
+        <svg class="icon darkmode" id="allsun" onclick=" toggleSettings()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"></path>
+            <path id="sunrays" d="M20 15.31L23.31 12 20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69zM12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z" style="transition-duration: 350ms;"></path>
+        </svg>
+    </div>
+    <div id="content">
+        <div id="schedule">
+            <div id="prompt" data-before="You have" data-after="Until 1st period starts" onclick="">5</div>
+        </div>
+        <div class="material-symbols-rounded" id="fullscreen">fullscreen</div>
+        <div id="iframes"></div>
+        <div id="text-input"></div>
+        <div class="container"></div>
+        <div id="input" contenteditable="true"></div>
+    </div>
+    <footer>
+        <a href="">Nothing</a>
+        <a href="" versetoblooket="">Works</a>
+        <a href="">Down</a>
+        <a href="">Here</a>
+        <a href="">Quote Book</a>
+        <span>2022 Henry Getz</span>
+    </footer>
+    <script src="Scripts/betterDict.js"></script>
+    <script src="Scripts/hscript.js"></script>
+    <script src="Scripts/script.js"></script>
+
+
+</body></html>

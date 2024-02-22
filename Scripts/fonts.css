@@ -1,0 +1,221 @@
+@font-face {
+    font-family: "Rubik";
+    src: url('../fonts/Rubik-Italic-VariableFont_wght.ttf') format('truetype');
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Rubik";
+    src: url('../fonts/Rubik-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+}
+/*
+@font-face {
+    font-family: "Lobster";
+    src: url('../static/fonts/Lobster-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "Amatic";
+    src: url('../static/fonts/AmaticSC-Regular.ttf') format('truetype');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Amatic";
+    src: url('../static/fonts/AmaticSC-Bold.ttf') format('truetype');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "Abril Fatface";
+    src: url('../static/fonts/AbrilFatface-Regular.ttf') format('truetype');
+}
+*/
+@font-face {
+    font-family: "Bebas Neue";
+    src: url('../fonts/BebasNeue-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: "Default";
+    src: url('../fonts/BebasNeue-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: "Hylian";
+    src: url('../fonts/ZeldaGlyphs-v2-Deco.ttf') format('truetype');
+}
+@font-face {
+    font-family: "Mason";
+    src: url('../fonts/IBMPlexMono-SemiBold.ttf')
+}
+@font-face {
+    font-family: "Kirby";
+    src: url('../fonts/kirby-classic.ttf')
+}
+@font-face {
+    font-family: "Minecraft";
+    src: url('../fonts/MinecraftRegular-Bmg3.otf')
+}
+@font-face {
+    font-family: "Unknown";
+    src: url('../fonts/Unown.ttf')
+}
+@font-face {
+    font-family: "Enchanting";
+    src: url('../fonts/minecraft-enchantment.ttf')
+}
+@font-face {
+    font-family: "Gameboy";
+    src: url('../fonts/PokemonGb-RAeo.ttf')
+}
+@font-face {
+    font-family: "LOTR";
+    src: url("../fonts/Aelfa-mlam.ttf")
+}
+@font-face {
+    font-family: "Demon";
+    src: url('../fonts/BloodCrow-GdXg.ttf');
+}
+@font-face {
+    font-family: "OnePiece";
+    src: url('../fonts/OnePiece-zAqL.ttf');
+}
+@font-face {
+    font-family: "Apple";
+    src: "../fonts/apple.woff";
+}
+/*
+@font-face {
+    font-family: "Cabin Sketch";
+    src: url('../static/fonts/CabinSketch-Bold.ttf') format('truetype');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "Cabin Sketch";
+    src: url('../static/fonts/CabinSketch-Regular.ttf') format('truetype');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Fredoka One";
+    src: url('../static/fonts/FredokaOne-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "Readex Pro";
+    src: url('../static/fonts/ReadexPro-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "Alata";
+    src: url('../static/fonts/Alata-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "Bungeee Shade";
+    src: url('../static/fonts/BungeeShade-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "Pattaya";
+    src: url('../static/fonts/Pattaya-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "Itim";
+    src: url('../static/fonts/Itim-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "Kalam";
+    src: url('../static/fonts/Kalam-Regular.ttf') format('truetype');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Kalam";
+    src: url('../static/fonts/Kalam-Light.ttf') format('truetype');
+    font-weight: lighter;
+}
+
+@font-face {
+    font-family: "Kalam";
+    src: url('../static/fonts/Kalam-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Cinzel";
+    src: url('../static/fonts/Cinzel-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "Graduate";
+    src: url('../static/fonts/Graduate-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "Fugaz One";
+    src: url('../static/fonts/FugazOne-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "Black Ops";
+    src: url('../static/fonts/BlackOpsOne-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "Lobster Two";
+    src: url('../static/fonts/LobsterTwo-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Lobster Two";
+    src: url('../static/fonts/LobsterTwo-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Lobster Two";
+    src: url('../static/fonts/LobsterTwo-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Lobster Two";
+    src: url('../static/fonts/LobsterTwo-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Special Elite";
+    src: url('../static/fonts/SpecialElite-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "Pacifico";
+    src: url('../static/fonts/Pacifico-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "Bangers";
+    src: url('../static/fonts/Bangers-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "Luckiest Guy";
+    src: url('../static/fonts/LuckiestGuy-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "Copse";
+    src: url('../static/fonts/Copse-Regular.ttf') format('truetype');
+}
+*/

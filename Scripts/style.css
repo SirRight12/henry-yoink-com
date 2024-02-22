@@ -1,0 +1,331 @@
+html, body {
+    overflow-x: hidden;
+    height: 100%;
+}
+body {
+    display: flex;
+    align-items: center;
+}
+.setText {
+    filter: invert(1)
+}
+.settings {
+    margin-right: 4px;
+}
+@keyframes moveRight {
+    0%{right: 0%;}
+    100%{right: -36.6%;}
+}
+@keyframes moveLeft {
+    0% {right: -36.6%}
+    100% {right: 0%}
+}
+#settingsMenu {
+    background-color: #202124;
+    width: 36%;
+    height: 55%;
+    position: absolute;
+    right: -36.6%;
+    z-index: 1;
+    top: 10%;
+    filter: invert(1);
+    animation-timing-function: cubic-bezier(0.42, 0, 0.27, 1.02);
+    border: 2px solid;
+    border-radius: 6px;
+}
+.settingsContainer {
+    filter: invert(1);
+    padding: 10px;
+    filter: none !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+#teachers {
+    text-align: center;
+    position: absolute;
+    top: 15%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-family: "Bebas Neue";
+    outline: 0;
+    font-size: 115%;
+    padding: 4px;
+    border-radius: 9px;
+    border: 2px solid #929292;
+}
+#allsuns {
+    position: absolute;
+	top: 12%;
+    z-index: 2;
+	right: .5%;
+}
+#teachers.dark {
+    background: #282b3a;
+    color: #fff;
+}
+#teachers.light {
+    background:  #fff;
+    color: #282b3a;
+}
+#main {
+    width: 100vw;
+    height: 300px;
+    position: static;
+    /* z-index: -1; */
+    margin: 0px 0px;
+    user-select: none;
+    object-fit: cover;
+    object-position: bottom;
+}
+#fonts {
+    text-align: center;
+}
+.playful {
+    font-family: Lobster, Arial;
+    font-size: 35px;
+    margin-right: 5px;
+}
+
+.header {
+    font-size: 31px;
+    word-spacing: 10px;
+    color: var(--sketch);
+    font-weight: normal;
+    font-family: Itim;
+}
+
+#portrait {
+    width: 84px;
+    border-radius: 150px;
+    float: left;
+    /* top: 10%;
+  left: 40%; */
+    shape-outside: circle(80% at 50% 23px) border-box;
+    justify-content: center;
+    margin-right: 15px;
+    margin-bottom: 18px;
+    /* display: none; */
+    user-select: none;
+    /* filter: grayscale(1); */
+}
+
+#intro {
+    column-gap: 18px;
+    align-items: flex-start;
+}
+
+@media screen and (max-width: 400px) {
+    #portrait {
+        display: none;
+    }
+}
+
+input {
+    filter: invert(1);
+}
+
+footer {
+    display: none !important;
+}
+
+#intro span.header {
+    width: 100%;
+    text-align: center;
+}
+.Mason {
+    --font:
+    'Mason' !important;
+    font-family: 'Mason' !important;
+}
+.Hylian {
+    --font: 'Hylian' !important;
+    font-family: 'Hylian' !important;
+}
+.Kirby {
+    --font: 'Kirby' !important;
+    font-family: 'Kirby' !important;
+}
+.Minecraft {
+    --font: 'Minecraft' !important;
+    font-family: 'Minecraft' !important;
+}
+.Default {
+    --font: 'Rubik' !important;
+    font-family: 'Default' !important;
+}
+.Unknown {
+    --font: 'Unknown' !important;
+    font-family: 'Unkown' !important;
+}
+.Enchanting {
+    --font:'Enchanting' !important;
+    gap: calc(50vmin/10) !important;
+    font-family: 'Enchanting' !important;
+    --margin: .4em !important;
+}
+.Gameboy {
+    --font:
+    'Gameboy' !important;
+    font-family: 'Gameboy' !important;
+    --size: 3.5vmin !important;
+    font-size: 13vmin !important;
+}
+.Apple {
+    font-family: 'Apple' !important;
+    --font:
+    'Apple' !important;
+}
+.LOTR {
+    --font:
+    "LOTR" !important;
+    font-family: "LOTR" !important;
+    gap: 0 !important;
+    font-size: 28vh !important;
+    --size: 8vh !important;
+    --margin: calc(-40em/100) !important;
+}
+.GameboySmall {
+    --font: 'Gameboy' !important;
+    font-family: 'Gameboy' !important;
+}
+.Demon {
+    --font: 'Demon' !important;
+    font-family: 'Demon' !important;
+}
+.OnePiece {
+    --font: 'OnePiece' !important;
+    font-family: 'OnePiece' !important;
+}
+#prompt {
+    display: grid;
+    user-select: none;
+    gap: calc(80vmin/10);
+    font-size: 15vmin;
+    --size: 6vmin;
+    font-weight: 800;--weight: normal;
+    text-align: center;
+    margin: 20vmin 0;
+    --margin: calc(-88em/100);
+    font-family:
+    'Bebas Neue';
+    --font:
+    'Rubik';
+    letter-spacing: calc(3em/100);
+    --spacing:
+    calc(0em/100);
+    transition: 1s;
+    font-weight: 500;
+}
+
+#prompt:before {
+    position: relative;
+    top: 50%;
+    right: 0%;
+    content: attr(data-before);
+    font-size: var(--size);
+    font-weight: var(--weight);
+    margin: var(--margin);
+    font-family: var(--font);
+    letter-spacing: var(--spacing);
+}
+
+#prompt:after {
+    content: attr(data-after);
+    font-size: var(--size);
+    font-weight: var(--weight);
+    margin: var(--margin);
+    font-family: var(--font);
+    letter-spacing: var(--spacing);
+}
+
+#schedule iframe {
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 31vmin;
+}
+
+#fullscreen {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 0;
+    text-align: center;
+    display: none;
+}
+
+.navbar {
+    width: 100%;
+    height: 10% !important;
+}
+
+#content {
+    height: 100%;
+    justify-content: center;
+}
+
+#text-input {
+    visibility: hidden;
+    display: none;
+}
+
+.container {
+    background: #00c3ff;
+    background: #00293b;
+    display: none;
+}
+
+#content:not(.input) #input {
+    display: none;
+}
+
+#input {
+    overflow: scroll;
+    outline: none;
+    background-color: red;
+    min-width: 1em;
+    min-height: 1em;
+    max-height: 5em;
+    max-height: 4em;
+}
+
+#text {
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    transition: all;
+    transition-duration: 400ms;
+    transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    font-size: 11pt;
+    margin-top: -10pt;
+}
+
+#text:hover {
+    transform: scaleX(1.1);
+    filter: drop-shadow(0px 0px 3px var(--background-color));
+}
+
+.playful {
+    font-family: Lobster, Arial;
+    font-size: 25pt !important;
+}
+
+div#text > span.icon {
+    font-family: "Material Symbols Rounded";
+    font-variation-settings: 'FILL' 1, 'wght' var(--weight) !important;
+    color: red !important;
+}
+
+.icecream {
+    height: 30pt;
+    z-index: -1;
+    margin: 0 10pt;
+    transform: translate(0px, 8pt) rotate(20deg);
+    filter: drop-shadow(0px 0px 2px var(--font-color)) contrast(140%);
+}
+
+div#text > .icecream:nth-child(3) {
+    transform: translate(0px, 8pt) rotate(-20deg);
+    margin: 0 5pt;
+}

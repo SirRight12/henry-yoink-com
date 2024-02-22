@@ -82,7 +82,7 @@
 }
 @font-face {
     font-family: "Apple";
-    src: "../fonts/apple.woff";
+    src: url("../fonts/apple.woff");
 }
 /*
 @font-face {

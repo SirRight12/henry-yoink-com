@@ -12,6 +12,9 @@ body {
 .settings {
     margin-right: 4px;
 }
+* {
+    user-select: none;
+}
 @keyframes moveRight {
     0%{right: 0%;}
     100%{right: -36.6%;}
@@ -188,6 +191,10 @@ footer {
 .GameboySmall {
     --font: 'Gameboy' !important;
     font-family: 'Gameboy' !important;
+}
+.CookieMonster {
+    --font: 'CookieMonster' !important;
+    font-family: 'CookieMonster' !important;
 }
 .Demon {
     --font: 'Demon' !important;

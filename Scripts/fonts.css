@@ -84,6 +84,10 @@
     font-family: "Apple";
     src: url("../fonts/apple.woff");
 }
+@font-face {
+    font-family: "CookieMonster";
+    src: url("../fonts/Blacktinbox-oGoA.ttf");
+}
 /*
 @font-face {
     font-family: "Cabin Sketch";

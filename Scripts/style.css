@@ -323,7 +323,27 @@ div#text > span.icon {
     font-variation-settings: 'FILL' 1, 'wght' var(--weight) !important;
     color: red !important;
 }
-
+#sub-console {
+    position: absolute;
+    z-index: 1000;
+    width: 10%;
+    height: 10%;
+    text-align: center;
+    color: white;
+}
+#import {
+    width: 100%;
+    aspect-ratio: 1/1;
+}
+#import-box {
+    width: 10vh;
+    height: 10vh;
+    top: .5%;
+    left: 1%;
+    cursor: pointer;
+    position: absolute;
+    display: flex;
+}
 .icecream {
     height: 30pt;
     z-index: -1;

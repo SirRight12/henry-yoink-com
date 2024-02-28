@@ -1,12 +1,11 @@
+const con = document.getElementById("sub-console")
 const sText = document.getElementById("prompt")
 const actualNavBar = document.querySelector("#navbar.navbar")
-console.log(sText)
 let isAutoUpdBg = false
 let isAutoUpdText = false
 let isAutoUpdNav = false
 const setTexts = document.getElementsByClassName("setText")
 function autoUpd(element) {
-    console.log("hello?")
     isAutoUpdBg = true
     document.body.style.transitionDuration = "100ms"
     for (let x = 0; x < setTexts.length; x++) {
@@ -31,10 +30,13 @@ function changeFont(element) {
     sText.className = val
     localStorage['font'] = val
 }
-function loadFont() {
+async function loadFont() {
     const font = localStorage['font']
     sText.className = font
     const option = document.getElementById("fonts")
+    con.innerHTML = "waiting for fonts!"
+    await loadSavedFonts()
+    con.innerHTML = ""
     option.value = font || "Default"
 }
 loadFont()

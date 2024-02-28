@@ -66,6 +66,8 @@ function updateDay() {
         timeDict = schedules.plc;
     } else if (dateText.match(spRegex) !== null) {
         timeDict = schedules[dateText];
+    } else if (schedules[dateText]) {
+        timeDict = schedules[dateText];
     } else {
         switch (weekday) {
         case 1:
@@ -258,7 +260,10 @@ function periodText(inp) {
         return "the powderpuff game";
     case "CRT":
         return "court presentation";
-        //Default case
+    //Spiritual Emphasis Cases
+    case "SEC":
+        return "Spiritual Emphasis Chapel"
+    //Default case
     default:
         return inp + "th period";
     }

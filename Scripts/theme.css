@@ -194,7 +194,9 @@
   div.icon a {
       user-select: none;
   }
-  
+  .s-icon {
+    position: absolute;
+  }
   .icon {
       color: var(--icon-color) !important;
       fill: var(--icon-color);

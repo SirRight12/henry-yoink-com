@@ -1,9 +1,9 @@
-const con = document.getElementById("sub-console")
 let parsedFiles = []
 const pickerOpts = {
     multiple:true,
     startIn: "downloads",
 }
+let addedFonts = []
 class ParsedFile {
     constructor(file,name) {
         this.name = name
@@ -51,6 +51,7 @@ async function awaitAllClear() {
 }
 let parseManager = new ParseFileManager() 
 function reset() {
+    addedFonts.length = 0
     parseManager.reset()
     parsedFiles = []
 }
@@ -97,11 +98,14 @@ function addClass(name) {
     return css
 }
 function addFontsToDOM() {
-    let e = document.createElement("style")
+    try {
+
+    let e = document.getElementById("imported-fonts")
     let fontSelections = document.getElementById("fonts")
     for (let x = 0; x < parsedFiles.length; x ++) {
         let file = parsedFiles[x]
         let name = getAcceptableName(file.name)
+        addedFonts.push(name)
         let option = document.createElement("option")
         option.classList.add("optionSettings",name)
         option.innerHTML = `<p>${name}</p>`
@@ -111,6 +115,38 @@ function addFontsToDOM() {
         e.innerHTML += addClass(name)
         e.innerHTML += "\n\n"
     }
-    document.head.appendChild(e)
+    let maxFrames = 60
+    let frames = 0
+    function anim() {
+        frames ++
+        if (frames > maxFrames) {
+            return
+        }
+        requestAnimationFrame(anim)
+        schedulePrompt("Congrats!","The Import was","Successful!")   
+    }
+    localStorage['imported-fonts'] = e.innerHTML
+    localStorage['font-names'] = addedFonts.toString()
+    anim()
     reset()
+    } catch (err) {
+        // con.innerHTML = err
+    }
+}
+async function loadSavedFonts() {
+    return new Promise((resolve,reject) => {
+        con.innerHTML += "\n working on it!"
+        const e = document.getElementById("imported-fonts")
+        e.innerHTML = localStorage['imported-fonts'] || ""
+        let names = localStorage['font-names'].split(",")
+        let fontSelections = document.getElementById("fonts")
+        for (let x = 0; x < names.length; x++) {
+            let name = names[x]
+            let option = document.createElement("option")
+            option.classList.add("optionSettings",name)
+            option.innerHTML = `<p>${name}</p>`
+            fontSelections.appendChild(option)
+        }
+        resolve(true)
+    })
 }

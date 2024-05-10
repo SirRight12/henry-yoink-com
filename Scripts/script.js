@@ -34,9 +34,7 @@ async function loadFont() {
     const font = localStorage['font']
     sText.className = font
     const option = document.getElementById("fonts")
-    con.innerHTML = "waiting for fonts!"
     await loadSavedFonts()
-    con.innerHTML = ""
     option.value = font || "Default"
 }
 loadFont()

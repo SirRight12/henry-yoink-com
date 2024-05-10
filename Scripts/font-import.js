@@ -135,7 +135,6 @@ function addFontsToDOM() {
 }
 async function loadSavedFonts() {
     return new Promise((resolve,reject) => {
-        con.innerHTML += "\n working on it!"
         const e = document.getElementById("imported-fonts")
         e.innerHTML = localStorage['imported-fonts'] || ""
         let names = localStorage['font-names'].split(",")

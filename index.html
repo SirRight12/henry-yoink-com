@@ -13,7 +13,7 @@
 <body class="dark" style="transition-duration: 350ms;">
     <div id="settingsMenu">
         <div class="settingsContainer">
-            <input class="settings" tabindex="-1"id="navbarColor" type="color" value="#202124" onfocus="autoUpdNavbar(this)"/> <label class="setText">Navbar Color</label>
+            <input class="settings" tabindex="-1"id="navbarColor" type="color" value="#5c6d81" onfocus="autoUpdNavbar(this)"/> <label class="setText">Navbar Color</label>
         </div>
         <div class="settingsContainer">
             <input class="settings" tabindex="-1" id="bg" type="color" value="#202124" onfocus="autoUpd(this)"/> <label class="setText">Background Color</label>
@@ -38,8 +38,26 @@
                 <option class="optionSettings OnePiece"><p>OnePiece</p></option>
             </select> <label class="setText">Font Style</label>
         </div>
-        <input type="checkbox" id="span" value="false"><label class="setText">Use Spanish</label>
-
+        <div class="settingsContainer">
+            <select  class="settings" id="presets" onchange="changePreset(this)">
+                <option class="optionSettings Mason">None</option>
+                <option class="optionSettings Mason">Coolest</option> 
+                <option class="optionSettings Mason">Christopher</option> 
+                <option class="optionSettings Mason">Isaiah</option> 
+                <option class="optionSettings Mason">EnchantingTable</option> 
+                
+            </select>
+            <label class="setText">Presets</label>
+        </div>
+        <div class="settingsContainer">
+            <button onclick="downloadCST()">Download CST</button>
+        </div>
+        <div class="settingsContainer">
+            <button onclick="clearFonts()">Clear Saved Fonts</button>
+        </div>
+        <div class="settingsContainer">
+            <input type="checkbox" id="span" value="false"><label class="setText">Use Spanish</label>
+        </div>
 
     </div>
     <div class="navbar" id="navbarspace"></div>
@@ -71,11 +89,13 @@
         <a href="">Quote Book</a>
         <span>2022 Henry Getz</span>
     </footer>
+    <!--Path: ...../Shared%20with%20me/Coding/henrygetz.com/schedule/dictionaries.js-->
     <script src="Scripts/betterDict.js"></script>
     <script src="Scripts/hscript.js"></script>
     <script defer src="Scripts/script.js"></script>
     <script src="Scripts/font-import.js"></script>
     <script src="Scripts/files.js"></script>
+    <script src="Scripts/cstParser.js"></script>
     <script>
         // localStorage.clear()
     </script>

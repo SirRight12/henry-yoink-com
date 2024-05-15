@@ -1,3 +1,29 @@
+const presets = {
+    "Coolest": {
+        "bg": "#000000",
+        "nb": "#000000",
+        "fc": "#ffffff",
+        "fn": "Minecraft",
+    },
+    "Christopher": {
+        "bg": "#ffff00",
+        "nb": "#0000ff",
+        "fc": "#0000ff",
+        "fn": "Enchanting",
+    },
+    "Isaiah": {
+        "bg": "#000000",
+        "nb": "#e7c104",
+        "fc": "#ffffff",
+        "fn": "LOTR",
+    },
+    "EnchantingTable": {
+      "bg": "#0b0029",
+      "nb":"#8a6500",
+      "fc": "#00c795" ,
+      "fn": "Enchanting" 
+    },
+}
 const con = document.getElementById("sub-console")
 const sText = document.getElementById("prompt")
 const actualNavBar = document.querySelector("#navbar.navbar")
@@ -5,6 +31,11 @@ let isAutoUpdBg = false
 let isAutoUpdText = false
 let isAutoUpdNav = false
 const setTexts = document.getElementsByClassName("setText")
+const settingsMenu = document.getElementById("settingsMenu")
+let fontName = ""
+let colorBG = ""
+let colorNavBar = ""
+let colorFont = ""
 function autoUpd(element) {
     isAutoUpdBg = true
     document.body.style.transitionDuration = "100ms"
@@ -13,31 +44,43 @@ function autoUpd(element) {
         t.style.color = element.value
     }
     requestAnimationFrame(anim)
-    const settingsMenu = document.getElementById("settingsMenu")
+    colorBG = element.value
     function anim() {
         if (!isAutoUpdBg) return
         requestAnimationFrame(anim)
         settingsMenu.style.backgroundColor = element.value
         document.body.style.backgroundColor = element.value
+        colorBG = element.value
         for (let x = 0; x < setTexts.length; x++) {
             const t = setTexts[x]
             t.style.color = element.value
         }
     }
 }
+function changePreset(element) {
+    const val = element.value
+    if (val == "None") {
+        loadBGColor()
+        loadFont()
+        loadNavColor()
+        loadTextColor()
+    }
+    usePreset(val)
+}
 function changeFont(element) {
     const val = element.value
     sText.className = val
+    fontName = val
     localStorage['font'] = val
 }
 async function loadFont() {
     const font = localStorage['font']
     sText.className = font
+    fontName = font
     const option = document.getElementById("fonts")
     await loadSavedFonts()
-    option.value = font || "Default"
+    option.value = font
 }
-loadFont()
 function cancelUpd() {
     saveBGColor()
     isAutoUpdBg = false
@@ -50,6 +93,7 @@ function autoUpdText(element) {
     function anim() {
         if (!isAutoUpdText) return
         requestAnimationFrame(anim)
+        colorFont = element.value
         sText.style.color = element.value
     }
 }
@@ -65,6 +109,7 @@ function autoUpdNavbar(element) {
     function anim() {
         if (!isAutoUpdText) return
         requestAnimationFrame(anim)
+        colorNavBar = element.value
         actualNavBar.style.backgroundColor = element.value
     }
 }
@@ -119,20 +164,47 @@ function saveNavColor() {
 function loadTextColor() {
     if (!localStorage['textColor']) return
     textChanger.value = localStorage['textColor']
+    colorFont = localStorage['textColor']
     autoUpdText(textChanger)
     requestAnimationFrame(cancelUpdText)
 }
-loadTextColor()
 function loadBGColor() {
     if (!localStorage['bgColor']) return
     bg.value = localStorage['bgColor']
+    colorBG = localStorage['bgColor']
     autoUpd(bg)
     requestAnimationFrame(cancelUpd)
 }
 function loadNavColor() {
-    if (!localStorage['navbar'])return
+    if (!localStorage['navbar']) return
     navbar.value = localStorage['navbar']
+    colorNavBar = localStorage['navbar']
     actualNavBar.style.backgroundColor = navbar.value
 }
+loadFont()
 loadNavColor()
 loadBGColor()
+loadTextColor()
+function clearFonts() {
+    localStorage['imported-fonts'] = ""
+    localStorage['font-names'] = ""
+    localStorage['font'] = "Default"
+    location.reload()
+}
+function usePreset(name) {
+    saveBGColor()
+    saveNavColor()
+    saveTextColor()
+    let preset = presets[name]
+    actualNavBar.style.backgroundColor = preset['nb'] 
+    settingsMenu.style.backgroundColor = preset['bg']
+    document.body.style.backgroundColor = preset['bg']
+    colorBG = preset['bg']
+    sText.style.color = preset['fc']
+    sText.className = preset['fn']
+    fontName = val
+    for (let x = 0; x < setTexts.length; x++) {
+        const t = setTexts[x]
+        t.style.color = preset['bg']
+    }
+}

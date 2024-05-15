@@ -2,6 +2,12 @@ let parsedFiles = []
 const pickerOpts = {
     multiple:true,
     startIn: "downloads",
+    types:[{
+        description: "Fonts/CST",
+        accept: {
+            "font/*": [".ttf",".cst"]
+        }
+    }],
 }
 let addedFonts = []
 class ParsedFile {
@@ -15,7 +21,6 @@ class ParseFileManager {
         this.onDone = undefined
         this.filesToParse = 0
         this._parsed = 0
-        this.filesToParse = 0
     }
     reset(amt=1) {
         this._parsed = 0
@@ -30,7 +35,7 @@ class ParseFileManager {
         if (val >= this.filesToParse) {
             if (!this.onDone) return
             this.onDone()
-            parseManager.reset()
+            this.reset()
         }
     }
     get _parsed() {
@@ -75,6 +80,11 @@ async function importFont() {
     }
 async function parseFile(handle) {
     let file = await handle.getFile()
+    if (file.name.split(".")[1] == "cst") {
+        parseManager.add()
+        readCST(file)
+        return
+    }
     let reader = new FileReader()
     reader.readAsDataURL(file)
     reader.onload = function (ev) {
@@ -133,7 +143,9 @@ function addFontsToDOM() {
         // con.innerHTML = err
     }
 }
+let loadedFonts = false
 async function loadSavedFonts() {
+    if (loadedFonts) return true
     return new Promise((resolve,reject) => {
         const e = document.getElementById("imported-fonts")
         e.innerHTML = localStorage['imported-fonts'] || ""
@@ -146,6 +158,7 @@ async function loadSavedFonts() {
             option.innerHTML = `<p>${name}</p>`
             fontSelections.appendChild(option)
         }
+        loadedFonts = true
         resolve(true)
     })
 }

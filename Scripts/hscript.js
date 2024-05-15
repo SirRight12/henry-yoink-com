@@ -60,6 +60,8 @@ var timeDict, times;
 function updateDay() {
     if (dateText.match("10/17") !== null) {
         timeDict = schedules.mwth;
+    } else if (dateText.match("4/24")) {
+        timeDict = schedules['4/24']
     } else if (dateText.match("10/19") !== null) {
         timeDict = schedules.t;
     } else if (dateText.match(plcRegex) !== null) {

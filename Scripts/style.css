@@ -35,6 +35,7 @@ body {
     animation-timing-function: cubic-bezier(0.42, 0, 0.27, 1.02);
     border: 2px solid;
     border-radius: 6px;
+    overflow: scroll;
 }
 .settingsContainer {
     filter: invert(1);
@@ -82,6 +83,9 @@ body {
     object-position: bottom;
 }
 #fonts {
+    text-align: center;
+}
+#presets {
     text-align: center;
 }
 .playful {

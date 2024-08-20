@@ -3,7 +3,7 @@
 //Whenever a change is made to this file, the below string needs
 //to be updated to a new version number.
 
-const dictVersion = "0.0";
+dictVersion = "0.0";
 
 //For custom days, define the date in the format "mm/dd/yyyy",
 //and then the schedule for that day.

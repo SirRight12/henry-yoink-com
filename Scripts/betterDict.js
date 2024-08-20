@@ -1,4 +1,16 @@
-const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+//This new version should also be updated in the version.js file.
+
+//Whenever a change is made to this file, the below string needs
+//to be updated to a new version number.
+
+const dictVersion = "0.0";
+
+//For custom days, define the date in the format "mm/dd/yyyy",
+//and then the schedule for that day.
+
+//Also, check periodText() in script.js for text names of things outside of periods.
+
+//(You'd think year is excessive but I've gotten burned by it before haha)
 
 oshSchedules = {
     "mwth": {
@@ -47,7 +59,7 @@ oshSchedules = {
         "L": "12:30-12:59",
         "7": "13:03-13:49",
     },
-    "4/24": {
+    "4/24/2023": {
         1: "08:20-09:00",
         CRT: "09:03-09:43",
         2: "09:47-10:27",
@@ -58,7 +70,7 @@ oshSchedules = {
         7: "13:12-13:49",
       },
     //Custom Spirit Week days
-    "9/18": {
+    "9/18/2023": {
         "1": "08:20-09:00",
         "2": "09:03-09:43",
         "3": "09:47-10:27",
@@ -70,7 +82,7 @@ oshSchedules = {
         "8": "13:56-14:36",
         "SP-M": "14:40-15:20",
     },
-    "9/19": {
+    "9/19/2023": {
         "C": "08:20-09:00",
         "1": "09:03-09:43",
         "2": "09:47-10:27",
@@ -82,7 +94,7 @@ oshSchedules = {
         "7": "13:56-14:36",
         "8": "14:40-15:20",
     },
-    "9/20": {
+    "9/20/2023": {
         "1": "08:20-09:00",
         "2": "09:03-09:43",
         "3": "09:47-10:27",
@@ -94,7 +106,7 @@ oshSchedules = {
         "8": "13:56-14:36",
         "SP-W": "14:40-15:20",
     },
-    "9/21": {
+    "9/21/2023": {
         "1": "08:20-09:00",
         "CRT": "09:03-09:43",
         "2": "09:47-10:27",
@@ -106,7 +118,7 @@ oshSchedules = {
         "7": "13:56-14:36",
         "8": "14:40-15:20",
     },
-    "9/22": {
+    "9/22/2023": {
         "D": "08:20-09:00",
         "1": "09:03-09:43",
         "2": "09:47-10:27",
@@ -119,7 +131,7 @@ oshSchedules = {
         "8": "14:40-15:20",
     },
     //Custom Spiritual Emphasis Schedule
-    "2/26": {
+    "2/26/2024": {
         "BH": "7:30-8:20",
         "H": "8:20-8:30",
         "1": "8:30-9:00",
@@ -133,8 +145,8 @@ oshSchedules = {
         "7": "13:56-14:36",
         "8": "14:40-15:20",
     },
-    "2/27": this.t,
-    "2/28": {
+    "2/27/2024": this.t,
+    "2/28/2024": {
         "BH": "7:30-8:20",
         "1": "8:20-9:06",
         "2": "9:10-9:40",
@@ -144,7 +156,7 @@ oshSchedules = {
         "L": "12:30-12:59",
         "7": "13:03-13:49",
     },
-    "2/29": {
+    "2/29/2024": {
         "BH": "7:30-8:20",
         'H': "8:20-8:20",
         "1": "8:20-9:00",
@@ -155,10 +167,10 @@ oshSchedules = {
         "L": "12:30-12:59",
         "7": "13:03-13:49",
     },
-    "3/1": this.f,
+    "3/1/2024": this.f,
 }
 
-
+//If you update this, Neenah will thank you greatly lol
 neenSchedules = {
     "mtwth": {
         "H": "08:05-08:15",
@@ -212,3 +224,16 @@ neenSchedules = {
         "6": "12:48-13:35",
     }
 }
+
+const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+/*
+ __________________
+< Sam is the best! >
+ ------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+*/

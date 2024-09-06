@@ -1,4 +1,4 @@
-const text = document.getElementById("time-text")
+const text = document.getElementById("prompt")
 
 const title = document.getElementById("title")
 text.innerHTML = "No WiFi, clown"

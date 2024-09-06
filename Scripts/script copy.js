@@ -1,7 +1,7 @@
-const text = document.getElementById("prompt")
+const text = document.getElementById("time-text")
 
 const title = document.getElementById("title")
-text.innerHTML = "Hello World"
+text.innerHTML = "No WiFi, clown"
 function getWeekDay() {
     const day = new Date().getDay()
     switch(day) {
@@ -13,10 +13,26 @@ function getWeekDay() {
             return "t"
         case 5:
             return "f"
-        
     }
 }
-const times = oshSchedules[getWeekDay()]
+let times = getTimes()
+
+function getTimes() {
+    return addPassings(oshSchedules[getWeekDay()])
+}
+
+function addPassings(times) {
+    let prevTime = false
+    for (let period in times) {
+        if (!prevTime) {
+            prevTime = period
+            continue
+        }
+        times["P" + period] = `${times[prevTime].split("-")[1]}-${times[period].split("-")[0]}`
+    }
+    return times
+}
+addPassings()
 function ParseTime(TimeString) {
     let [startTime,endTime] = TimeString.split("-")
     
@@ -34,13 +50,14 @@ function IsNow(TimeString) {
         return false
     }
     const now = new Date()
-    // now.setHours(8,21)
+    // now.setHours(13,53)
     const [start,end] = ParseTime(TimeString)
     if (now > start && now < end) return true
     return false
 }
 function getTimeTo(TimeString) {
     const now = new Date()
+    // now.setHours(13,53)
     const [start,end] = ParseTime(TimeString)
     const difference = end - now
     const milliseconds = Math.floor(difference)
@@ -66,6 +83,7 @@ function loop() {
 
     if (!now) {
         suggestedPeriod = false
+        times = getTimes()
         if (tries >= 10) {
             cancelAnimationFrame(frame)
             clearInterval(interval)
@@ -110,6 +128,8 @@ function getPeriodFig(period) {
     switch (period) {
         case "D":
             return "Coach Groups ends"
+        case "L":
+            return "Lunch ends"
         case "P1":
             return "1st Period Starts"
         case "1":
@@ -118,16 +138,28 @@ function getPeriodFig(period) {
             return "2nd Period starts"
         case "2":
             return "2nd Period ends"
+        case "P3":
+            return "3rd Period starts"
         case "3":
             return "3rd Period ends"
+        case "P4":
+            return "4th Period starts"
         case "4":
             return "4th Period ends"
+        case "P5":
+            return "5th Period starts"
         case "5":
             return "5th Period ends"
+        case "P6":
+            return "6th Period starts"
         case "6":
             return "6th Period ends"
+        case "P7":
+            return "7th Period starts"
         case "7":
             return "7th Period ends"
+        case "P8":
+            return "8th Period starts"
         case "8":
             return "8th Period ends"
         default:
@@ -142,7 +174,7 @@ function displayTime(Time) {
 }
 function titleUpdate() {
     if (!times[suggestedPeriod]) return
-    const [hrs,mins,secs] = FormatTime(getTimeTo(times[suggestedPeriod]))
+    const [hrs,mins,secs] = FormatTime(getTimeTo(time[suggestedPeriod]))
     
     title.innerText = `${hrs}${mins}:${secs}`
 }

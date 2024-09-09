@@ -108,6 +108,8 @@ function FormatTime(Time) {
 }
 function getPeriodFig(period) {
     switch (period) {
+        case "BH":
+            return "Until H Hour starts"
         case "D":
             return "Coach Groups ends"
         case "P1":
@@ -131,7 +133,7 @@ function getPeriodFig(period) {
         case "8":
             return "8th Period ends"
         default:
-            return "Xth Period ends"
+            return 'Period figure does not exist, please yell at sam to add "' + period + '"'
     }
 }
 function displayTime(Time) {

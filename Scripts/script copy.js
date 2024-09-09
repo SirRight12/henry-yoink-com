@@ -1,7 +1,5 @@
 const text = document.getElementById("prompt")
-const con = document.getElementById("con")
-// con.innerHTML = "hi"
-try {
+
 const title = document.getElementById("title")
 text.innerHTML = "No WiFi, clown"
 function getWeekDay() {
@@ -128,18 +126,12 @@ function FormatTime(Time) {
 }
 function getPeriodFig(period) {
     switch (period) {
-        case "BD":
-            return "Coach Groups starts"
-        case "BC":
-            return "Chapel starts"
-        case "BH":
-            return "Homeroom starts"
-        case "C":
-            return "Chapel ends"
         case "D":
             return "Coach Groups ends"
         case "L":
             return "Lunch ends"
+        case "BH"
+            return "Home room starts"
         case "P1":
             return "1st Period Starts"
         case "1":
@@ -173,24 +165,21 @@ function getPeriodFig(period) {
         case "8":
             return "8th Period ends"
         default:
-            return "Period figure does not exist, please yell at sam to add: " + period
+            return 'Period fig does not exist, please yell at sam to add "' + period + '"'
     }
 }
 function displayTime(Time) {
     let [hrs,mins,secs,mils,unit] = FormatTime(Time)
     text.dataset.before = "You Have"
-    text.innerText = `${hrs}${mins}:${secs}:${mils} ${unit}`
+    text.innerText = `${hrs}${mins}:${secs}.${mils} ${unit}`
     text.dataset.after = `Until ${getPeriodFig(suggestedPeriod)}`
 }
 function titleUpdate() {
     if (!times[suggestedPeriod]) return
-    const [hrs,mins,secs] = FormatTime(getTimeTo(time[suggestedPeriod]))
+    const [hrs,mins,secs] = FormatTime(getTimeTo(times[suggestedPeriod]))
     
     title.innerText = `${hrs}${mins}:${secs}`
 }
 let interval = setInterval(titleUpdate,100)
 titleUpdate()
 loop()
-} catch (err) {
-    con.innerHTML = err
-}

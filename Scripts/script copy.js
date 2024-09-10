@@ -182,7 +182,7 @@ function displayTime(Time) {
 }
 function titleUpdate() {
     if (!times[suggestedPeriod]) return
-    const [hrs,mins,secs] = FormatTime(getTimeTo(time[suggestedPeriod]))
+    const [hrs,mins,secs] = FormatTime(getTimeTo(times[suggestedPeriod]))
     
     title.innerText = `${hrs}${mins}:${secs}`
 }

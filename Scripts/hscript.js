@@ -10,6 +10,7 @@ const endPrompts = [["School's out, it's time to", "celebrate!", "No more homewo
 const spanPrompts = [["Escuela está acaba, es la hora para", "Celebrar!", "No más terea. Está bien?", ], ];
 const plcDates = ["9/25"];
 const plcRegex = new RegExp("^" + plcDates.join("|^"),"gm");
+const spiritWeekDates = ["9/18", "9/19", "9/20", "9/21", "9/22"];
 const spRegex = new RegExp("^" + spiritWeekDates.join("|^"),"gm");
 var testDate;
 // testDate = new Date("9/22/2023 15:00");

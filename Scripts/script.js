@@ -20,9 +20,22 @@ const presets = {
     "EnchantingTable": {
       "bg": "#0b0029",
       "nb":"#8a6500",
-      "fc": "#00c795" ,
+      "fc": "#00c795",
       "fn": "Enchanting" 
     },
+    "Mason": {
+        "bg": "black",
+        "nb" : "rgb(138,0,0)",
+        "fc": "rgb(138,0,0)",
+        "fn": "Demon",
+    },
+    "Kenzie": {
+        "bg": "rgb(249,128,171)",
+        "nb": "rgb(255,36,112)",
+        "fc": "rgb(255,36,112)",
+        "fn": "Default",
+    }
+
 }
 const con = document.getElementById("sub-console")
 const sText = document.getElementById("prompt")

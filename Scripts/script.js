@@ -25,10 +25,10 @@ const presets = {
     },
     "Mason": {
         "bg": "black",
-        "nb" : "rgb(138,0,0)",
+        "nb" : "black",
         "fc": "rgb(138,0,0)",
         "fn": "Demon",
-        "ic": "red",
+        "ic": "rgb(138,0,0)",
     },
     "Kenzie": {
         "bg": "rgb(249,128,171)",

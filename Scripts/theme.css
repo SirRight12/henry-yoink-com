@@ -196,10 +196,12 @@
   }
   .s-icon {
     position: absolute;
+    color: rgb(140, 13, 13) !important;
+    fill: rgb(140, 13, 13);
   }
   .icon {
-      color: var(--icon-color) !important;
-      fill: var(--icon-color);
+      color: #ffffff !important;
+      fill: #ffffff;
       /* width: 36px; */
       height: 36px;
       /* transition-property: background, color, border, filter, width, fill; */

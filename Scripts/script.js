@@ -21,19 +21,21 @@ const presets = {
       "bg": "#0b0029",
       "nb":"#8a6500",
       "fc": "#00c795",
-      "fn": "Enchanting" 
+      "fn": "Enchanting"
     },
     "Mason": {
         "bg": "black",
         "nb" : "rgb(138,0,0)",
         "fc": "rgb(138,0,0)",
         "fn": "Demon",
+        "ic": "red",
     },
     "Kenzie": {
         "bg": "rgb(249,128,171)",
         "nb": "rgb(255,36,112)",
         "fc": "rgb(255,36,112)",
         "fn": "Default",
+        "ic": "rgb(249,128,171)",
     }
 
 }
@@ -43,11 +45,13 @@ const actualNavBar = document.querySelector("#navbar.navbar")
 let isAutoUpdBg = false
 let isAutoUpdText = false
 let isAutoUpdNav = false
+let isAutoUpdIco = false
 const setTexts = document.getElementsByClassName("setText")
 const settingsMenu = document.getElementById("settingsMenu")
 let fontName = ""
 let colorBG = ""
 let colorNavBar = ""
+let colorIcon = ""
 let colorFont = ""
 function autoUpd(element) {
     isAutoUpdBg = true
@@ -131,6 +135,27 @@ function cancelUpdNavBar() {
     isAutoUpdNav = false
     actualNavBar.style.transitionDuration = "350ms"
 }
+const icon = document.getElementById("allsun")
+const icoChanger = document.getElementById("iconcolor")
+function autoUpdIconColor(element) {
+    isAutoUpdIco = true
+    requestAnimationFrame(anim)
+    function anim() {
+        if (!isAutoUpdIco) return
+        requestAnimationFrame(anim)
+        setIconColor(element.value)
+    }   
+}
+function setIconColor(val) {
+    if (!val) return
+    icon.style.color = val
+    icon.style.fill = val
+    colorIcon = val
+}
+function cancelUpdIcon() {
+    saveIcoColor()
+    isAutoUpdIco = false
+} 
 let isInSettings = false
 let canClick = true
 const mainSettings = document.getElementById("settingsMenu")
@@ -165,6 +190,7 @@ const textChanger = document.getElementById("textism")
 const navbar = document.querySelector("#navbarColor")
 textChanger.addEventListener("blur",cancelUpdText)
 navbar.addEventListener("blur",cancelUpdNavBar)
+icoChanger.addEventListener('blur',cancelUpdIcon)
 function saveBGColor() {
     localStorage['bgColor'] = bg.value
 }
@@ -173,6 +199,9 @@ function saveTextColor() {
 }
 function saveNavColor() {
     localStorage['navbar'] = navbar.value
+}
+function saveIcoColor() {
+    localStorage['icon'] = icoChanger.value
 }
 function loadTextColor() {
     if (!localStorage['textColor']) return
@@ -188,6 +217,12 @@ function loadBGColor() {
     autoUpd(bg)
     requestAnimationFrame(cancelUpd)
 }
+function loadIcoColor() {
+    if (!localStorage['icon']) return
+    icoChanger.value = localStorage['icon']
+    colorIcon = localStorage['icon']
+    setIconColor(localStorage['icon'])
+}
 function loadNavColor() {
     if (!localStorage['navbar']) return
     navbar.value = localStorage['navbar']
@@ -198,6 +233,7 @@ loadFont()
 loadNavColor()
 loadBGColor()
 loadTextColor()
+loadIcoColor()
 function clearFonts() {
     localStorage['imported-fonts'] = ""
     localStorage['font-names'] = ""
@@ -208,10 +244,12 @@ function usePreset(name) {
     saveBGColor()
     saveNavColor()
     saveTextColor()
+    saveIcoColor()
     let preset = presets[name]
     actualNavBar.style.backgroundColor = preset['nb'] 
     settingsMenu.style.backgroundColor = preset['bg']
     document.body.style.backgroundColor = preset['bg']
+    setIconColor(preset['ic'])
     colorBG = preset['bg']
     sText.style.color = preset['fc']
     sText.className = preset['fn']

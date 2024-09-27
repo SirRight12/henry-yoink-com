@@ -35,7 +35,8 @@ body {
     animation-timing-function: cubic-bezier(0.42, 0, 0.27, 1.02);
     border: 2px solid;
     border-radius: 6px;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 .settingsContainer {
     filter: invert(1);
@@ -207,6 +208,38 @@ footer {
 .OnePiece {
     --font: 'OnePiece' !important;
     font-family: 'OnePiece' !important;
+}
+.BlackOps {
+    --font: 'BlackOps' !important;
+    font-family: 'BlackOps' !important;
+}
+.Sankofa {
+    --font: 'Sankofa' !important;
+    font-family: 'Sankofa' !important;
+}
+.Knight {
+    --font: 'Knight' !important;
+    font-family: 'Knight' !important; 
+}
+.Google {
+    --font: 'Google' !important;
+    font-family: 'Google' !important;
+}
+.SilkScreen {
+    --font: "SilkScreen" !important;
+    font-family: 'SilkScreen' !important;
+}
+.Micro5 {
+    --font: 'Micro5' !important;
+    font-family: 'Micro5' !important;
+}
+.Monoton {
+    --font: 'Monoton' !important;
+    font-family: 'Monoton' !important;
+}
+.Circular {
+    --font: 'Circular' !important;
+    font-family: 'Circular' !important;
 }
 #prompt {
     display: grid;

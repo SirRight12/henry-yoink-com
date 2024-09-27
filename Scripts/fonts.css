@@ -88,6 +88,40 @@
     font-family: "CookieMonster";
     src: url("../fonts/Blacktinbox-oGoA.ttf");
 }
+
+/* TO ADD TO LIST */
+@font-face {
+    font-family: "BlackOps";
+    src: url("../fonts/BlackOps.ttf");
+}
+@font-face {
+    font-family: "Sankofa";
+    src: url("../fonts/SankofaDisplay-Regular.ttf");
+}
+@font-face {
+    font-family: "Knight";
+    src: url("../fonts/KnightFont.ttf");
+}
+@font-face {
+    font-family: "Google";
+    src: url("../fonts/GoogleFont.ttf");
+}
+@font-face {
+    font-family: "SilkScreen";
+    src: url("../fonts/Silkscreen-Regular.ttf");
+}
+@font-face {
+    font-family: "Micro5";
+    src: url("../fonts/Micro5-Regular.ttf");
+}
+@font-face {
+    font-family: "Monoton";
+    src: url("../fonts/Monoton.ttf");
+}
+@font-face {
+    font-family: 'Circular';
+    src: url("../fonts/FlowCircular-Regular.ttf");
+}
 /*
 @font-face {
     font-family: "Cabin Sketch";

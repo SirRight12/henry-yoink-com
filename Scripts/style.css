@@ -241,6 +241,10 @@ footer {
     --font: 'Circular' !important;
     font-family: 'Circular' !important;
 }
+.Wingding {
+    --font: 'Wingding' !important;
+    font-family: 'Wingding' !important;
+}
 #prompt {
     display: grid;
     user-select: none;

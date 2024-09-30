@@ -126,6 +126,10 @@
     font-family: 'Wingding';
     src: url("../fonts/wingding.ttf");
 }
+@font-face {
+    font-family: "Navy";
+    src: url("../fonts/BabelStoneMaritime.ttf");
+}
 /*
 @font-face {
     font-family: "Cabin Sketch";

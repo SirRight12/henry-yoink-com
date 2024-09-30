@@ -245,6 +245,10 @@ footer {
     --font: 'Wingding' !important;
     font-family: 'Wingding' !important;
 }
+.Navy {
+    --font: 'Navy' !important;
+    font-family: 'Navy' !important;
+}
 #prompt {
     display: grid;
     user-select: none;

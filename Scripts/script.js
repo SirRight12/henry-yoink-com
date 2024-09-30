@@ -21,7 +21,7 @@ const presets = {
       "bg": "#0b0029",
       "nb":"#8a6500",
       "fc": "#00c795",
-      "fn": "Enchanting"
+      "fn": "Enchanting" 
     },
     "Mason": {
         "bg": "black",
@@ -36,7 +36,7 @@ const presets = {
         "fc": "rgb(255,36,112)",
         "fn": "Default",
         "ic": "rgb(249,128,171)",
-    }
+    },
 
 }
 const con = document.getElementById("sub-console")
@@ -102,7 +102,7 @@ function cancelUpd() {
     saveBGColor()
     isAutoUpdBg = false
     document.body.style.transitionDuration = "350ms"
-}
+}   
 function autoUpdText(element) {
     isAutoUpdText = true
     sText.style.transitionDuration = "100ms"
@@ -155,7 +155,31 @@ function setIconColor(val) {
 function cancelUpdIcon() {
     saveIcoColor()
     isAutoUpdIco = false
-} 
+}
+function updateBGImage(element) {
+    setBGImg(element)
+}
+async function setBGImg(image) {
+    const file = image.files[0]
+    const b64 = await readFileAsB64(file)
+    document.body.style.backgroundImage = `url("${b64}")`
+}
+function clearBGImg() {
+    document.body.style.backgroundImage = 'unset'
+}
+async function readFileAsB64(file) {
+    return new Promise((resolve,reject) => {
+        const reader = new FileReader()
+        reader.readAsDataURL(file)
+        let failure = setTimeout(() => {
+            reject("Could not read, exceeded 10000ms")
+        },10000)
+        reader.onload = () => {
+            resolve(reader.result)
+            clearTimeout(failure)
+        }
+    })
+}
 let isInSettings = false
 let canClick = true
 const mainSettings = document.getElementById("settingsMenu")

@@ -19,6 +19,9 @@
             <input class="settings" tabindex="-1" id="bg" type="color" value="#202124" onfocus="autoUpd(this)"/> <label class="setText">Background Color</label>
         </div>
         <div class="settingsContainer">
+            <input class="settings setText" tabindex="-1" id="bg-img" type="file" accept=".png,.gif,.jpg" onchange="updateBGImage(this)"/> <label class="setText">ALT bg Image</label>
+        </div>
+        <div class="settingsContainer">
             <input class="settings" id="textism" tabindex="-1"type="color" value="#ffffff" onfocus="autoUpdText(this)"/> <label class="setText">Text Color</label>
         </div>
         <div class="settingsContainer">
@@ -51,8 +54,8 @@
                 <option class="optionSettings Navy"><p>Navy</p></option>
             </select> <label class="setText">Font Style</label>
         </div>
-        <div class="settingsContainer">
-            <select  class="settings" id="presets" onchange="changePreset(this)">
+        <div tabindex="-1" class="settingsContainer">
+            <select tabindex="-1"  class="settings" id="presets" onchange="changePreset(this)">
                 <option class="optionSettings Mason">None</option>
                 <option class="optionSettings Mason">Coolest</option> 
                 <option class="optionSettings Mason">Christopher</option> 
@@ -64,14 +67,17 @@
             </select>
             <label class="setText">Presets</label>
         </div>
-        <div class="settingsContainer">
-            <button onclick="downloadCST()">Download CST</button>
+        <div tabindex="-1" class="settingsContainer">
+            <button tabindex="-1" onclick="downloadCST()">Download CST</button>
         </div>
-        <div class="settingsContainer">
-            <button onclick="clearFonts()">Clear Saved Fonts</button>
+        <div tabindex="-1" class="settingsContainer">
+            <button tabindex="-1" onclick="clearBGImg()">Clear Image</button>
         </div>
-        <div class="settingsContainer">
-            <input type="checkbox" id="span" value="false"><label class="setText">Use Spanish</label>
+        <div tabindex="-1" class="settingsContainer">
+            <button tabindex="-1" onclick="clearFonts()">Clear Saved Fonts</button>
+        </div>
+        <div tabindex="-1" class="settingsContainer">
+            <input tabindex="-1" type="checkbox" id="span" value="false"><label class="setText">Use Spanish</label>
         </div>
 
     </div>

@@ -93,11 +93,13 @@ function autoUpd(element) {
 }
 function changePreset(element) {
     const val = element.value
+    savePreset(val)
     if (val == "None") {
         loadBGColor()
         loadFont()
         loadNavColor()
         loadTextColor()
+        loadBGColor()
     }
     usePreset(val)
 }
@@ -185,6 +187,7 @@ function updateBGImage(element) {
 async function setBGImg(image) {
     const file = image.files[0]
     const b64 = await readFileAsB64(file)
+    saveBGImage(b64)
     setBG64(b64)
 }
 function setBG64(b64) {
@@ -193,9 +196,13 @@ function setBG64(b64) {
     document.body.style.backgroundImage = `url("${b64}")`
 }
 function clearBGImg() {
+    removeBGImg()
+    localStorage['bgImage'] = ""
+}
+function removeBGImg() {
     document.body.style.backgroundImage = 'unset'
-    actualNavBar.style.display = "flex" //flex
-    space.style.display = "block" //block
+    actualNavBar.style.display = "flex"
+    space.style.display = "block" 
 }
 async function readFileAsB64(file) {
     return new Promise((resolve,reject) => {
@@ -257,6 +264,12 @@ function saveNavColor() {
 function saveIcoColor() {
     localStorage['icon'] = icoChanger.value
 }
+function saveBGImage(b64) {
+    localStorage['bgImage'] = b64
+}
+function savePreset(psName) {
+    localStorage['preset'] = psName
+}
 function loadTextColor() {
     if (!localStorage['textColor']) return
     textChanger.value = localStorage['textColor']
@@ -283,11 +296,26 @@ function loadNavColor() {
     colorNavBar = localStorage['navbar']
     actualNavBar.style.backgroundColor = navbar.value
 }
+function loadBGImage() {
+    const val = localStorage['bgImage']
+    if (!val) return
+    setBG64(val)
+}
+const presetVal = document.getElementById("presets")
+function loadPreset() {
+    const val = localStorage['preset']
+    if (!val || val === "None") return false
+    presetVal.value = val
+    usePreset(val)
+    return true
+}
 loadFont()
 loadNavColor()
 loadBGColor()
 loadTextColor()
 loadIcoColor()
+loadBGImage()
+loadPreset()
 function clearFonts() {
     localStorage['imported-fonts'] = ""
     localStorage['font-names'] = ""
@@ -299,13 +327,15 @@ function usePreset(name) {
     saveNavColor()
     saveTextColor()
     saveIcoColor()
-    clearBGImg()
+    removeBGImg()
     let preset = presets[name]
     actualNavBar.style.backgroundColor = preset['nb'] 
     settingsMenu.style.backgroundColor = preset['bg']
     document.body.style.backgroundColor = preset['bg']
     setIconColor(preset['ic'])
-    setBG64(preset['bi'])
+    if (preset['bi']) {
+        setBG64(preset['bi'])
+    }
     colorBG = preset['bg']
     sText.style.color = preset['fc']
     sText.className = preset['fn']
@@ -315,4 +345,3 @@ function usePreset(name) {
         t.style.color = preset['bg']
     }
 }
-clearBGImg()

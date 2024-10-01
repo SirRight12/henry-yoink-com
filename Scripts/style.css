@@ -3,7 +3,7 @@ html, body {
     height: 100%;
     background-image: unset;
     background-repeat: no-repeat;
-    background-size: 100vw 90%;
+    background-size: cover;
     background-position: 50% 100%;
 }
 body {
@@ -314,6 +314,8 @@ footer {
 .navbar {
     width: 100%;
     height: 10% !important;
+    opacity: 1;
+    display: block;
 }
 
 #content {
@@ -371,6 +373,7 @@ div#text > span.icon {
     font-family: "Material Symbols Rounded";
     font-variation-settings: 'FILL' 1, 'wght' var(--weight) !important;
     color: red !important;
+    opacity: inherit !important;
 }
 #sub-console {
     position: absolute;

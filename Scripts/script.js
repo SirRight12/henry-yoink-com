@@ -1,3 +1,4 @@
+
 const presets = {
     "Coolest": {
         "bg": "#000000",
@@ -36,6 +37,22 @@ const presets = {
         "fc": "rgb(255,36,112)",
         "fn": "Default",
         "ic": "rgb(249,128,171)",
+    },
+    "RX-7": {
+        "bg": "black",
+        "nb": "black",
+        "bi": getFile('rx-7.gif'), 
+        "ic": "white",
+        "fc": "white",
+        "fn": "Enchanting"
+    },
+    "Bill": {
+        "bg": "black",
+        "nb": "black",
+        "bi": getFile('bill.gif'), 
+        "ic": "white",
+        "fc": "white",
+        "fn": "Enchanting"
     },
 
 }
@@ -156,16 +173,29 @@ function cancelUpdIcon() {
     saveIcoColor()
     isAutoUpdIco = false
 }
+const space = document.getElementById("navbarspace")
 function updateBGImage(element) {
-    setBGImg(element)
+    try {
+        if (!element) return
+        setBGImg(element)
+    } catch (err) {
+        con.innerHTML = err
+    }
 }
 async function setBGImg(image) {
     const file = image.files[0]
     const b64 = await readFileAsB64(file)
+    setBG64(b64)
+}
+function setBG64(b64) {
+    actualNavBar.style.display = "none"
+    space.style.display = "none"
     document.body.style.backgroundImage = `url("${b64}")`
 }
 function clearBGImg() {
     document.body.style.backgroundImage = 'unset'
+    actualNavBar.style.display = "flex" //flex
+    space.style.display = "block" //block
 }
 async function readFileAsB64(file) {
     return new Promise((resolve,reject) => {
@@ -269,11 +299,13 @@ function usePreset(name) {
     saveNavColor()
     saveTextColor()
     saveIcoColor()
+    clearBGImg()
     let preset = presets[name]
     actualNavBar.style.backgroundColor = preset['nb'] 
     settingsMenu.style.backgroundColor = preset['bg']
     document.body.style.backgroundColor = preset['bg']
     setIconColor(preset['ic'])
+    setBG64(preset['bi'])
     colorBG = preset['bg']
     sText.style.color = preset['fc']
     sText.className = preset['fn']
@@ -283,3 +315,4 @@ function usePreset(name) {
         t.style.color = preset['bg']
     }
 }
+clearBGImg()

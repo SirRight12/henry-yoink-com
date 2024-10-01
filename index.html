@@ -19,7 +19,7 @@
             <input class="settings" tabindex="-1" id="bg" type="color" value="#202124" onfocus="autoUpd(this)"/> <label class="setText">Background Color</label>
         </div>
         <div class="settingsContainer">
-            <input class="settings setText" tabindex="-1" id="bg-img" type="file" accept=".png,.gif,.jpg" onchange="updateBGImage(this)"/> <label class="setText">ALT bg Image</label>
+            <input class="settings setText" tabindex="-1" id="bg-img" type="file" accept="image/*" onchange="updateBGImage(this)"/> <label class="setText">ALT bg Image</label>
         </div>
         <div class="settingsContainer">
             <input class="settings" id="textism" tabindex="-1"type="color" value="#ffffff" onfocus="autoUpdText(this)"/> <label class="setText">Text Color</label>
@@ -63,6 +63,8 @@
                 <option class="optionSettings Mason">EnchantingTable</option> 
                 <option class="optionSettings Mason">Mason</option> 
                 <option class="optionSettings Mason">Kenzie</option> 
+                <option class="optionSettings Mason">RX-7</option> 
+                <option class="optionSettings Mason">Bill</option> 
                 
             </select>
             <label class="setText">Presets</label>
@@ -87,7 +89,7 @@
             <path d="M0 0h24v24H0z" fill="none"></path>
             <path id="sunrays" d="M20 15.31L23.31 12 20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69zM12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z" style="transition-duration: 350ms;"></path>
         </svg>
-        <div id="import-box">
+        <div class="icon" id="import-box">
             <img id="import" class="s-icon" onclick="importFont()" src="icons/import.svg">
         </div>
     </div>

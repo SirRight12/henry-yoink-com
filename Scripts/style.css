@@ -1,7 +1,10 @@
 html, body {
     overflow-x: hidden;
     height: 100%;
-    background-image: unset;
+    background-image: url('../icons/icon.svg');
+    background-repeat: no-repeat;
+    background-size: 100vw 90%;
+    background-position: 50% 100%;
 }
 body {
     display: flex;

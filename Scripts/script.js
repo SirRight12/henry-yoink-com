@@ -70,7 +70,7 @@ const presets = {
         "fn": "Gameboy",
         "no": 0,
         "ss": 'custom',
-        'cw': 10,
+        'cw': 5,
         'rs': 'repeat',
 
     }

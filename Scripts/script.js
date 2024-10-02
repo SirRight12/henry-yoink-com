@@ -5,24 +5,28 @@ const presets = {
         "nb": "#000000",
         "fc": "#ffffff",
         "fn": "Minecraft",
+        "no": 1,
     },
     "Christopher": {
         "bg": "#ffff00",
         "nb": "#0000ff",
         "fc": "#0000ff",
         "fn": "Enchanting",
+        "no": 1,
     },
     "Isaiah": {
         "bg": "#000000",
         "nb": "#e7c104",
         "fc": "#ffffff",
         "fn": "LOTR",
+        "no": 1,
     },
     "EnchantingTable": {
       "bg": "#0b0029",
       "nb":"#8a6500",
       "fc": "#00c795",
-      "fn": "Enchanting" 
+      "fn": "Enchanting",
+      "no": 0,
     },
     "Mason": {
         "bg": "black",
@@ -30,6 +34,7 @@ const presets = {
         "fc": "rgb(138,0,0)",
         "fn": "Demon",
         "ic": "rgb(138,0,0)",
+        "no": 1,
     },
     "Kenzie": {
         "bg": "rgb(249,128,171)",
@@ -37,6 +42,7 @@ const presets = {
         "fc": "rgb(255,36,112)",
         "fn": "Default",
         "ic": "rgb(249,128,171)",
+        "no": 1,
     },
     "RX-7": {
         "bg": "black",
@@ -414,14 +420,19 @@ function clearFonts() {
 }
 function usePreset(name) {
     try {
-
+    let preset = presets[name]
+    con.innerHTML = JSON.stringify(preset)
+    if (!preset) {
+        con.innerHTML = "preset does not exist"
+        return
+    }
     saveBGColor()
     saveNavColor()
     saveTextColor()
     saveIcoColor()
     removeBGImg()
-    let preset = presets[name]
     actualNavBar.style.backgroundColor = preset['nb'] 
+    space.style.backgroundColor = preset['nb']
     settingsMenu.style.backgroundColor = preset['bg']
     document.body.style.backgroundColor = preset['bg']
     setIconColor(preset['ic'])

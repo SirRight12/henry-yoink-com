@@ -17,7 +17,7 @@ function parseCST(string) {
     return values
 }
 function downloadCST() {
-    let fileText = parseAsCST(colorBG,colorFont,colorNavBar,fontName)
+    let fileText = parseAsCST(colorBG || "black",colorFont || "white",colorNavBar || "black",fontName || "Default")
     let file = new File([fileText],"theme.cst")
     const reader = new FileReader()
     const a = document.createElement("a")
@@ -43,7 +43,8 @@ function addPresetName(name) {
     option.classList.add("optionSettings","Mason")
     option.innerHTML = name
     presetList.appendChild(option)
-}//cst = custom schedule theme
+}
+//cst = custom schedule theme
 function parseAsCST(bgcolor,fontColor,navbar,fontName) {
     let fileString = ""
     fileString += `${bgcolor}`
@@ -82,7 +83,6 @@ function readCST(file) {
         addPresetName(file.name.split('.')[0])
     }
 }
-const presetList = document.getElementById("presets")
 function addPresetName(name) {
     const option = document.createElement("option")
     option.classList.add("optionSettings","Mason")

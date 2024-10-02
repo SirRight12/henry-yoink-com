@@ -147,8 +147,10 @@ let loadedFonts = false
 async function loadSavedFonts() {
     if (loadedFonts) return true
     return new Promise((resolve,reject) => {
+        
         const e = document.getElementById("imported-fonts")
         e.innerHTML = localStorage['imported-fonts'] || ""
+        if (!localStorage['font-names']) return
         let names = localStorage['font-names'].split(",")
         let fontSelections = document.getElementById("fonts")
         for (let x = 0; x < names.length; x++) {

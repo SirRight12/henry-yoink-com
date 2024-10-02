@@ -16,6 +16,9 @@ body {
 .settings {
     margin-right: 4px;
 }
+#custom-position {
+    display: none;
+}
 * {
     user-select: none;
 }

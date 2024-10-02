@@ -81,6 +81,31 @@
         <div tabindex="-1" class="settingsContainer">
             <input tabindex="-1" type="checkbox" id="span" value="false"><label class="setText">Use Spanish</label>
         </div>
+        <div tabindex="-1" class="settingsContainer">
+            <input tabindex="-1" type="range" min="0" step=".01" max="1" value="1" onfocus="updateNbOp(this)" onblur="cancelUpdateNbOp()"><label class="setText">Navbar Opacity</label>
+        </div>
+        <div tabindex="-1" class="settingsContainer">
+            <label class="setText">Background Image settings</label>
+        </div>
+        
+        <div tabindex="-1" class="settingsContainer" title="Change how the background image fits the page">
+            <select tabindex="-1" id="sizing" class="settings" onchange="changeSizingStyle(this)">
+                <option class="Mason" title="Fill the entire screen no matter if the image actually fits">Cover</option>
+                <option class="Mason" title="Fit the image so it doesn't go too far in any direction">Contain</option>
+                <option class="Mason" title="Set a custom Image Size">Custom</option>
+            </select> <label class="setText">  Background Image Sizing</label>
+        </div>
+        <div tabindex="-1" class="settingsContainer" title="Change the size" id="custom-position">
+            <input type="range" min="1" max="100" step="1" id="value-x" onchange="changeCustomSize(this)"> <label>Custom Width</label> <br>
+        </div>
+        <div tabindex="-1" class="settingsContainer" title="Change how the background image repeats">
+            <select tabindex="-1" id="repeating" class="settings" onchange="changeRepeatStyle(this)">
+                <option class="Mason" title="Don't repeat the image">No-Repeat</option>
+                <option class="Mason" title="Repeat the image across the width">Repeat-X</option>
+                <option class="Mason" title="Repeat the image across the height">Repeat-Y</option>
+                <option class="Mason" title="Repeat the image across both directions">Repeat</option>
+            </select> <label class="setText">Background Image Sizing</label>
+        </div>
 
     </div>
     <div class="navbar" id="navbarspace"></div>

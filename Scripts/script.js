@@ -93,7 +93,6 @@ function autoUpd(element) {
 }
 function changePreset(element) {
     const val = element.value
-    savePreset(val)
     if (val == "None") {
         loadBGColor()
         loadFont()
@@ -191,8 +190,6 @@ async function setBGImg(image) {
     setBG64(b64)
 }
 function setBG64(b64) {
-    actualNavBar.style.display = "none"
-    space.style.display = "none"
     document.body.style.backgroundImage = `url("${b64}")`
 }
 function clearBGImg() {
@@ -201,8 +198,6 @@ function clearBGImg() {
 }
 function removeBGImg() {
     document.body.style.backgroundImage = 'unset'
-    actualNavBar.style.display = "flex"
-    space.style.display = "block" 
 }
 async function readFileAsB64(file) {
     return new Promise((resolve,reject) => {
@@ -216,6 +211,60 @@ async function readFileAsB64(file) {
             clearTimeout(failure)
         }
     })
+}
+let sizingStyle = "Cover"
+let sizingWidth = 100
+
+let repeatingStyle = "no-repeat"
+function changeSizingStyle(element) {
+    console.log(element.value)
+    setSizing(element.value)
+    saveImageStyles()
+}
+const customPos = document.getElementById("custom-position")
+function setSizing(val) {
+    if (val == "Custom") {
+        customPos.style.display = "block"   
+        sizingStyle = val
+        return
+    }
+    customPos.style.display = "none"
+
+    document.body.style.backgroundSize = val.toLowerCase()
+    sizingStyle = val
+}
+function setRepeating(val) {
+    repeatingStyle = val
+    document.body.style.backgroundRepeat = val.toLowerCase()
+}
+function changeRepeatStyle(element) {
+    setRepeating(element.value)
+    saveImageStyles()
+}
+function changeCustomSize() {
+    setCustomSize()
+    saveImageStyles()
+
+}
+const valX = document.getElementById("value-x")
+function setCustomSize() {
+    let val = `${valX.value}%,1%` 
+    sizingWidth = valX.value
+    document.body.style.backgroundSize = val
+}
+let isUpdNavBarOp = false
+function updateNbOp(element) {
+    isUpdNavBarOp = true
+    function anim() {
+        if (!isUpdNavBarOp) return
+        space.style.opacity = element.value
+        actualNavBar.style.opacity = element.value
+        requestAnimationFrame(anim)
+    }
+    anim()
+} 
+function cancelUpdateNbOp() {
+    isAutoUpdNav = false
 }
 let isInSettings = false
 let canClick = true
@@ -267,8 +316,13 @@ function saveIcoColor() {
 function saveBGImage(b64) {
     localStorage['bgImage'] = b64
 }
-function savePreset(psName) {
-    localStorage['preset'] = psName
+function saveImageStyles() {
+    localStorage['bgImageSize'] = sizingStyle
+    if (sizingStyle == 'Custom') {
+        localStorage['bgWidth'] = sizingWidth
+    }
+    localStorage['bgRepeat'] = repeatingStyle
+    console.log(sizingWidth)
 }
 function loadTextColor() {
     if (!localStorage['textColor']) return
@@ -290,32 +344,48 @@ function loadIcoColor() {
     colorIcon = localStorage['icon']
     setIconColor(localStorage['icon'])
 }
+function setNavColor(val) {
+    actualNavBar.style.backgroundColor = val
+    space.style.backgroundColor = val
+}
 function loadNavColor() {
     if (!localStorage['navbar']) return
     navbar.value = localStorage['navbar']
     colorNavBar = localStorage['navbar']
-    actualNavBar.style.backgroundColor = navbar.value
+    setNavColor(navbar.value)
 }
 function loadBGImage() {
     const val = localStorage['bgImage']
     if (!val) return
     setBG64(val)
 }
-const presetVal = document.getElementById("presets")
-function loadPreset() {
-    const val = localStorage['preset']
-    if (!val || val === "None") return false
-    presetVal.value = val
-    usePreset(val)
-    return true
+const sizing = document.getElementById("sizing")
+const repeating = document.getElementById("repeating")
+function loadImageStyles() {
+    console.log(localStorage)
+    setSizing(localStorage['bgImageSize'] || "Cover")
+    sizing.value = localStorage['bgImageSize'] || "Cover"
+    console.log(localStorage)
+    
+    if (localStorage['bgImageSize'] == 'Custom') {
+        valX.value = localStorage['bgWidth'] || "100"
+        setCustomSize()
+    }
+    console.log(localStorage)
+
+    setRepeating(localStorage['bgRepeat'] || "no-repeat")
+    repeating.value = localStorage['bgRepeat'] || "no-repeat"
+    console.log(localStorage)
 }
+const presetVal = document.getElementById("presets")
+
 loadFont()
 loadNavColor()
 loadBGColor()
 loadTextColor()
 loadIcoColor()
 loadBGImage()
-loadPreset()
+loadImageStyles()
 function clearFonts() {
     localStorage['imported-fonts'] = ""
     localStorage['font-names'] = ""
@@ -339,7 +409,7 @@ function usePreset(name) {
     colorBG = preset['bg']
     sText.style.color = preset['fc']
     sText.className = preset['fn']
-    fontName = val
+    fontName = preset['fn']
     for (let x = 0; x < setTexts.length; x++) {
         const t = setTexts[x]
         t.style.color = preset['bg']

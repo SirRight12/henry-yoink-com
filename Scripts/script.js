@@ -44,7 +44,11 @@ const presets = {
         "bi": getFile('rx-7.gif'), 
         "ic": "white",
         "fc": "white",
-        "fn": "Enchanting"
+        "fn": "Enchanting",
+        "ss": "cover",
+        "cw": 100,
+        "rs": "no-repeat",
+        "no": 0,
     },
     "Bill": {
         "bg": "black",
@@ -52,8 +56,24 @@ const presets = {
         "bi": getFile('bill.gif'), 
         "ic": "white",
         "fc": "white",
-        "fn": "Enchanting"
+        "fn": "Enchanting",
+        "ss": "cover",
+        "rs": "no-repeat",
+        "no": 0,
     },
+    "Blueberry": {
+        "bg": "black",
+        "nb": "black",
+        "bi": getFile('blueberry.png'), 
+        "ic": "black",
+        "fc": "white",
+        "fn": "Gameboy",
+        "no": 0,
+        "ss": 'custom',
+        'cw': 10,
+        'rs': 'repeat',
+
+    }
 
 }
 const con = document.getElementById("sub-console")
@@ -393,6 +413,8 @@ function clearFonts() {
     location.reload()
 }
 function usePreset(name) {
+    try {
+
     saveBGColor()
     saveNavColor()
     saveTextColor()
@@ -410,8 +432,25 @@ function usePreset(name) {
     sText.style.color = preset['fc']
     sText.className = preset['fn']
     fontName = preset['fn']
+    if (preset['no'] || preset['no'] == 0) {
+        space.style.opacity = preset['no']
+        actualNavBar.style.opacity = preset['no']
+    }
+    if (preset['ss'] && preset['ss'] != 'custom') {
+        document.body.style.backgroundSize = preset['ss']
+    } else if (preset['ss'] == 'custom') {
+        valX.value = preset['cw']
+        changeCustomSize()
+    }
+
+    if (preset['rs']) {
+        document.body.style.backgroundRepeat = preset['rs']
+    }
     for (let x = 0; x < setTexts.length; x++) {
         const t = setTexts[x]
         t.style.color = preset['bg']
+    }
+    } catch (err) {
+        con.innerHTML = err
     }
 }

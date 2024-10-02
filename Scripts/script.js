@@ -421,7 +421,6 @@ function clearFonts() {
 function usePreset(name) {
     try {
     let preset = presets[name]
-    con.innerHTML = JSON.stringify(preset)
     if (!preset) {
         con.innerHTML = "preset does not exist"
         return

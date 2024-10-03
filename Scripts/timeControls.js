@@ -30,9 +30,9 @@ try {
     function timer() {
         useTimeControl(current)
         // con.innerHTML = "hi "
-        requestAnimationFrame(timer)
     }
     timer()
+    setInterval(timer)
     } catch (err) {
         con.innerHTML = err
     }

@@ -1,4 +1,4 @@
-// TODO add passing periods
+//TODO add passing periods
 function timeControls() {
     const text = document.getElementById("prompt")
 
@@ -88,7 +88,7 @@ function loop() {
         times = getTimes()
         if (tries >= 10 || broke) {
             broke = true
-            clearInterval(interval)
+            // clearInterval(interval)
             title.innerText = "Bork"
             text.dataset.before = "Nothing to see here"
             text.dataset.after = "Move along"
@@ -101,6 +101,7 @@ function loop() {
         return
     }
     tries = 0
+    titleUpdate()
     displayTime(getTimeTo(times[suggestedPeriod]))
 }
 function FormatTime(Time) {

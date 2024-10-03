@@ -1,8 +1,10 @@
-const text = document.getElementById("prompt")
+// TODO add passing periods
+function timeControls() {
+    const text = document.getElementById("prompt")
 
-const title = document.getElementById("title")
-text.innerHTML = "No WiFi, clown"
-function getWeekDay() {
+    const title = document.getElementById("title")
+    text.innerHTML = "No WiFi, clown"
+    function getWeekDay() {
     const day = new Date().getDay()
     switch(day) {
         case 1:
@@ -16,23 +18,23 @@ function getWeekDay() {
     }
 }
 let times = getTimes()
-
 function getTimes() {
     return addPassings(oshSchedules[getWeekDay()])
 }
 
 function addPassings(times) {
     let prevTime = false
+    let newTimes = []
     for (let period in times) {
         if (!prevTime) {
             prevTime = period
             continue
         }
-        times["P" + period] = `${times[prevTime].split("-")[1]}-${times[period].split("-")[0]}`
+        newTimes["P" + period] = `${times[prevTime].split("-")[1]}-${times[period].split("-")[0]}`
+        newTimes[period] = times[period]
     }
     return times
 }
-addPassings()
 function ParseTime(TimeString) {
     let [startTime,endTime] = TimeString.split("-")
     
@@ -75,8 +77,8 @@ function getSuggestedPeriod() {
     return false
 }
 let tries = 0
+let broke = false
 function loop() {
-    let frame = requestAnimationFrame(loop)
     if (!suggestedPeriod) suggestedPeriod = getSuggestedPeriod()
 
     let now = IsNow(times[suggestedPeriod])
@@ -84,17 +86,17 @@ function loop() {
     if (!now) {
         suggestedPeriod = false
         times = getTimes()
-        if (tries >= 10) {
-            cancelAnimationFrame(frame)
+        if (tries >= 10 || broke) {
+            broke = true
             clearInterval(interval)
             title.innerText = "Bork"
             text.dataset.before = "Nothing to see here"
             text.dataset.after = "Move along"
             text.innerText = "Bozo D. Clown"
             
-            // throw new Error("couldn't do anything, sorry dog")
             return
-        } 
+        }
+        broke = false
         tries += 1
         return
     }
@@ -106,7 +108,7 @@ function FormatTime(Time) {
     if (mins < 10 && hrs > 0) {
         mins = "0" + mins
     }
-    let unit = "Hours"
+    let unit = ""
     if (mils < 100) {
         mils = "0" + mils
     }
@@ -118,7 +120,7 @@ function FormatTime(Time) {
     }
     if (hrs <= 0) {
         hrs = ""
-        unit = "Minutes"
+        unit = ""
     } else {
         hrs = hrs + ":"
     }
@@ -186,6 +188,7 @@ function titleUpdate() {
     
     title.innerText = `${hrs}${mins}:${secs}`
 }
-let interval = setInterval(titleUpdate,100)
+// let interval = setInterval(titleUpdate,100)
 titleUpdate()
-loop()
+return loop
+}

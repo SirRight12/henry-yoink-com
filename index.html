@@ -70,6 +70,13 @@
             </select>
             <label class="setText">Presets</label>
         </div>
+
+        <div tabindex="-1" class="settingsContainer">
+            <select id="timeControls" class="settings" title="Changes which time renderer the site should use, defaults to 'Henry'" onchange="changeTimeControl(this)">
+                <option title="Displays regular times, very consistant">Classic</option>
+                <option title="Displays milliseconds, can be volitile">Milliseconds</option>
+            </select> <label class="setText">Time Controller</label>
+        </div>
         <div tabindex="-1" class="settingsContainer">
             <button tabindex="-1" onclick="downloadCST()">Download CST</button>
         </div>
@@ -136,15 +143,17 @@
         <a href="">Down</a>
         <a href="">Here</a>
         <a href="">Quote Book</a>
-        <span>2022 Henry Getz</span>
+        <span>2024 Henry Getz</span>
     </footer>
     <!--Path: ...../Shared%20with%20me/Coding/henrygetz.com/schedule/dictionaries.js-->
     <script src="Scripts/betterDict.js"></script>
     <script src="Scripts/hscript.js"></script>
+    <script src="Scripts/script copy.js"></script>
     <script defer src="Scripts/script.js"></script>
     <script src="Scripts/font-import.js"></script>
     <script src="Scripts/files.js"></script>
     <script src="Scripts/cstParser.js"></script>
+    <script src="Scripts/timeControls.js" defer></script>
     <script>
         // localStorage.clear()
     </script>

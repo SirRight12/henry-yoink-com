@@ -76,7 +76,7 @@ const presets = {
         "fn": "Gameboy",
         "no": 0,
         "ss": 'custom',
-        'cw': 5,
+        'cw': 3,
         'rs': 'repeat',
 
     }
@@ -422,7 +422,6 @@ function usePreset(name) {
     try {
     let preset = presets[name]
     if (!preset) {
-        con.innerHTML = "preset does not exist"
         return
     }
     saveBGColor()

@@ -32,7 +32,7 @@ try {
         // con.innerHTML = "hi "
     }
     timer()
-    setInterval(timer,100)
+    setInterval(timer,1)
     } catch (err) {
         con.innerHTML = err
     }

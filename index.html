@@ -52,17 +52,19 @@
                 <option class="optionSettings Circular"><p>Circular</p></option>
                 <option class="optionSettings Wingding"><p>Wingding</p></option>
                 <option class="optionSettings Navy"><p>Navy</p></option>
-            </select> <label class="setText">Font Style</label>
+            </select>  <label class="setText">Font Style</label>
         </div>
         <div tabindex="-1" class="settingsContainer">
             <select tabindex="-1"  class="settings" id="presets" onchange="changePreset(this)">
                 <option class="optionSettings Mason">None</option>
+                <option class="optionSettings Mason">Christmas</option> 
                 <option class="optionSettings Mason">Coolest</option> 
                 <option class="optionSettings Mason">Christopher</option> 
                 <option class="optionSettings Mason">Isaiah</option> 
                 <option class="optionSettings Mason">EnchantingTable</option> 
                 <option class="optionSettings Mason">Mason</option> 
                 <option class="optionSettings Mason">Kenzie</option> 
+                <option class="optionSettings Mason">Peanuts</option> 
                 <option class="optionSettings Mason">RX-7</option> 
                 <option class="optionSettings Mason">Bill</option> 
                 <option class="optionSettings Mason">Blueberry</option> 
@@ -72,9 +74,9 @@
         </div>
 
         <div tabindex="-1" class="settingsContainer">
-            <select id="timeControls" class="settings" title="Changes which time renderer the site should use, defaults to 'Classic'" onchange="changeTimeControl(this)">
+            <select id="timeControls" class="settings" title="Changes which time renderer the site should use, defaults to 'Classic' Milliseconds will return after spirit week" onchange="changeTimeControl(this)">
                 <option title="Displays regular times, very consistant">Classic</option>
-                <option title="Displays milliseconds, can be volitile">Milliseconds</option>
+                <!-- <option title="Displays milliseconds, can be volitile">Milliseconds</option> -->
             </select> <label class="setText">Time Controller</label>
         </div>
         <div tabindex="-1" class="settingsContainer">
@@ -117,6 +119,7 @@
 
     </div>
     <div class="navbar" id="navbarspace"></div>
+    <!-- <img src="icons/snow.svg" class="snow"> -->
     <div class="navbar" id="navbar"></div>
         <svg class="icon darkmode" id="allsun" onclick="toggleSettings()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path d="M0 0h24v24H0z" fill="none"></path>
@@ -143,7 +146,7 @@
         <a href="">Down</a>
         <a href="">Here</a>
         <a href="">Quote Book</a>
-        <span>2024 Henry Getz</span>
+        <span>2022 Henry Getz</span>
     </footer>
     <!--Path: ...../Shared%20with%20me/Coding/henrygetz.com/schedule/dictionaries.js-->
     <script src="Scripts/betterDict.js"></script>

@@ -3,7 +3,7 @@
 //Whenever a change is made to this file, the below string needs
 //to be updated to a new version number.
 
-dictVersion = "0.3";
+dictVersion = "0.4";
 
 //For custom days, define the date in the format "mm/dd/yyyy",
 //and then the schedule for that day.
@@ -86,8 +86,20 @@ oshSchedules = {
         "L": "12:40-13:09",
         "SP-M": "13:00-13:49",
     },
-    //Henry's doesn't use year?
-    "10/14": {
+    "10/17/2024": {
+        "BH": "7:30-8:20",
+        "1": "08:20-09:00",
+        "2": "09:03-09:43",
+        "3": "09:47-10:27",
+        "4": "10:31-11:11",
+        "5": "11:15-11:55",
+        "6": "11:59-12:39",
+        "L": "12:39-13:09",
+        "7": "13:12-13:52",
+        "8": "13:56-14:36",
+        "SP-M": "14:40-15:20",
+    },
+    "10/18/2024": {
         "BH": "7:30-8:20",
         "1": "08:20-09:00",
         "2": "09:03-09:43",

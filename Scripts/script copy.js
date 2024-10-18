@@ -1,25 +1,30 @@
 //TODO add passing periods
+function getDay() {
+    let nowThing = new Date()
+
+    let dateText = (nowThing.getMonth() + 1) + "/" + nowThing.getDate() + "/" + nowThing.getFullYear() 
+    if (oshSchedules[dateText]) return dateText
+const day = new Date().getDay()
+switch(day) {
+    case 1:
+    case 3:
+    case 4:
+        return "mwth"
+    case 2:
+        return "t"
+    case 5:
+        return "f"
+}
+}
 function timeControls() {
     const text = document.getElementById("prompt")
 
     const title = document.getElementById("title")
     text.innerHTML = "No WiFi, clown"
-    function getWeekDay() {
-    const day = new Date().getDay()
-    switch(day) {
-        case 1:
-        case 3:
-        case 4:
-            return "mwth"
-        case 2:
-            return "t"
-        case 5:
-            return "f"
-    }
-}
+    
 let times = getTimes()
 function getTimes() {
-    return addPassings(oshSchedules[getWeekDay()])
+    return addPassings(oshSchedules[getDay()])
 }
 
 function addPassings(times) {
@@ -52,14 +57,12 @@ function IsNow(TimeString) {
         return false
     }
     const now = new Date()
-    // now.setHours(13,53)
     const [start,end] = ParseTime(TimeString)
     if (now > start && now < end) return true
     return false
 }
 function getTimeTo(TimeString) {
     const now = new Date()
-    // now.setHours(13,53)
     const [start,end] = ParseTime(TimeString)
     const difference = end - now
     const milliseconds = Math.floor(difference)
@@ -92,7 +95,7 @@ function loop() {
             title.innerText = "Bork"
             text.dataset.before = "Nothing to see here"
             text.dataset.after = "Move along"
-            text.innerText = "Bozo D. Clown"
+            text.innerText = "Bozo Clown"
             
             return
         }

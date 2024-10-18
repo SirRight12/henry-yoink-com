@@ -36,6 +36,15 @@ const presets = {
         "ic": "rgb(138,0,0)",
         "no": 1,
     },
+    'Cyrus': {
+        "bg": 'black',
+        'nb': 'black',
+        'fc': 'white',
+        'no': 0,
+        'fn': 'Enchanting',
+        'ic': 'white',
+        'bi': getFile('cyrus.png'),
+    },
     "Kenzie": {
         "bg": "rgb(249,128,171)",
         "nb": "rgb(255,36,112)",

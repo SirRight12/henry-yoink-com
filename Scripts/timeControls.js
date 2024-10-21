@@ -50,7 +50,8 @@ function isInsideSchool() {
     return false
 }
 function timer() {
-    useTimeControl(current)
+    hTime()
+    // useTimeControl(current)
     // con.innerHTML = "hi "
 }
 timer()

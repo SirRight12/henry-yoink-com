@@ -15,7 +15,7 @@ function changeTimeControl(element) {
 }
 function useTimeControl(controller) {
     try {
-    if (!isInsideSchool()) return
+    // if (!isInsideSchool()) return
     if (controller == 1) {
         hTime()
     } else if (controller == 2) {
@@ -50,8 +50,8 @@ function isInsideSchool() {
     return false
 }
 function timer() {
-    hTime()
-    // useTimeControl(current)
+    // hTime()
+    useTimeControl(current)
     // con.innerHTML = "hi "
 }
 timer()

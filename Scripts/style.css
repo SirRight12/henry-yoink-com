@@ -6,6 +6,12 @@ html, body {
     background-size: cover;
     background-position: 50% 100%;
 }
+.snow {
+    width: 5vh;
+    height: 5vh;
+    position: absolute;
+    z-index: 0;
+}
 body {
     display: flex;
     align-items: center;
@@ -36,7 +42,7 @@ body {
     height: 55%;
     position: absolute;
     right: -36.6%;
-    z-index: 1;
+    z-index: 4;
     top: 10%;
     filter: invert(1);
     animation-timing-function: cubic-bezier(0.42, 0, 0.27, 1.02);
@@ -256,6 +262,10 @@ footer {
     --font: 'Navy' !important;
     font-family: 'Navy' !important;
 }
+.Christmas {
+    --font: 'Christmas' !important;
+    font-family: 'LOTR' !important;
+}
 #prompt {
     display: grid;
     user-select: none;
@@ -264,6 +274,7 @@ footer {
     --size: 6vmin;
     font-weight: 800;--weight: normal;
     text-align: center;
+    text-rendering: optimizeLegibility;
     margin: 20vmin 0;
     --margin: calc(-88em/100);
     font-family:
@@ -275,6 +286,7 @@ footer {
     calc(0em/100);
     transition: 1s;
     font-weight: 500;
+    z-index: 2;
 }
 
 #prompt:before {
@@ -287,6 +299,7 @@ footer {
     margin: var(--margin);
     font-family: var(--font);
     letter-spacing: var(--spacing);
+    z-index: 2;
 }
 
 #prompt:after {
@@ -296,6 +309,7 @@ footer {
     margin: var(--margin);
     font-family: var(--font);
     letter-spacing: var(--spacing);
+    z-index: 2;
 }
 
 #schedule iframe {
@@ -319,6 +333,7 @@ footer {
     height: 10% !important;
     opacity: 1;
     display: block;
+    z-index: 1;
 }
 
 #content {

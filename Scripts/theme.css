@@ -209,6 +209,7 @@
       filter: drop-shadow(1px 1px 29px transparent);
       user-select: none;
       cursor: pointer;
+      z-index: 2;
       font-family: "Material Symbols Rounded";
       font-variation-settings: 'FILL' 1, 'wght' var(--weight);
       font-size: 24pt;

@@ -89,7 +89,6 @@
     src: url("../fonts/Blacktinbox-oGoA.ttf");
 }
 
-/* TO ADD TO LIST */
 @font-face {
     font-family: "BlackOps";
     src: url("../fonts/BlackOps.ttf");
@@ -129,6 +128,10 @@
 @font-face {
     font-family: "Navy";
     src: url("../fonts/BabelStoneMaritime.ttf");
+}
+@font-face {
+    font-family: 'Christmas';
+    src: url('../fonts/MerryChristmasColorRegular-ELxn.ttf');
 }
 /*
 @font-face {

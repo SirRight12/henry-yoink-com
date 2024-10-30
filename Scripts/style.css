@@ -265,6 +265,10 @@ footer {
 .Christmas {
     --font: 'Christmas' !important;
     font-family: 'LOTR' !important;
+    gap: 0 !important;
+    font-size: 28vh !important;
+    --size: 8vh !important;
+    --margin: calc(-40em/100) !important;
 }
 #prompt {
     display: grid;

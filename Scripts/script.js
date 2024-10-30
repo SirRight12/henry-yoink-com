@@ -48,17 +48,17 @@ const presets = {
         "rs": "no-repeat",
         'no': 0,
     },
-    "MDawg": {
+    "ChristmasM": {
         "bg": 'black',
-        'nb': 'black',
-        "fc": 'white',
-        'fn': 'BlackOps',
+        'nb': 'green',
+        "fc": 'red',
+        'fn': 'Christmas',
         'ic': 'white',
         'bi': getFile('mdawg.jpg'),
-        'ss': 'cover',
-        'cw': 100,
-        'rs': 'no-repeat',
-        'no': 0,
+        'ss': 'custom',
+        'cw': 33,
+        'rs': 'repeat',
+        'no': 1,
     },
     "Mason": {
         "bg": "black",
@@ -68,7 +68,6 @@ const presets = {
         "ic": "rgb(138,0,0)",
         "no": 1,
     },
-    
     'Cyrus': {
         "bg": 'black',
         'nb': 'black',
@@ -536,6 +535,7 @@ document.addEventListener("keyup", () => {
 })
 const specialThemes = {
     'Christmas': Christmas,
+    'ChristmasM': Christmas,
 }
 let clickedScreen = false
 function onDocClicked() {

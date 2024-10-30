@@ -26,7 +26,7 @@ const presets = {
       "nb":"#8a6500",
       "fc": "#00c795",
       "fn": "Enchanting",
-      "no": 0,
+      "no": 1,
     },
     "Christmas": {
         "bg": 'red',
@@ -34,7 +34,6 @@ const presets = {
         "fc": "green",
         "fn": "Christmas",
         "ic": "red",
-        // "bi": file('cary.gif'),
         "no": 1,
     },
     "Peanuts": {
@@ -44,6 +43,9 @@ const presets = {
         'fn': 'Christmas',
         'ic': 'green',
         'bi': getFile('Peanuts.gif'),
+        "ss": "cover",
+        "cw": 100,
+        "rs": "no-repeat",
         'no': 0,
     },
     "Mason": {
@@ -62,6 +64,9 @@ const presets = {
         'fn': 'Enchanting',
         'ic': 'white',
         'bi': getFile('cyrus.png'),
+        "ss": "cover",
+        "cw": 100,
+        "rs": "no-repeat",
     },
     "Kenzie": {
         "bg": "rgb(249,128,171)",
@@ -601,3 +606,27 @@ function usePreset(name) {
 setTimeout(() => {
     usePreset('Christmas')
 },100)
+let selectedPreset = 0
+document.addEventListener('keydown',(event) => {
+    
+    const key = event.key.toUpperCase()
+    con.innerHTML = key + ' ' + event.ctrlKey + ' ' + event.shiftKey
+    if (key === 'M' && event.ctrlKey && !event.shiftKey) {
+        const keys = Object.keys(presets)
+        selectedPreset += 1
+        if (selectedPreset >= keys.length) {
+            selectedPreset = 0
+        }
+        con.innerHTML = 'hi'
+        const presetKey = keys[selectedPreset]
+        usePreset(presetKey)
+    } else if (key == 'M' && event.ctrlKey && event.shiftKey) {
+        const keys = Object.keys(presets)
+        selectedPreset -= 1
+        if (selectedPreset < 0) {
+            selectedPreset = keys.length - 1
+        } 
+        const presetKey = keys[selectedPreset]
+        usePreset(presetKey)
+    }
+})

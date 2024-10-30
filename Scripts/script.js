@@ -48,6 +48,18 @@ const presets = {
         "rs": "no-repeat",
         'no': 0,
     },
+    "MDawg": {
+        "bg": 'black',
+        'nb': 'black',
+        "fc": 'white',
+        'fn': 'BlackOps',
+        'ic': 'white',
+        'bi': getFile('mdawg.jpg'),
+        'ss': 'cover',
+        'cw': 100,
+        'rs': 'no-repeat',
+        'no': 0,
+    },
     "Mason": {
         "bg": "black",
         "nb" : "black",
@@ -56,6 +68,7 @@ const presets = {
         "ic": "rgb(138,0,0)",
         "no": 1,
     },
+    
     'Cyrus': {
         "bg": 'black',
         'nb': 'black',

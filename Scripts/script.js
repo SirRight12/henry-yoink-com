@@ -610,14 +610,12 @@ let selectedPreset = 0
 document.addEventListener('keydown',(event) => {
     
     const key = event.key.toUpperCase()
-    con.innerHTML = key + ' ' + event.ctrlKey + ' ' + event.shiftKey
     if (key === 'M' && event.ctrlKey && !event.shiftKey) {
         const keys = Object.keys(presets)
         selectedPreset += 1
         if (selectedPreset >= keys.length) {
             selectedPreset = 0
         }
-        con.innerHTML = 'hi'
         const presetKey = keys[selectedPreset]
         usePreset(presetKey)
     } else if (key == 'M' && event.ctrlKey && event.shiftKey) {

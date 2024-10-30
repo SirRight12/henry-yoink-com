@@ -28,6 +28,24 @@ const presets = {
       "fn": "Enchanting",
       "no": 0,
     },
+    "Christmas": {
+        "bg": 'red',
+        "nb" : "green",
+        "fc": "green",
+        "fn": "Christmas",
+        "ic": "red",
+        // "bi": file('cary.gif'),
+        "no": 1,
+    },
+    "Peanuts": {
+        'bg': 'black',
+        'nb': 'black',
+        "fc": 'black',
+        'fn': 'Christmas',
+        'ic': 'green',
+        'bi': getFile('Peanuts.gif'),
+        'no': 0,
+    },
     "Mason": {
         "bg": "black",
         "nb" : "black",
@@ -181,6 +199,7 @@ function autoUpdNavbar(element) {
         requestAnimationFrame(anim)
         colorNavBar = element.value
         actualNavBar.style.backgroundColor = element.value
+        space.style.backgroundColor = element.value
     }
 }
 function cancelUpdNavBar() {
@@ -413,7 +432,6 @@ function loadImageStyles() {
     console.log(localStorage)
 }
 const presetVal = document.getElementById("presets")
-
 loadFont()
 loadNavColor()
 loadBGColor()
@@ -427,12 +445,120 @@ function clearFonts() {
     localStorage['font'] = "Default"
     location.reload()
 }
+function badrng(min,max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+function PlayChristmasMusic() {
+    const audio = new Audio('18-AudioTrack1.wav')
+    audio.loop = true
+    
+    audio.play()
+
+    return () => {
+        audio.pause()
+        audio.remove()
+    }
+}
+function Christmas() {
+    try {
+    let StopMusic = PlayChristmasMusic()
+    function addSnow() {
+        let snow = document.createElement('img')
+        snow.src = "icons/snow.svg"
+        snow.className = 'snow'
+        snow.style.left = badrng(0,100) + "%"
+        snow.style.top = "-10%"
+        document.body.appendChild(snow)
+    }
+    
+    let an = requestAnimationFrame(anim) 
+    let spawnFrame = 10
+    let frameElapsed = 0
+    function anim() {
+        frameElapsed ++
+        // con.innerHTML = 'init'
+        an = requestAnimationFrame(anim)
+        if (frameElapsed % spawnFrame == 0) {
+            addSnow()
+        }
+        const elements = document.querySelectorAll('.snow')
+        elements.forEach(element => {
+            let height = parseFloat(element.style.top.replace("%","")) || 0
+            height += 10 * (1 / 60)
+            element.style.top = height + "%"
+            if (height > 100) {
+                element.remove()
+            }
+        });
+    }
+    return () => {
+        StopMusic()
+        const elements = document.querySelectorAll('.snow')
+        elements.forEach(element => {
+            element.remove()
+        });
+        cancelAnimationFrame(an)
+    }
+    } catch (err) {
+        con.innerHTML = err
+    }
+}
+let stringThing = ""
+document.addEventListener("keydown",(event) => {
+    if (event.repeat) return
+    const key = event.key.toUpperCase()
+    stringThing += key
+    if (stringThing == "ASDF") {
+        usePreset("Christmas")
+        stringThing = ""
+    }
+})
+document.addEventListener("keyup", () => {
+    stringThing = ""
+})
+const specialThemes = {
+    'Christmas': Christmas,
+}
+let clickedScreen = false
+function onDocClicked() {
+    clickedScreen = true
+}
+document.addEventListener('click',onDocClicked)
+async function Clicked() {
+    return new Promise((resolve,reject) => {
+        if (clickedScreen) {
+            resolve()
+            return
+        }
+        function anim() {
+            if (clickedScreen) {
+                clearInterval(interval)
+                resolve()
+                return
+            } 
+        }
+        anim()
+        let interval = setInterval(anim,0)
+    })
+}
+let stopSpecial = null
+async function checkForSpecial(name) {
+    if (stopSpecial) { 
+        stopSpecial()
+        stopSpecial = false
+    }
+    if (!specialThemes[name]) return
+    await Clicked() 
+    stopSpecial = specialThemes['Christmas']()
+}
 function usePreset(name) {
     try {
+    checkForSpecial(name)
     let preset = presets[name]
     if (!preset) {
         return
     }
+    
     saveBGColor()
     saveNavColor()
     saveTextColor()
@@ -472,3 +598,6 @@ function usePreset(name) {
         con.innerHTML = err
     }
 }
+setTimeout(() => {
+    usePreset('Christmas')
+},100)

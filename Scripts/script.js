@@ -89,6 +89,7 @@ const presets = {
         'ss': 'contain',
         'bi': getFile('navy.png'),
         'rs': 'no-repeat',
+        'ic': 'white',
     },
     "Kenzie": {
         "bg": "rgb(249,128,171)",

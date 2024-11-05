@@ -80,6 +80,16 @@ const presets = {
         "cw": 100,
         "rs": "no-repeat",
     },
+    'Navy': {
+        'bg': 'black',
+        'nb': 'black',
+        'fc': 'white',
+        'no': 0,
+        'fn': 'Default',
+        'ss': 'contain',
+        'bi': getFile('navy.png'),
+        'rs': 'no-repeat',
+    },
     "Kenzie": {
         "bg": "rgb(249,128,171)",
         "nb": "rgb(255,36,112)",

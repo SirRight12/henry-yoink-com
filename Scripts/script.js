@@ -67,9 +67,9 @@ const presets = {
         'fn': 'BlackOps',
         'ic': 'white',
         'bi': getFile('jack.png'),
-        'ss': 'custom',
-        'cw': 33,
-        'rs': 'repeat',
+        'ss': 'contain',
+        'cw': 100,
+        'rs': 'no-repeat',
         'no': 0,
     },
     "Mason": {

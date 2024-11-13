@@ -60,6 +60,18 @@ const presets = {
         'rs': 'repeat',
         'no': 1,
     },
+    "Jack": {
+        "bg": 'black',
+        'nb': 'black',
+        "fc": 'white',
+        'fn': 'BlackOps',
+        'ic': 'white',
+        'bi': getFile('jack.png'),
+        'ss': 'custom',
+        'cw': 33,
+        'rs': 'repeat',
+        'no': 0,
+    },
     "Mason": {
         "bg": "black",
         "nb" : "black",

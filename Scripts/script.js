@@ -111,6 +111,18 @@ const presets = {
         "ic": "rgb(249,128,171)",
         "no": 1,
     },
+    'Paige': {
+        "bg": 'black',
+        'nb': 'rgb(81,139,205)',
+        'fc': 'white',
+        'no': 1,
+        'fn': 'Google',
+        'ic': 'white',
+        'bi': getFile('monke.gif'),
+        "ss": "contain",
+        "cw": 100,
+        "rs": "repeat",
+    },
     "RX-7": {
         "bg": "black",
         "nb": "black",
@@ -499,6 +511,17 @@ function PlayChristmasMusic() {
         audio.remove()
     }
 }
+function Monkey() {
+    const audio = new Audio('monke.mp3')
+    audio.loop = true
+    
+    audio.play()
+
+    return () => {
+        audio.pause()
+        audio.remove()
+    }
+}
 function Christmas() {
     try {
     let StopMusic = PlayChristmasMusic()
@@ -565,6 +588,7 @@ document.addEventListener("keyup", () => {
 const specialThemes = {
     'Christmas': Christmas,
     'ChristmasM': Christmas,
+    'Paige': Monkey,
 }
 let clickedScreen = false
 function onDocClicked() {

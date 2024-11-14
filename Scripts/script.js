@@ -620,7 +620,7 @@ async function checkForSpecial(name) {
     }
     if (!specialThemes[name]) return
     await Clicked() 
-    stopSpecial = specialThemes['Christmas']()
+    stopSpecial = specialThemes[name]()
 }
 function usePreset(name) {
     try {

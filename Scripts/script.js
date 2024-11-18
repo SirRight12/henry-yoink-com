@@ -797,7 +797,7 @@ function Tales() {
             case 'Grape':
                 audio.pause()
                 audio.remove()
-                audio = new Audio('Music/Block Tales OST_Fear.mp3')
+                audio = new Audio('Music/Block Tales OST_ Fear.mp3')
                 audio.loop = true
                 audio.play()
                 break
@@ -811,56 +811,56 @@ function Tales() {
             case 'Banana':
                 audio.pause()
                 audio.remove()
-                audio = new Audio('Music/Block Tales OST_Greed.mp3')
+                audio = new Audio('Music/Block Tales OST_ Greed.mp3')
                 audio.loop = true
                 audio.play()
                 break
             case 'Chocolate':
                 audio.pause()
                 audio.remove()
-                audio = new Audio('Music/Block Tales OST_Bigfoot.mp3')
+                audio = new Audio('Music/Block Tales OST_ Bigfoot.mp3')
                 audio.loop = true
                 audio.play()
                 break
             case 'Coal':
                 audio.pause()
                 audio.remove()
-                audio = new Audio('Music/Block Tales OST_Slasher.mp3')
+                audio = new Audio('Music/Block Tales OST_ Slasher.mp3')
                 audio.loop = true
                 audio.play()
                 break
             case 'Gold':
                 audio.pause()
                 audio.remove()
-                audio = new Audio('Music/Block Tales OST_Turkey.mp3')
+                audio = new Audio('Music/Block Tales OST_ Turkey.mp3')
                 audio.loop = true
                 audio.play()
                 break
             case 'Lime':
                 audio.pause()
                 audio.remove()
-                audio = new Audio('Music/Block Tales OST_Green & Purple Noobs.mp3')
+                audio = new Audio('Music/Block Tales OST_ Green & Purple Noobs.mp3')
                 audio.loop = true
                 audio.play()
                 break
             case 'Orange':
                 audio.pause()
                 audio.remove()
-                audio = new Audio('Music/Block Tales OST_Bizville.mp3')
+                audio = new Audio('Music/Block Tales OST_ Bizville.mp3')
                 audio.loop = true
                 audio.play()
                 break
             case 'Platinum':
                 audio.pause()
                 audio.remove()
-                audio = new Audio('Music/Block Tales OST_Solitude')
+                audio = new Audio('Music/Block Tales OST_ Solitude')
                 audio.loop = true
                 audio.play()
                 break
             case 'Rose':
                 audio.pause()
                 audio.remove()
-                audio = new Audio('Music/Block Tales OST_Bubonic Plant.mp3')
+                audio = new Audio('Music/Block Tales OST_ Bubonic Plant.mp3')
                 audio.loop = true
                 audio.play()
                 break

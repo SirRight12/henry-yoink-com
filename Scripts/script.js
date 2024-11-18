@@ -822,42 +822,42 @@ function Tales() {
                 audio.loop = true
                 audio.play
                 break
-            case 'Coal'
+            case 'Coal':
                 audio.pause()
                 audio.remove()
                 audio = new Audio('Music/Block Tales OST_Slasher.mp3')
                 audio.loop = true
                 audio.play
                 break
-            case 'Gold'
+            case 'Gold':
                 audio.pause()
                 audio.remove()
                 audio = new Audio('Music/Block Tales OST_Turkey.mp3')
                 audio.loop = true
                 audio.play
                 break
-            case 'Lime'
+            case 'Lime':
                 audio.pause()
                 audio.remove()
                 audio = new Audio('Music/Block Tales OST_Green & Purple Noobs.mp3')
                 audio.loop = true
                 audio.play
                 break
-            case 'Orange'
+            case 'Orange':
                 audio.pause()
                 audio.remove()
                 audio = new Audio('Music/Block Tales OST_Bizville.mp3')
                 audio.loop = true
                 audio.play
                 break
-            case 'Platinum'
+            case 'Platinum':
                 audio.pause()
                 audio.remove()
                 audio = new Audio('Music/Block Tales OST_Solitude')
                 audio.loop = true
                 audio.play
                 break
-            case 'Rose'
+            case 'Rose':
                 audio.pause()
                 audio.remove()
                 audio = new Audio('Music/Block Tales OST_Bubonic Plant.mp3')

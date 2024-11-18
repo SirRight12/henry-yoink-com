@@ -789,6 +789,9 @@ function Tales() {
                 audio = new Audio('Music/cruel_king.mp3')
                 //audio must be able looped
                 audio.loop = true
+
+                //Play music
+                audio.play()
                 //do not forget to break
                 break
             case 'Grape':
@@ -796,12 +799,14 @@ function Tales() {
                 audio.remove()
                 audio = new Audio('Music/Block Tales OST_Fear.mp3')
                 audio.loop = true
+                audio.play()
                 break
             case 'Lime':
                 audio.pause()
                 audio.remove()
                 audio = new Audio('Music/HATRED.mp3')
                 audio.loop=true
+                audio.play()
                 break
                 
         }

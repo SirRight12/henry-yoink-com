@@ -1,5 +1,6 @@
 
 const presets = {
+    'None': false,
     "Coolest": {
         "bg": "#000000",
         "nb": "#000000",
@@ -146,6 +147,13 @@ const presets = {
         "rs": "no-repeat",
         "no": 0,
     },
+    "Tales": {
+        "bg": "black",
+        "nb": "black",
+        "ic": "black",
+        "fc": "white",
+        "fn": "Gameboy",
+    },
     "Blueberry": {
         "bg": "black",
         "nb": "black",
@@ -157,8 +165,128 @@ const presets = {
         "ss": 'custom',
         'cw': 3,
         'rs': 'repeat',
-
-    }
+    },
+    "Apple": {
+        "bg": "black",
+        "nb": "black",
+        "bi": 'Flavors/Apple.png', 
+        "ic": "black",
+        "fc": "white",
+        "fn": "Gameboy",
+        "no": 0,
+        "ss": 'custom',
+        'cw': 3,
+        'rs': 'repeat',
+    },
+    "Banana": {
+        "bg": "black",
+        "nb": "black",
+        "bi": 'Flavors/Banana.png', 
+        "ic": "black",
+        "fc": "black",
+        "fn": "Gameboy",
+        "no": 0,
+        "ss": 'custom',
+        'cw': 3,
+        'rs': 'repeat',
+    },
+    "Chocolate": {
+        "bg": "black",
+        "nb": "black",
+        "bi": 'Flavors/Chocolate.png', 
+        "ic": "black",
+        "fc": "white",
+        "fn": "Gameboy",
+        "no": 0,
+        "ss": 'custom',
+        'cw': 3,
+        'rs': 'repeat',
+    },
+    "Coal": {
+        "bg": "black",
+        "nb": "black",
+        "bi": 'Flavors/Coal.png', 
+        "ic": "black",
+        "fc": "white",
+        "fn": "Gameboy",
+        "no": 0,
+        "ss": 'custom',
+        'cw': 3,
+        'rs': 'repeat',
+    },
+    "Gold": {
+        "bg": "black",
+        "nb": "black",
+        "bi": 'Flavors/Gold.png', 
+        "ic": "black",
+        "fc": "white",
+        "fn": "Gameboy",
+        "no": 0,
+        "ss": 'custom',
+        'cw': 3,
+        'rs': 'repeat',
+    },
+    "Grape": {
+        "bg": "black",
+        "nb": "black",
+        "bi": 'Flavors/Grape.png', 
+        "ic": "black",
+        "fc": "white",
+        "fn": "Gameboy",
+        "no": 0,
+        "ss": 'custom',
+        'cw': 3,
+        'rs': 'repeat',
+    },
+    "Lime": {
+        "bg": "black",
+        "nb": "black",
+        "bi": 'Flavors/Lime.png', 
+        "ic": "black",
+        "fc": "white",
+        "fn": "Gameboy",
+        "no": 0,
+        "ss": 'custom',
+        'cw': 3,
+        'rs': 'repeat',
+    },
+    "Orange": {
+        "bg": "black",
+        "nb": "black",
+        "bi": 'Flavors/Orange.png', 
+        "ic": "black",
+        "fc": "white",
+        "fn": "Gameboy",
+        "no": 0,
+        "ss": 'custom',
+        'cw': 3,
+        'rs': 'repeat',
+    },
+    "Platinum": {
+        "bg": "black",
+        "nb": "black",
+        "bi": 'Flavors/Platinum.png', 
+        "ic": "black",
+        "fc": "white",
+        "fn": "Gameboy",
+        "no": 0,
+        "ss": 'custom',
+        'cw': 3,
+        'rs': 'repeat',
+    },
+    "Rose": {
+        "bg": "black",
+        "nb": "black",
+        "bi": 'Flavors/Rose.png', 
+        "ic": "black",
+        "fc": "white",
+        "fn": "Gameboy",
+        "no": 0,
+        "ss": 'custom',
+        'cw': 3,
+        'rs': 'repeat',
+    },
+    
 
 }
 const con = document.getElementById("sub-console")
@@ -198,13 +326,6 @@ function autoUpd(element) {
 }
 function changePreset(element) {
     const val = element.value
-    if (val == "None") {
-        loadBGColor()
-        loadFont()
-        loadNavColor()
-        loadTextColor()
-        loadBGColor()
-    }
     usePreset(val)
 }
 function changeFont(element) {
@@ -512,7 +633,7 @@ function PlayChristmasMusic() {
     }
 }
 function Monkey() {
-    const audio = new Audio('monke.mp3')
+    const audio = new Audio('Music/monke.mp3')
     audio.loop = true
     
     audio.play()
@@ -521,6 +642,33 @@ function Monkey() {
         audio.pause()
         audio.remove()
     }
+}
+function PlaySkeletonsMusic() {
+    const audio = new Audio('Music/Skeletons.mp3')
+    audio.loop = true
+
+    audio.play()
+
+    return () => {
+        audio.pause()
+        audio.remove()
+    }
+}
+function Thanksgiving() {
+    let video = document.getElementById('video')
+    video.style.display = 'block'
+    video.play()
+
+    return () => {
+        try {
+
+        video.style.display = 'none'
+        video.pause()
+        } catch (err) {
+            con.innerHTML = err
+        }
+        
+    } 
 }
 function Christmas() {
     try {
@@ -553,7 +701,7 @@ function Christmas() {
             // rotation += 2 * (1 / 60)
             height += 10 * (1 / 60)
             element.style.top = height + "%"
-            // con.innerHTML = element.style.transform
+            con.innerHTML = element.style.transform
             // element.style.transform = `rotate(${rotation}deg)`
             if (height > 100) {
                 element.remove()
@@ -572,6 +720,102 @@ function Christmas() {
         con.innerHTML = err
     }
 }
+function MatthewChristmas() {
+    try {
+        let StopMusic = PlayChristmasMusic()
+        function addSnow() {
+            let snow = document.createElement('img')
+            snow.src = "icons/matthew.jpg"
+            snow.className = 'snow'
+            snow.style.left = badrng(0,100) + "%"
+            snow.style.top = "-10%"
+            // const randRot = badrng(0,360)
+            // snow.style.transform = `rotate(${randRot}deg)`
+            document.body.appendChild(snow)
+        }
+        con.innerHTML = 'Merry Matthew'
+        
+        let an = requestAnimationFrame(anim) 
+        let spawnFrame = 10
+        let frameElapsed = 0
+        function anim() {
+            frameElapsed ++
+            // con.innerHTML = 'init'
+            an = requestAnimationFrame(anim)
+            if (frameElapsed % spawnFrame == 0) {
+                addSnow()
+            }
+            const elements = document.querySelectorAll('.snow')
+            elements.forEach(element => {
+                let height = parseFloat(element.style.top.replace("%","")) || 0
+                // let rotation = parseFloat(element.style.transform.replace('rotate(',"").replace(')',"").replace('deg','')) || 0
+                // rotation += 2 * (1 / 60)
+                height += 10 * (1 / 60)
+                element.style.top = height + "%"
+                con.innerHTML = element.style.transform
+                // element.style.transform = `rotate(${rotation}deg)`
+                if (height > 100) {
+                    element.remove()
+                }
+            });
+        }
+        return () => {
+            StopMusic()
+            const elements = document.querySelectorAll('.snow')
+            elements.forEach(element => {
+                element.remove()
+            });
+            cancelAnimationFrame(an)
+        }
+        } catch (err) {
+            con.innerHTML = err
+        }
+}
+function Tales() {
+    let audio = new Audio('Music/cruel_king.mp3')
+    audio.play()
+    audio.loop = true
+    applyPreset('Blueberry')
+    let flavors = ['Blueberry','Apple','Banana','Chocolate','Coal','Gold','Grape','Lime','Orange','Platinum','Rose']
+    let selectedFlavor = 0
+    function FlavorMusic() {
+        let flavor = flavors[selectedFlavor]
+        switch(flavor) {
+            //name goes in the quotes/apothesis
+            case 'Blueberry':
+                audio.pause()
+                audio.remove()
+                //drop music file into Music folder
+                audio = new Audio('Music/curel_king.mp3')
+                //audio must be able looped
+                audio.loop = true
+                //do not forget to break
+                break
+        }
+    }
+    function keyDown(event) {
+        if (event.key.toUpperCase() == 'F' && !event.shiftKey) {
+            selectedFlavor += 1
+            if (selectedFlavor >= flavors.length) {
+                selectedFlavor = 0
+            }
+            applyPreset(flavors[selectedFlavor])
+        } else if (event.key.toUpperCase() == 'F' && event.shiftKey) {
+            selectedFlavor -= 1
+            if (selectedFlavor < 0) {
+                selectedFlavor = flavors.length - 1
+            }
+            applyPreset(flavors[selectedFlavor])
+        }
+        FlavorMusic()
+    }
+    document.addEventListener('keypress',keyDown)
+    return () => {
+        document.removeEventListener('keypress',keyDown)
+        audio.pause()
+        audio.remove()
+    }
+}
 let stringThing = ""
 document.addEventListener("keydown",(event) => {
     if (event.repeat) return
@@ -587,7 +831,10 @@ document.addEventListener("keyup", () => {
 })
 const specialThemes = {
     'Christmas': Christmas,
-    'ChristmasM': Christmas,
+    'ChristmasM': MatthewChristmas,
+    'Halloween': PlaySkeletonsMusic,
+    'Thanksgiving': Thanksgiving,
+    'Tales': Tales,
     'Paige': Monkey,
 }
 let clickedScreen = false
@@ -620,11 +867,30 @@ async function checkForSpecial(name) {
     }
     if (!specialThemes[name]) return
     await Clicked() 
+    const keys = Object.keys(presets)
+    if (keys[selectedPreset] != name) return
     stopSpecial = specialThemes[name]()
 }
 function usePreset(name) {
     try {
+        const keys = Object.keys(presets)
+        selectedPreset = keys.indexOf(name)
+    presetList.value = name
+    if (name == 'None') {
+        loadBGColor()
+        loadFont()
+        loadNavColor()
+        loadTextColor()
+        loadBGColor()
+        setIconColor(icoChanger.value)
+    }
     checkForSpecial(name)
+    applyPreset(name)
+    } catch (err) {
+        con.innerHTML = err
+    }
+}
+function applyPreset(name) {
     let preset = presets[name]
     if (!preset) {
         return
@@ -639,7 +905,7 @@ function usePreset(name) {
     space.style.backgroundColor = preset['nb']
     settingsMenu.style.backgroundColor = preset['bg']
     document.body.style.backgroundColor = preset['bg']
-    setIconColor(preset['ic'])
+    setIconColor(preset['ic'] || 'white')
     if (preset['bi']) {
         setBG64(preset['bi'])
     }
@@ -664,9 +930,6 @@ function usePreset(name) {
     for (let x = 0; x < setTexts.length; x++) {
         const t = setTexts[x]
         t.style.color = preset['bg']
-    }
-    } catch (err) {
-        con.innerHTML = err
     }
 }
 setTimeout(() => {

@@ -786,11 +786,24 @@ function Tales() {
                 audio.pause()
                 audio.remove()
                 //drop music file into Music folder
-                audio = new Audio('Music/curel_king.mp3')
+                audio = new Audio('Music/cruel_king.mp3')
                 //audio must be able looped
                 audio.loop = true
                 //do not forget to break
                 break
+            case 'Grape':
+                audio.pause()
+                audio.remove()
+                audio = new Audio('music/Block Tales OST_Fear.mp3')
+                audio.loop = true
+                break
+            case 'Lime':
+                audio.pause()
+                audio.remove()
+                audio = new Audio('music/HATRED.mp3)
+                audio.loop=true
+                break
+                
         }
     }
     function keyDown(event) {

@@ -794,13 +794,13 @@ function Tales() {
             case 'Grape':
                 audio.pause()
                 audio.remove()
-                audio = new Audio('music/Block Tales OST_Fear.mp3')
+                audio = new Audio('Music/Block Tales OST_Fear.mp3')
                 audio.loop = true
                 break
             case 'Lime':
                 audio.pause()
                 audio.remove()
-                audio = new Audio('music/HATRED.mp3)
+                audio = new Audio('Music/HATRED.mp3')
                 audio.loop=true
                 break
                 

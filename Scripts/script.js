@@ -853,7 +853,7 @@ function Tales() {
             case 'Platinum':
                 audio.pause()
                 audio.remove()
-                audio = new Audio('Music/Block Tales OST_ Solitude')
+                audio = new Audio('Music/Block Tales OST_ Solitude.mp3')
                 audio.loop = true
                 audio.play()
                 break

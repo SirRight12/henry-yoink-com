@@ -792,10 +792,6 @@ function MatthewChristmas() {
         }
 }
 function Tales() {
-    con.innerHTML = '(Use "f" and shift "f" to change flavors)'
-    setTimeout(() => {
-        con.innerHTML = ''
-    },2000)
     let audio = new Audio('Music/cruel_king.mp3')
     audio.play()
     audio.loop = true
@@ -926,6 +922,16 @@ document.addEventListener("keydown",(event) => {
 document.addEventListener("keyup", () => {
     stringThing = ""
 })
+function KneeSurgery() {
+    const audio = new Audio('Music/surgery.mp3')
+    audio.loop = true
+    audio.play()
+
+    return () => {
+        audio.pause()
+        audio.remove()
+    }
+}
 const specialThemes = {
     'Christmas': Christmas,
     'ChristmasM': MatthewChristmas,
@@ -933,6 +939,7 @@ const specialThemes = {
     'Thanksgiving': Thanksgiving,
     'Tales': Tales,
     'Paige': Monkey,
+    'KneeSurgery': KneeSurgery,
 }
 let clickedScreen = false
 function onDocClicked() {

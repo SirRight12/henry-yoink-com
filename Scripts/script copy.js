@@ -104,8 +104,9 @@ function loop() {
         return
     }
     tries = 0
-    titleUpdate()
-    displayTime(getTimeTo(times[suggestedPeriod]))
+    const time = getTimeTo(times[suggestedPeriod])
+    titleUpdate(time)
+    displayTime()
 }
 function FormatTime(Time) {
     let [hrs,mins,secs,mils] = Time
@@ -186,9 +187,9 @@ function displayTime(Time) {
     text.innerText = `${hrs}${mins}:${secs}:${mils} ${unit}`
     text.dataset.after = `Until ${getPeriodFig(suggestedPeriod)}`
 }
-function titleUpdate() {
+function titleUpdate(time) {
     if (!times[suggestedPeriod]) return
-    const [hrs,mins,secs] = FormatTime(getTimeTo(times[suggestedPeriod]))
+    const [hrs,mins,secs] = time
     
     title.innerText = `${hrs}${mins}:${secs}`
 }

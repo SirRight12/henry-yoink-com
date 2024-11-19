@@ -281,6 +281,10 @@ footer {
     --size: 8vh !important;
     --margin: calc(-40em/100) !important;
 }
+.Knee {
+    --font: 'Knee' !important;
+    font-family: 'Knee' !important;
+}
 #prompt {
     display: grid;
     user-select: none;

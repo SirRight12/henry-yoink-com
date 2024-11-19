@@ -89,6 +89,18 @@ const presets = {
         "ic": "rgb(138,0,0)",
         "no": 1,
     },
+    'KneeSurgery': {
+        "bg": 'black',
+        'nb': 'black',
+        'fc': 'white',
+        'no': 0,
+        'fn': 'Knee',
+        'ic': 'white',
+        'bi': 'Backgrounds/Knee.jpg',
+        "ss": "cover",
+        "cw": 100,
+        "rs": "no-repeat",
+    },
     'Cyrus': {
         "bg": 'black',
         'nb': 'black',

@@ -133,6 +133,10 @@
     font-family: 'Christmas';
     src: url('../fonts/MerryChristmasColorRegular-ELxn.ttf');
 }
+@font-face {
+    font-family: 'Knee';
+    src: url('../fonts/VinaSans-Regular.ttf');
+}
 /*
 @font-face {
     font-family: "Cabin Sketch";

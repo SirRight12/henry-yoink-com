@@ -795,7 +795,7 @@ function Tales() {
     con.innerHTML = '(Use "f" and shift "f" to change flavors)'
     setTimeout(() => {
         con.innerHTML = ''
-    },250)
+    },2000)
     let audio = new Audio('Music/cruel_king.mp3')
     audio.play()
     audio.loop = true

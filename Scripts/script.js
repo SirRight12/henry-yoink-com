@@ -622,7 +622,7 @@ function badrng(min,max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 function PlayChristmasMusic() {
-    const audio = new Audio('18-AudioTrack1.wav')
+    const audio = new Audio('Music/18-AudioTrack1.wav')
     audio.loop = true
     
     audio.play()

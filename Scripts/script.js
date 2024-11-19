@@ -29,6 +29,14 @@ const presets = {
       "fn": "Enchanting",
       "no": 1,
     },
+    'Thanksgiving': {
+        "bg": 'black',
+        "nb" : "black",
+        "fc": "white",
+        "fn": "Christmas",
+        "ic": "orange",
+        "no": 0,
+    },
     "Christmas": {
         "bg": 'red',
         "nb" : "green",

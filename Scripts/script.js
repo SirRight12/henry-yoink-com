@@ -57,18 +57,6 @@ const presets = {
         "rs": "no-repeat",
         'no': 0,
     },
-    "ChristmasM": {
-        "bg": 'black',
-        'nb': 'green',
-        "fc": 'red',
-        'fn': 'Christmas',
-        'ic': 'white',
-        'bi': getFile('mdawg.jpg'),
-        'ss': 'custom',
-        'cw': 33,
-        'rs': 'repeat',
-        'no': 1,
-    },
     "Jack": {
         "bg": 'black',
         'nb': 'black',
@@ -740,57 +728,6 @@ function Christmas() {
         con.innerHTML = err
     }
 }
-function MatthewChristmas() {
-    try {
-        let StopMusic = PlayChristmasMusic()
-        function addSnow() {
-            let snow = document.createElement('img')
-            snow.src = "icons/matthew.jpg"
-            snow.className = 'snow'
-            snow.style.left = badrng(0,100) + "%"
-            snow.style.top = "-10%"
-            // const randRot = badrng(0,360)
-            // snow.style.transform = `rotate(${randRot}deg)`
-            document.body.appendChild(snow)
-        }
-        con.innerHTML = 'Merry Matthew'
-        
-        let an = requestAnimationFrame(anim) 
-        let spawnFrame = 10
-        let frameElapsed = 0
-        function anim() {
-            frameElapsed ++
-            // con.innerHTML = 'init'
-            an = requestAnimationFrame(anim)
-            if (frameElapsed % spawnFrame == 0) {
-                addSnow()
-            }
-            const elements = document.querySelectorAll('.snow')
-            elements.forEach(element => {
-                let height = parseFloat(element.style.top.replace("%","")) || 0
-                // let rotation = parseFloat(element.style.transform.replace('rotate(',"").replace(')',"").replace('deg','')) || 0
-                // rotation += 2 * (1 / 60)
-                height += 10 * (1 / 60)
-                element.style.top = height + "%"
-                con.innerHTML = element.style.transform
-                // element.style.transform = `rotate(${rotation}deg)`
-                if (height > 100) {
-                    element.remove()
-                }
-            });
-        }
-        return () => {
-            StopMusic()
-            const elements = document.querySelectorAll('.snow')
-            elements.forEach(element => {
-                element.remove()
-            });
-            cancelAnimationFrame(an)
-        }
-        } catch (err) {
-            con.innerHTML = err
-        }
-}
 function Tales() {
     let audio = new Audio('Music/cruel_king.mp3')
     audio.play()
@@ -934,7 +871,6 @@ function KneeSurgery() {
 }
 const specialThemes = {
     'Christmas': Christmas,
-    'ChristmasM': MatthewChristmas,
     'Halloween': PlaySkeletonsMusic,
     'Thanksgiving': Thanksgiving,
     'Tales': Tales,

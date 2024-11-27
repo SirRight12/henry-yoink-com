@@ -3,7 +3,7 @@
 //Whenever a change is made to this file, the below string needs
 //to be updated to a new version number.
 
-dictVersion = "0.5";
+dictVersion = "0.6";
 
 //For custom days, define the date in the format "mm/dd/yyyy",
 //and then the schedule for that day.
@@ -61,6 +61,15 @@ oshSchedules = {
         "5": "11:40-12:26",
         "L": "12:30-12:59",
         "7": "13:03-13:49",
+    },
+    //Half day
+    "11/16/2024": {
+        "BH": "7:30-8:20",
+        "1": "08:20-09:00",
+        "2": "09:03-09:43",
+        "3": "09:47-10:27",
+        "4": "10:31-11:11",
+        "5": "11:15-11:55",
     },
     //50th
     "10/30/2024": {

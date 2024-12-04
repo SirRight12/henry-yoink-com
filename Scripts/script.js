@@ -112,6 +112,17 @@ const presets = {
         'rs': 'no-repeat',
         'ic': 'white',
     },
+    'USSR': {
+        'bg': 'black',
+        'nb': 'black',
+        'fc': 'white',
+        'no': 0,
+        'fn': 'Default',
+        'ss': 'cover',
+        'bi': 'Backgrounds/jordan.jpg',
+        'rs': 'no-repeat',
+        'ic': 'white',
+    },
     "Kenzie": {
         "bg": "rgb(249,128,171)",
         "nb": "rgb(255,36,112)",
@@ -651,6 +662,15 @@ function Monkey() {
         audio.remove()
     }
 }
+function USSR() {
+    const audio = new Audio('Music/jordan.mp3')
+    audio.loop = true
+    audio.play()
+    return () => {
+        audio.pause()
+        audio.remove()
+    }
+}
 function PlaySkeletonsMusic() {
     const audio = new Audio('Music/Skeletons.mp3')
     audio.loop = true
@@ -876,6 +896,7 @@ const specialThemes = {
     'Tales': Tales,
     'Paige': Monkey,
     'KneeSurgery': KneeSurgery,
+    'USSR': USSR,
 }
 let clickedScreen = false
 function onDocClicked() {

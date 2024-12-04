@@ -37,6 +37,14 @@ const presets = {
         "ic": "orange",
         "no": 0,
     },
+    'EthanRe': {
+        "bg": 'black',
+        "nb" : "black",
+        "fc": "white",
+        "fn": "Mason",
+        "ic": "white",
+        "no": 0,
+    },
     "Christmas": {
         "bg": 'red',
         "nb" : "green",
@@ -112,7 +120,7 @@ const presets = {
         'rs': 'no-repeat',
         'ic': 'white',
     },
-    'USSR': {
+    'JordanN': {
         'bg': 'black',
         'nb': 'black',
         'fc': 'white',
@@ -684,7 +692,10 @@ function PlaySkeletonsMusic() {
 }
 function Thanksgiving() {
     let video = document.getElementById('video')
+    let source = document.getElementById('source')
+    source.src = 'charlie brown.mp4'
     video.style.display = 'block'
+    video.load()
     video.play()
 
     return () => {
@@ -889,6 +900,25 @@ function KneeSurgery() {
         audio.remove()
     }
 }
+function EthanRe() {
+    let video = document.getElementById('video')
+    let source = document.getElementById('source')
+    source.src = 'Backgrounds/EthanRe.mp4'
+    video.style.display = 'block'
+    video.load()
+    video.play()
+
+    return () => {
+        try {
+
+        video.style.display = 'none'
+        video.pause()
+        } catch (err) {
+            con.innerHTML = err
+        }
+        
+    } 
+}
 const specialThemes = {
     'Christmas': Christmas,
     'Halloween': PlaySkeletonsMusic,
@@ -897,6 +927,7 @@ const specialThemes = {
     'Paige': Monkey,
     'KneeSurgery': KneeSurgery,
     'USSR': USSR,
+    'EthanRe': EthanRe,
 }
 let clickedScreen = false
 function onDocClicked() {

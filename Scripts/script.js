@@ -670,7 +670,7 @@ function Monkey() {
         audio.remove()
     }
 }
-function USSR() {
+function JordanN() {
     const audio = new Audio('Music/jordan.mp3')
     audio.loop = true
     audio.play()
@@ -926,7 +926,7 @@ const specialThemes = {
     'Tales': Tales,
     'Paige': Monkey,
     'KneeSurgery': KneeSurgery,
-    'USSR': USSR,
+    'JordanN': JordanN,
     'EthanRe': EthanRe,
 }
 let clickedScreen = false

@@ -85,6 +85,15 @@ const presets = {
         "ic": "rgb(138,0,0)",
         "no": 1,
     },
+    "Massive": {
+        "bg": "black",
+        "nb" : "black",
+        "fc": "white",
+        "fn": "Default",
+        "ic": "white",
+        "no": 0,
+        'bi': 'Backgrounds/low_taper_fade.png'
+    },
     'KneeSurgery': {
         "bg": 'black',
         'nb': 'black',
@@ -919,6 +928,16 @@ function EthanRe() {
         
     } 
 }
+function Massive() {
+    const audio = new Audio('Music/what_if.mp3')
+    audio.loop = true
+    audio.play()
+
+    return () => {
+        audio.pause()
+        audio.remove()
+    }
+}
 const specialThemes = {
     'Christmas': Christmas,
     'Halloween': PlaySkeletonsMusic,
@@ -926,6 +945,7 @@ const specialThemes = {
     'Tales': Tales,
     'Paige': Monkey,
     'KneeSurgery': KneeSurgery,
+    'Massive': Massive,
     'JordanN': JordanN,
     'EthanRe': EthanRe,
 }

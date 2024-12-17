@@ -94,6 +94,15 @@ const presets = {
         "no": 0,
         'bi': 'Backgrounds/low_taper_fade.png'
     },
+    'Skibidi': {
+        "bg": "black",
+        "nb" : "black",
+        "fc": "white",
+        "fn": "Default",
+        "ic": "white",
+        "no": 0,
+        'bi': 'Backgrounds/skibidi.webp'
+    },
     "ThickOfIt": {
         "bg": "black",
         "nb" : "black",
@@ -957,6 +966,17 @@ function ThickOfIt() {
         audio.remove()
     }
 }
+
+function Skibidi() {
+    const audio = new Audio('Music/skibidi.mp3')
+    audio.loop = true
+    audio.play()
+
+    return () => {
+        audio.pause()
+        audio.remove()
+    }
+}
 const specialThemes = {
     'Christmas': Christmas,
     'Halloween': PlaySkeletonsMusic,
@@ -965,6 +985,7 @@ const specialThemes = {
     'Paige': Monkey,
     'KneeSurgery': KneeSurgery,
     'Massive': Massive,
+    'Skibidi': Skibidi,
     'ThickOfIt':ThickOfIt,
     'JordanN': JordanN,
     'EthanRe': EthanRe,

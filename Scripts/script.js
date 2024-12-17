@@ -950,10 +950,20 @@ function Massive() {
     const audio = new Audio('Music/what_if.mp3')
     audio.loop = true
     audio.play()
-
+    function fade(event) {
+        if (event.key.toUpperCase() != 'F') return
+        const other = new Audio('Music/fade.mp3')
+        other.play()
+        audio.pause()
+        other.onended = () => {
+            audio.play()
+        }
+    }
+    document.addEventListener('keypress',fade)
     return () => {
         audio.pause()
         audio.remove()
+        document.removeEventListener('keypress',fade)
     }
 }
 function ThickOfIt() {

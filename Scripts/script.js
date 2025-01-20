@@ -1095,9 +1095,6 @@ function applyPreset(name) {
         t.style.color = preset['bg']
     }
 }
-setTimeout(() => {
-    usePreset('Christmas')
-},100)
 let selectedPreset = 0
 document.addEventListener('keydown',(event) => {
     

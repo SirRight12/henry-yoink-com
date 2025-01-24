@@ -158,6 +158,17 @@ const presets = {
         'rs': 'no-repeat',
         'ic': 'white',
     },
+    'Subnautica': {
+        'bg': 'black',
+        'nb': 'black',
+        'fc': 'white',
+        'no': 0,
+        'fn': 'Default',
+        'ss': 'cover',
+        'bi': 'Backgrounds/subnautica.png',
+        'rs': 'no-repeat',
+        'ic': 'white',
+    },
     "Kenzie": {
         "bg": "rgb(249,128,171)",
         "nb": "rgb(255,36,112)",
@@ -987,6 +998,16 @@ function Skibidi() {
         audio.remove()
     }
 }
+function Subnautica() {
+    const audio = new Audio('Music/subnautica.mp3')
+    audio.loop = true
+    audio.play()
+
+    return () => {
+        audio.pause()
+        audio.remove()
+    }
+}
 const specialThemes = {
     'Christmas': Christmas,
     'Halloween': PlaySkeletonsMusic,
@@ -994,6 +1015,7 @@ const specialThemes = {
     'Tales': Tales,
     'Paige': Monkey,
     'KneeSurgery': KneeSurgery,
+    'Subnautica': Subnautica,
     'Massive': Massive,
     'Skibidi': Skibidi,
     'ThickOfIt':ThickOfIt,
@@ -1095,6 +1117,7 @@ function applyPreset(name) {
         t.style.color = preset['bg']
     }
 }
+
 let selectedPreset = 0
 document.addEventListener('keydown',(event) => {
     

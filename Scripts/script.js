@@ -29,6 +29,18 @@ const presets = {
       "fn": "Enchanting",
       "no": 1,
     },
+    "Borton": {
+        "bg": "black",
+        "nb" : "black",
+        "fc": "white",
+        "fn": "Borton",
+        "ic": "white",
+        "no": 0,
+        'bi': 'Backgrounds/Daniel.jpg',
+        'ic': 'rgb(209,155,137)',
+        'ss': "contain",
+        "rs": 'repeat',
+    },
     'Thanksgiving': {
         "bg": 'black',
         "nb" : "black",

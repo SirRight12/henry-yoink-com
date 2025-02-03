@@ -285,6 +285,10 @@ footer {
     --font: 'Knee' !important;
     font-family: 'Knee' !important;
 }
+.Borton {
+    --font: 'Borton' !important;
+    font-family: "Borton" !important;
+}
 #prompt {
     display: grid;
     user-select: none;

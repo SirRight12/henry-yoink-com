@@ -137,6 +137,10 @@
     font-family: 'Knee';
     src: url('../fonts/VinaSans-Regular.ttf');
 }
+@font-face {
+    font-family: "Borton";
+    src: url('../fonts/TimesNewRoman.ttf');
+}
 /*
 @font-face {
     font-family: "Cabin Sketch";

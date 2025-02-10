@@ -65,6 +65,14 @@ const presets = {
         "ic": "white",
         "no": 0,
     },
+    'Moto': {
+        "bg": 'black',
+        "nb" : "black",
+        "fc": "white",
+        "fn": "Mason",
+        "ic": "white",
+        "no": 0,
+    },
     "Christmas": {
         "bg": 'red',
         "nb" : "green",
@@ -996,6 +1004,24 @@ function WRXSTI() {
         
     } 
 }
+function Moto() {
+    let video = document.getElementById('video')
+    let source = document.getElementById('source')
+    source.src = 'Backgrounds/moto.mp4'
+    video.style.display = 'block'
+    video.load()
+    video.play()
+    return () => {
+        try {
+
+        video.style.display = 'none'
+        video.pause()
+        } catch (err) {
+            con.innerHTML = err
+        }
+        
+    } 
+}
 function Massive() {
     const audio = new Audio('Music/what_if.mp3')
     audio.loop = true
@@ -1061,6 +1087,7 @@ const specialThemes = {
     'JordanN': JordanN,
     'EthanRe': EthanRe,
     "WRX-STI": WRXSTI,
+    'Moto': Moto,
 }
 let clickedScreen = false
 function onDocClicked() {

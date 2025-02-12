@@ -19,27 +19,13 @@ switch(day) {
 function timeControls() {
     const text = document.getElementById("prompt")
 
-    const title = document.getElementById("title")
     text.innerHTML = "No WiFi, clown"
     
 let times = getTimes()
 function getTimes() {
-    return addPassings(oshSchedules[getDay()])
+    return oshSchedules[getDay()]
 }
 
-function addPassings(times) {
-    let prevTime = false
-    let newTimes = []
-    for (let period in times) {
-        if (!prevTime) {
-            prevTime = period
-            continue
-        }
-        newTimes["P" + period] = `${times[prevTime].split("-")[1]}-${times[period].split("-")[0]}`
-        newTimes[period] = times[period]
-    }
-    return times
-}
 function ParseTime(TimeString) {
     let [startTime,endTime] = TimeString.split("-")
     
@@ -61,6 +47,24 @@ function IsNow(TimeString) {
     if (now > start && now < end) return true
     return false
 }
+function getRawToStart(TimeString) {
+    const now = new Date()
+    const [start,end] = ParseTime(TimeString)
+    const difference = start - now
+
+    return difference
+}
+function getTimeToStart(TimeString) {
+    const now = new Date()
+    const [start,end] = ParseTime(TimeString)
+    const difference = start - now
+    const milliseconds = Math.floor(difference)
+    const seconds = Math.floor(difference / 1000)
+    const minutes = Math.floor(difference / (1000 * 60))
+    const hours = Math.floor(difference / (1000 * 60 * 60))
+
+    return [hours % 24,minutes % 60,seconds % 60,milliseconds % 1000]
+}
 function getTimeTo(TimeString) {
     const now = new Date()
     const [start,end] = ParseTime(TimeString)
@@ -81,14 +85,27 @@ function getSuggestedPeriod() {
 }
 let tries = 0
 let broke = false
+function getClosest() {
+    let leastTime = 0
+    let leastTimeIdx = false
+    for (let period in times) {
+        let time = getRawToStart(times[period])
+        if (time <= leastTime) {
+            leastTimeIdx = period
+        }
+    }
+    return leastTimeIdx
+}
+let passing = false
 function loop() {
     if (!suggestedPeriod) suggestedPeriod = getSuggestedPeriod()
 
     let now = IsNow(times[suggestedPeriod])
 
     if (!now) {
-        suggestedPeriod = false
+        suggestedPeriod = getClosest()
         times = getTimes()
+
         if (tries >= 10 || broke) {
             broke = true
             // clearInterval(interval)
@@ -104,9 +121,12 @@ function loop() {
         return
     }
     tries = 0
-    const time = getTimeTo(times[suggestedPeriod])
-    titleUpdate(time)
-    displayTime()
+    let time = getTimeTo(times[suggestedPeriod])
+    if (passing) {
+        time = getTimeToStart(times[suggestedPeriod])
+    }
+
+    displayTime(time)
 }
 function FormatTime(Time) {
     let [hrs,mins,secs,mils] = Time

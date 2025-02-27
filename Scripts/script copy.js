@@ -93,6 +93,7 @@ function getClosest() {
         if (time <= leastTime) {
             leastTimeIdx = period
         }
+
     }
     return leastTimeIdx
 }
@@ -127,6 +128,7 @@ function loop() {
     }
 
     displayTime(time)
+    titleUpdate(time)
 }
 function FormatTime(Time) {
     let [hrs,mins,secs,mils] = Time

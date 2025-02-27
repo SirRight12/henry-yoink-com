@@ -42,8 +42,12 @@ function IsNow(TimeString) {
         // console.warn("Not a string lol")
         return false
     }
+   
     const now = new Date()
     const [start,end] = ParseTime(TimeString)
+    if (TimeString == '12:39-1:09') {
+        console.log(now,start,end)
+    }
     if (now > start && now < end) return true
     return false
 }
@@ -216,6 +220,7 @@ function titleUpdate(time) {
     title.innerText = `${hrs}${mins}:${secs}`
 }
 // let interval = setInterval(titleUpdate,100)
+console.log(times)
 titleUpdate()
 return loop
 }

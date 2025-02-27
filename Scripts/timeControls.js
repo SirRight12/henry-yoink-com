@@ -2,7 +2,7 @@ try {
 
     let time = timeControls()
     let hTime = hTimeControls()
-let current = 1
+let current = 2
 function changeTimeControl(element) {
     if (element.value == "Classic") {
         current = 1

@@ -3,7 +3,7 @@
 //Whenever a change is made to this file, the below string needs
 //to be updated to a new version number.
 
-dictVersion = "0.9";
+dictVersion = "1.0";
 
 //For custom days, define the date in the format "mm/dd/yyyy",
 //and then the schedule for that day.
@@ -26,6 +26,7 @@ oshSchedules = {
         "7": "13:50-14:33",
         "8": "14:37-15:20",
     },
+    '05/27/2025': this.mwth || {},
     "t": {
         "BH": "7:30-8:20",
         "C": "08:20-09:00",

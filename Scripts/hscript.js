@@ -67,16 +67,16 @@ function updateDay() {
     } else {
         switch (weekday) {
         case 1:
-            timeDict = schedules.mwth;
+            timeDict = schedules.mtth;
             break;
         case 2:
-            timeDict = schedules.t;
+            timeDict = schedules.mtth;
             break;
         case 3:
-            timeDict = schedules.mwth;
+            timeDict = schedules.w;
             break;
         case 4:
-            timeDict = schedules.mwth;
+            timeDict = schedules.mtth;
             break;
         case 5:
             timeDict = schedules.f;
@@ -231,6 +231,8 @@ function periodText(inp) {
         return "Chapel";
     case "D":
         return "D-Groups";
+    case 'WC': 
+        return 'Warrior Time'
     case "CD":
         return "Chapel/D-Groups";
     case "L":

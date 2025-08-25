@@ -1,7 +1,7 @@
 //Whenever changes to betterDict are made and the version is updated,
 //the below version must match exactly.
 
-version = "1.0";
+version = "1.1";
 
 /*-----------------------------------
 

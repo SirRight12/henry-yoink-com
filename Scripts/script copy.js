@@ -7,11 +7,11 @@ function getDay() {
 const day = new Date().getDay()
 switch(day) {
     case 1:
-    case 3:
-    case 4:
-        return "mwth"
     case 2:
-        return "t"
+    case 4:
+        return "mtth"
+    case 3:
+        return "w"
     case 5:
         return "f"
 }
@@ -165,6 +165,8 @@ function getPeriodFig(period) {
             return "Chapel starts"
         case "BH":
             return "Homeroom starts"
+        case 'WC':
+            return 'Warrior Culture'
         case "C":
             return "Chapel ends"
         case "D":

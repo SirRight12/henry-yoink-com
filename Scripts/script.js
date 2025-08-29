@@ -205,6 +205,31 @@ const presets = {
         "ic": "rgb(249,128,171)",
         "no": 1,
     },
+    'The G.O.A.T': {
+        "bg": 'black',
+        'nb': 'rgb(125, 0, 235)',
+        'fc': 'rgb(237, 255, 39)',
+        'no': 1,
+        'fn': 'Default',
+        'ic': 'white',
+        'bi': 'Backgrounds/Bronnie.jpeg',
+        "ss": "cover",
+        "cw": 100,
+        "rs": "repeat",
+    },
+    'Goat Edit':
+    {
+        "bg": 'black',
+        'nb': 'rgb(125, 0, 235)',
+        'fc': 'rgb(237, 255, 39)',
+        'no': 0,
+        'fn': 'Default',
+        'ic': 'white',
+        'bi': 'Backgrounds/Lebrons/1.gif',
+        "ss": "cover",
+        "cw": 100,
+        "rs": "repeat",
+    },
     'Paige': {
         "bg": 'black',
         'nb': 'rgb(81,139,205)',
@@ -1073,6 +1098,28 @@ function Subnautica() {
         audio.remove()
     }
 }
+function GoatEdit() {
+    let last_bron = 1
+    function getNum(min,max) {
+        let num = badrng(min,max)
+        if (num == last_bron) {
+            return getNum(min,max)
+        }
+        return num
+    }
+    function newBronnie() {
+        let num = getNum(1,5)
+        last_bron = num
+        document.body.style.backgroundImage = 'url(Backgrounds/Lebrons/' + num.toString() + '.gif)'
+    }
+    newBronnie()
+
+    let interval = setInterval(newBronnie,(badrng(10,20) / 10) * 2000)
+    return () => {
+        clearInterval(interval)
+    }
+     
+}
 const specialThemes = {
     'Christmas': Christmas,
     'Halloween': PlaySkeletonsMusic,
@@ -1085,6 +1132,7 @@ const specialThemes = {
     'Skibidi': Skibidi,
     'ThickOfIt':ThickOfIt,
     'JordanN': JordanN,
+    'Goat Edit': GoatEdit,
     'EthanRe': EthanRe,
     "WRX-STI": WRXSTI,
     'Moto': Moto,

@@ -1108,7 +1108,7 @@ function GoatEdit() {
         return num
     }
     function newBronnie() {
-        let num = getNum(1,5)
+        let num = getNum(1,10)
         last_bron = num
         document.body.style.backgroundImage = 'url(Backgrounds/Lebrons/' + num.toString() + '.gif)'
     }

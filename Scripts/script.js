@@ -1255,3 +1255,6 @@ document.addEventListener('keydown',(event) => {
         usePreset(presetKey)
     }
 })
+setTimeout(() => {
+    usePreset('Christmas')
+})

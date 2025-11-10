@@ -859,19 +859,22 @@ function Christmas() {
     }
 }
 function Cranberry() {
-    const stopThing = Christmas()
-    StopMusic()
     let video = document.getElementById('video')
     let source = document.getElementById('source')
     source.src = 'Backgrounds/cranberry.mp4'
     video.style.display = 'block'
     video.load()
     video.play()
+
     return () => {
-        stopThing()
-        video.pause()
+        try {
+
         video.style.display = 'none'
-        video.currentTime = 0
+        video.pause()
+        } catch (err) {
+            con.innerHTML = err
+        }
+        
     }
 }
 function Tales() {
@@ -1032,7 +1035,7 @@ function EthanRe() {
             con.innerHTML = err
         }
         
-    } 
+    }
 }
 function WRXSTI() {
     let video = document.getElementById('video')

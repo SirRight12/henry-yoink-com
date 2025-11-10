@@ -81,6 +81,14 @@ const presets = {
         "ic": "red",
         "no": 1,
     },
+    'Cranberry': {
+        "bg": 'red',
+        "nb" : "green",
+        "fc": "green",
+        "fn": "Christmas",
+        "ic": "red",
+        "no": 1,
+    },
     "Peanuts": {
         'bg': 'black',
         'nb': 'black',
@@ -850,6 +858,22 @@ function Christmas() {
         con.innerHTML = err
     }
 }
+function Cranberry() {
+    const stopThing = Christmas()
+    StopMusic()
+    let video = document.getElementById('video')
+    let source = document.getElementById('source')
+    source.src = 'Backgrounds/cranberry.mp4'
+    video.style.display = 'block'
+    video.load()
+    video.play()
+    return () => {
+        stopThing()
+        video.pause()
+        video.style.display = 'none'
+        video.currentTime = 0
+    }
+}
 function Tales() {
     let audio = new Audio('Music/cruel_king.mp3')
     audio.play()
@@ -1122,6 +1146,7 @@ function GoatEdit() {
 }
 const specialThemes = {
     'Christmas': Christmas,
+    'Cranberry': Cranberry,
     'Halloween': PlaySkeletonsMusic,
     'Thanksgiving': Thanksgiving,
     'Tales': Tales,

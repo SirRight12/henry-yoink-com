@@ -861,7 +861,7 @@ function Christmas() {
 function Cranberry() {
     let video = document.getElementById('video')
     let source = document.getElementById('source')
-    source.src = 'Backgrounds/cranberry.mp4'
+    source.src = 'cranberry.mp4'
     video.style.display = 'block'
     video.load()
     video.play()

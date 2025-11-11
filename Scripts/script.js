@@ -87,7 +87,7 @@ const presets = {
         "fc": "green",
         "fn": "Christmas",
         "ic": "red",
-        "no": 1,
+        "no": 0,
     },
     "Peanuts": {
         'bg': 'black',

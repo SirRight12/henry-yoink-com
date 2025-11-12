@@ -1222,6 +1222,7 @@ function GoatEdit() {
 const specialThemes = {
     'Christmas': Christmas,
     'Cranberry': Cranberry,
+    'Daniella': Daniella,
     'Halloween': PlaySkeletonsMusic,
     'Thanksgiving': Thanksgiving,
     'Tales': Tales,

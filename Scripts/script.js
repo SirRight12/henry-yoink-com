@@ -1261,7 +1261,7 @@ async function Clicked() {
     })
 }
 let stopSpecial = null
-async function checkForSpecial(name) {
+async function checkForSpecial(name,override=false) {
     if (stopSpecial) { 
         stopSpecial()
         stopSpecial = false
@@ -1269,7 +1269,7 @@ async function checkForSpecial(name) {
     if (!specialThemes[name]) return
     await Clicked() 
     const keys = Object.keys(presets)
-    if (keys[selectedPreset] != name) return
+    if (keys[selectedPreset] != name && override) return
     stopSpecial = specialThemes[name]()
 }
 function usePreset(name) {
@@ -1291,6 +1291,17 @@ function usePreset(name) {
         con.innerHTML = err
     }
 }
+async function changeFX(element) {
+    const fx = element.value
+    if (stopSpecial) { 
+        stopSpecial()
+        stopSpecial = false
+    }
+    if (!specialThemes[fx]) return
+    await Clicked() 
+    stopSpecial = specialThemes[fx]()
+}
+
 function applyPreset(name) {
     let preset = presets[name]
     if (!preset) {

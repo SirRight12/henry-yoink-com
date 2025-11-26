@@ -113,6 +113,9 @@ body {
 #presets {
     text-align: center;
 }
+#fx {
+    text-align: center;
+}
 .playful {
     font-family: Lobster, Arial;
     font-size: 35px;

@@ -562,7 +562,9 @@ neenSchedules = {
     }
 }
 //Adding plc mondays
-oshSchedules['2/09/2026'] = oshSchedules.plcm
+
+
+
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 /*

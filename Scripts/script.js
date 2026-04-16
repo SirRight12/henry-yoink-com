@@ -1367,6 +1367,6 @@ document.addEventListener('keydown',(event) => {
         usePreset(presetKey)
     }
 })
-setTimeout(() => {
-    usePreset('KneeSurgery')
-},250)
+// setTimeout(() => {
+//     usePreset('KneeSurgery')
+// },250)

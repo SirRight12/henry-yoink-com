@@ -468,11 +468,13 @@ function changePreset(element) {
 function changeFont(element) {
     const val = element.value
     sText.className = val
+    counter.className = val
     fontName = val
     localStorage['font'] = val
 }
 async function loadFont() {
     const font = localStorage['font']
+    counter.className = font
     sText.className = font
     fontName = font
     const option = document.getElementById("fonts")
@@ -1324,6 +1326,7 @@ function applyPreset(name) {
     colorBG = preset['bg']
     sText.style.color = preset['fc']
     sText.className = preset['fn']
+    counter.className = preset['fn']
     fontName = preset['fn']
     if (preset['no'] || preset['no'] == 0) {
         space.style.opacity = preset['no']

@@ -13,7 +13,7 @@ function calculateTimeToEnd() {
   const minute = Math.floor(minutes)
   const second = Math.floor(seconds)
 
-  const time = `${hour}:${formatTime(minute)}:${formatTime(second)}<br>Until the end of the year`
+  const time = `${hour}:${minute}:${second}<br>Until the end of the year`
   counter.innerHTML = time
 }
 function formatTime(num) {

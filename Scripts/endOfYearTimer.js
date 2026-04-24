@@ -29,11 +29,12 @@ function calculateTimeToEndDays() {
   const minutesFract = minutes - Math.floor(minutes)
   const seconds = (minutesFract) * 60
 
+  const day = Math.floor(days)
   const hour = Math.floor(hours)
   const minute = Math.floor(minutes)
   const second = Math.floor(seconds)
 
-  const time = `${days} days and ${hour}:${minute}:${second} hours<br>Until the end of the year`
+  const time = `${day} days and ${hour}:${minute}:${second} hours<br>Until the end of the year`
   counter.innerHTML = time
 }
 function calculateTimeToEnd(){

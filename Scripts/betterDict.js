@@ -564,6 +564,7 @@ neenSchedules = {
 //Adding plc mondays
 oshSchedules['3/2/2026'] = oshSchedules.plcm
 oshSchedules['4/20/2026'] = oshSchedules.plcm
+oshSchedules['5/4/2026'] = oshSchedules.plcm
 
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 

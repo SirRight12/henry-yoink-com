@@ -472,15 +472,6 @@ div#text > .icecream:nth-child(3) {
 #count-text {
     font-size: 130% !important;
     text-align: center;
-    width: 100%;
-    margin: 0;
-    cursor: pointer;
-}
-#count-text.compact {
-    font-size: 105% !important;
-}
-#count-text.very-compact {
-    font-size: 85% !important;
     position: absolute;
     top: 0px;
     cursor: pointer;

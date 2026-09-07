@@ -37,12 +37,7 @@ function PT(TimeString) {
     start.setHours(startHr,startMin,startSec,0)
     const end = getScheduleNow()
     end.setHours(endHr,endMin,endSec,0)
-    let [startHr,startMin] = startTime.split(":")
-    let [endHr,endMin] = endTime.split(":")
-    const start = new Date()
-    start.setHours(startHr,startMin,0,0)
-    const end = new Date()
-    end.setHours(endHr,endMin,0,0)
+    
     return [start,end]
 }
     
@@ -53,10 +48,7 @@ function isInsideSchool() {
     let lastPeriod = times[Object.keys(times)[Object.keys(times).length - 1]]
     const [start,end] = PT(lastPeriod)
     const now = getScheduleNow()
-    let times = oshSchedules[getDay()]
-    let lastPeriod = times[Object.keys(times)[Object.keys(times).length - 1]]
-    const [start,end] = PT(lastPeriod)
-    const now = new Date()
+
     if (now < end) return true
     return false
 }
@@ -66,7 +58,7 @@ function timer() {
     // con.innerHTML = "hi "
 }
 timer()
-setInterval(timer,250)
+setInterval(timer,0)
 } catch (err) {
     con.innerHTML = err
 }

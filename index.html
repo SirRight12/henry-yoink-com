@@ -10,7 +10,7 @@
     <style id="customFontCSS"></style>
     <style id="imported-fonts"></style>
 <body class="dark" style="transition-duration: 350ms;">
-    <div id="count-down">
+    <div id="count-down" style="display: none;">
         <p id="count-text">0:00:00 until the year is over</p>
     </div>
     <div id="settingsMenu">
@@ -28,6 +28,9 @@
         </div>
         <div class="settingsContainer">
             <input class="settings" tabindex="-1" id="iconcolor" type="color" value="#ffffff" onfocus="autoUpdIconColor(this)"/> <label class="setText">Icon Color</label>
+        </div>
+        <div class="settingsContainer" tabindex="-1">
+            <select id="myDropdown"><option value="">None</option></select><label class="setText">Count Down to Date</label>
         </div>
         <div class="settingsContainer" tabindex="-1">
             <select class="settings" tabindex="-1" id="fonts" onchange="changeFont(this)">
@@ -68,6 +71,7 @@
             <select tabindex="-1"  class="settings" id="presets" onchange="changePreset(this)">
                 <option class="optionSettings Mason">None</option>
                 <option class="optionSettings Mason">Christmas</option> 
+                <option class="optionSettings Mason">Thanksgiving</option>
                 <option class="optionSettings Mason">Daniella</option> 
                 <option class="optionSettings Mason">Cranberry</option> 
                 <option class="optionSettings Mason">EthanRe</option> 
@@ -123,6 +127,12 @@
             <input tabindex="-1" type="range" min="0" step=".01" max="1" value="1" onfocus="updateNbOp(this)" onblur="cancelUpdateNbOp()"><label class="setText">Navbar Opacity</label>
         </div>
         <div tabindex="-1" class="settingsContainer">
+            <select tabindex="-1" class="settings" id="database-source">
+                <option value="local">Local</option>
+                <option value="global">Global</option>
+            </select> <label class="setText">Schedule Data Source</label>
+        </div>
+        <div tabindex="-1" class="settingsContainer">
             <label class="setText">Background Image settings</label>
         </div>
         
@@ -144,7 +154,6 @@
                 <option class="Mason" title="Repeat the image across both directions">Repeat</option>
             </select> <label class="setText">Background Image Repeating</label>
         </div>
-
     </div>
     <div class="navbar" id="navbarspace"></div>
     <!-- <img src="icons/snow.svg" class="snow"> -->
@@ -159,8 +168,8 @@
     </div>
     <div id="sub-console"></div>
     <div id="content">
-        <video id="video" loop>
-            <source id="source" src="charlie brown.mp4">
+        <video id="video" loop preload="none">
+            <source id="source" src="Videos/charlie brown.mp4">
         </video>
         <div id="schedule">
             <div id="prompt" data-before="You have" data-after="Until 1st period starts" onclick="">5</div>
@@ -179,16 +188,19 @@
         <a href="">Quote Book</a>
         <span>2022 Henry Getz</span>
     </footer>
-    <!--Path: ...../Shared%20with%20me/Coding/henrygetz.com/schedule/dictionaries.js-->
-    <script src="Scripts/betterDict.js"></script>
+        <script src="Scripts/googleSheets.js"></script>
+    <script src="Scripts/testClock.js"></script>
+    <script src="Scripts/mainSchedule.js"></script>
     <script src="Scripts/hscript.js"></script>
     <script src="Scripts/script copy.js"></script>
+    <script src="Scripts/endOfYearTimer.js" defer></script>
     <script defer src="Scripts/script.js"></script>
     <script src="Scripts/font-import.js"></script>
     <script src="Scripts/files.js"></script>
     <script src="Scripts/cstParser.js"></script>
     <script src="Scripts/timeControls.js" defer></script>
-    <script src="Scripts/endOfYearTimer.js" defer></script>
+     <script src="Scripts/LoadCountDownToData.js?v=2"></script>
+    <script src="Scripts/nextClass.js"></script>
     <script>
         // localStorage.clear()
     </script>

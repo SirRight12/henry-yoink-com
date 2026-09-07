@@ -31,6 +31,12 @@ function useTimeControl(controller) {
 function PT(TimeString) {
     let [startTime,endTime] = TimeString.split("-")
     
+    let [startHr,startMin,startSec = 0] = startTime.split(":")
+    let [endHr,endMin,endSec = 0] = endTime.split(":")
+    const start = getScheduleNow()
+    start.setHours(startHr,startMin,startSec,0)
+    const end = getScheduleNow()
+    end.setHours(endHr,endMin,endSec,0)
     let [startHr,startMin] = startTime.split(":")
     let [endHr,endMin] = endTime.split(":")
     const start = new Date()
@@ -42,6 +48,11 @@ function PT(TimeString) {
     
     
 function isInsideSchool() {
+    let times = getScheduleForDate(getScheduleNow())
+    if (!times) return false
+    let lastPeriod = times[Object.keys(times)[Object.keys(times).length - 1]]
+    const [start,end] = PT(lastPeriod)
+    const now = getScheduleNow()
     let times = oshSchedules[getDay()]
     let lastPeriod = times[Object.keys(times)[Object.keys(times).length - 1]]
     const [start,end] = PT(lastPeriod)
@@ -55,7 +66,7 @@ function timer() {
     // con.innerHTML = "hi "
 }
 timer()
-setInterval(timer,0)
+setInterval(timer,250)
 } catch (err) {
     con.innerHTML = err
 }

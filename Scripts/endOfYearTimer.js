@@ -30,6 +30,8 @@ async function getSelectedCountdown() {
   const index = await findRowIndexFromServer("Databases Local/CountDownToDate.csv");
   const dateValue = getColumnValue(csvText, index, 3);
   const timeValue = getColumnValue(csvText, index, 4);
+  const selectedRow = csvText.replace(/\r/g, "").split('\n').filter(r => r.trim())[index];
+  const selectedColumns = selectedRow ? parseDelimitedRow(selectedRow) : [];
   const targetDate = dateValue && timeValue ? new Date(`${dateValue} ${timeValue}`) : null;
 
   if (!targetDate || Number.isNaN(targetDate.getTime())) {
@@ -38,7 +40,7 @@ async function getSelectedCountdown() {
 
   return {
     date: targetDate,
-    value: getFirstColumnValue(csvText, index) || "Select a countdown"
+    value: getLocalizedCsvValue(selectedColumns, 0, 5) || "Select a countdown"
   };
 }
 async function calculateTimeToEndHours() {  
@@ -109,7 +111,6 @@ function formatTime(num) {
   return "0" + parseString(num)
 
 }
-setInterval(calculateTimeToEnd,1000/3)
 
 counter.onclick = () => {
   //toggle days to hours and visa-versa

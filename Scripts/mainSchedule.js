@@ -2,6 +2,16 @@ const scheduleFile = "Databases Local/MainSchedule.csv";
 const specialScheduleFile = "Databases Local/SpecialScheduleDays.csv";
 const periodTextFile = "Databases Local/PeriodText.csv";
 
+function isSpanishEnabled() {
+	return Boolean(document.getElementById("span")?.checked);
+}
+
+function getLocalizedCsvValue(columns, englishIndex, spanishIndex) {
+	const englishValue = columns[englishIndex]?.trim() || "";
+	const spanishValue = columns[spanishIndex]?.trim() || "";
+	return isSpanishEnabled() && spanishValue ? spanishValue : englishValue;
+}
+
 function normalizeScheduleTime(value) {
 	const parts = value.split(":");
 	const hour = parts[0].padStart(2, "0");
@@ -79,18 +89,20 @@ function parseDelimitedRow(row) {
 
 function loadPeriodTextMap() {
 	const periodText = {};
+	const periodTextSpanish = {};
 	const rows = loadDatabaseText(periodTextFile, "periodText")
 		.split(/\r?\n/)
 		.map(row => row.trim())
 		.filter(Boolean);
 
 	for (const row of rows) {
-		const [code, text] = parseDelimitedRow(row);
+		const [code, text, spanishText] = parseDelimitedRow(row);
 		if (!code || !text || code === "Code") continue;
 		periodText[code.toUpperCase()] = text;
+		periodTextSpanish[code.toUpperCase()] = (spanishText || text).replace(/^spanish:\s*/i, "");
 	}
 
-	return periodText;
+	return { english: periodText, spanish: periodTextSpanish };
 }
 
 function normalizeScheduleDate(value) {
@@ -130,12 +142,15 @@ function loadSpecialSchedules() {
 		.filter(Boolean);
 
 	for (const row of rows) {
-		const [name, , , dates, period, start, end, dayType] = parseDelimitedRow(row);
+		const columns = parseDelimitedRow(row);
+		const [name, , , dates, period, start, end, dayType] = columns;
+		const spanishName = columns[7];
 		if (!dates || name === "Name") continue;
 
 		for (const dateKey of expandScheduleDates(dates)) {
 			if (name) {
 				specialDayTypes[dateKey] = name;
+				specialDayTypesSpanish[dateKey] = spanishName || name;
 				if (!schedules[dateKey]) schedules[dateKey] = {};
 			}
 			if (period && ["normal", "normal schedule"].includes(period.trim().toLowerCase())) {
@@ -180,9 +195,10 @@ function getSpecialDayType(date) {
 	const dateKey = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
 	const dayType = specialDayTypes[dateKey];
 	if (!dayType) return undefined;
+	const localizedDayType = isSpanishEnabled() ? specialDayTypesSpanish[dateKey] : dayType;
 
 	const specialTimes = Object.values(specialSchedules[dateKey] || {});
-	if (specialTimes.length === 0) return dayType;
+	if (specialTimes.length === 0) return localizedDayType;
 
 	const currentMinutes = date.getHours() * 60 + date.getMinutes();
 	const isWithinSpecialTime = specialTimes.some(time => {
@@ -193,12 +209,15 @@ function getSpecialDayType(date) {
 		return currentMinutes >= start && currentMinutes <= end;
 	});
 
-	return isWithinSpecialTime ? dayType : undefined;
+	return isWithinSpecialTime ? localizedDayType : undefined;
 }
 
 var oshSchedules = loadMainSchedule();
-var periodTextMap = loadPeriodTextMap();
+var periodTextMaps = loadPeriodTextMap();
+var periodTextMap = periodTextMaps.english;
+var periodTextSpanishMap = periodTextMaps.spanish;
 var specialDayTypes = {};
+var specialDayTypesSpanish = {};
 var normalScheduleDates = {};
 var specialSchedules = loadSpecialSchedules();
 var neenSchedules = oshSchedules;

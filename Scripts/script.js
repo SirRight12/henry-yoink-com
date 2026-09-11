@@ -1295,6 +1295,7 @@ function usePreset(name) {
 }
 async function changeFX(element) {
     const fx = element.value
+    localStorage.setItem("fx", fx)
     if (stopSpecial) { 
         stopSpecial()
         stopSpecial = false
@@ -1349,6 +1350,21 @@ function applyPreset(name) {
 }
 
 let selectedPreset = 0
+const savedPreset = localStorage.getItem("preset")
+if (savedPreset && presets[savedPreset]) {
+    presetVal.value = savedPreset
+    applyPreset(savedPreset)
+}
+const savedFX = localStorage.getItem("fx")
+if (savedFX) {
+    const fxSelect = document.getElementById("fx")
+    if (fxSelect && Array.from(fxSelect.options).some(option => option.value === savedFX)) {
+        fxSelect.value = savedFX
+        if (savedFX !== "None") {
+            document.addEventListener("click", () => changeFX(fxSelect), { once: true })
+        }
+    }
+}
 document.addEventListener('keydown',(event) => {
     
     const key = event.key.toUpperCase()

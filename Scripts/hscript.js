@@ -6,6 +6,16 @@ function hTimeControls() {
 
 let stringThing = "";
 const spanish = document.getElementById("span")
+const spanishParam = new URLSearchParams(window.location.search).get("spanish");
+if (spanish) {
+    spanish.checked = spanishParam === null
+        ? localStorage.getItem("useSpanish") === "true"
+        : ["1", "true", "yes", "on"].includes(spanishParam.toLowerCase());
+    spanish.addEventListener("change", () => {
+        localStorage.setItem("useSpanish", String(spanish.checked));
+        update();
+    });
+}
 var whileCount = 0;
 const loopDelay = 500;
 const endPrompts = [["School's out, it's time to", "celebrate!", "No more homework, isn't that great?", ], ["Done with classes, it's", "time to shine!", "Enjoy the free time."], ["School's over, it's", "party time!", "Celebrate the day's uphill climb."], ["Out of school, now it's", "chillaxing!", "No more textbooks, it's relaxing.", ], ["No more lectures, it's", "fun o'clock!", "Enjoy the freedom around the block.", ], ["School's out, it's", "time to roam!", "No more classrooms, head home."], ["School's out, time to", "laugh and play!", "Leave the stress far, far away.", ], ["School's out, it's time to", "celebrate!", "No more school, that's pretty great.", ], ["Done with school, it's", "time to unwind!", "Relax and leave your stress behind.", ], ["School's over, it's", "party time!", "Celebrate the day, it's all prime."], ["Out of school, now it's", "chill and cheer!", "No more textbooks, the coast is clear.", ], ["No more lectures, it's", "fun o'clock!", "Enjoy the evening, let your laughter rock.", ], ["School's out, it's", "time to thrive!", "No more classes, embrace the vibe.", ], ];
@@ -189,7 +199,7 @@ function update() {
                     case 0:
                         switch (style) {
                         case 0:
-                            if (spanish.checked) schedulePrompt("Tienes", minuteText(minute).toLowerCase(), "hasta " + periodFig + " empieza"); 
+                            if (spanish.checked) return schedulePrompt("Tienes", minuteText(minute).toLowerCase(), "hasta " + periodFig + " empieza");
 
                             return schedulePrompt("You have", minuteText(minute).toLowerCase(), "until " + periodFig + " starts");
                         case 1:
@@ -279,7 +289,8 @@ function minuteTime(num) {
 }
 
 function periodText(inp) {
-    return periodTextMap[String(inp).trim().toUpperCase()] || inp + "th period";
+    const periodMap = spanish.checked ? periodTextSpanishMap : periodTextMap;
+    return periodMap[String(inp).trim().toUpperCase()] || inp + "th period";
 }
 
 function toggleStyle() {

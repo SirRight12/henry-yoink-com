@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CSV Upload Tutorial</title>
+    <style>
+        :root {
+            --ink: #18212b;
+            --muted: #5b6874;
+            --paper: #f5f1e8;
+            --panel: #fffdf8;
+            --line: #d9d1c2;
+            --accent: #176b87;
+            --accent-dark: #0d4d62;
+            --warning: #8c4b18;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            color: var(--ink);
+            background: linear-gradient(135deg, #e7eef0, var(--paper) 45%, #e8e2d5);
+            font: 16px/1.6 Georgia, "Times New Roman", serif;
+        }
+        main { width: min(980px, calc(100% - 32px)); margin: 0 auto; padding: 42px 0 64px; }
+        header { border-bottom: 3px solid var(--ink); margin-bottom: 28px; padding-bottom: 22px; }
+        h1, h2, h3 { line-height: 1.15; font-family: "Trebuchet MS", Verdana, sans-serif; }
+        h1 { max-width: 720px; margin: 0 0 10px; font-size: clamp(2.2rem, 6vw, 4.8rem); letter-spacing: 0; }
+        h2 { margin-top: 42px; color: var(--accent-dark); }
+        h3 { margin-bottom: 6px; }
+        p { max-width: 760px; }
+        .lead { color: var(--muted); font-size: 1.12rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+        section, .card { background: color-mix(in srgb, var(--panel) 92%, transparent); border: 1px solid var(--line); padding: 20px; box-shadow: 0 8px 22px rgba(24, 33, 43, .07); }
+        .card h3 { margin-top: 0; color: var(--accent-dark); }
+        code, pre { font-family: Consolas, "Courier New", monospace; }
+        code { background: #e8eef0; padding: 2px 5px; }
+        pre { overflow-x: auto; padding: 14px; background: #18212b; color: #f8f5ed; border-left: 5px solid var(--accent); }
+        li { margin: 5px 0; }
+        .notice { border-left: 5px solid var(--warning); background: #fff4df; padding: 14px 18px; }
+        .back { display: inline-block; margin-bottom: 22px; color: var(--accent-dark); font-family: "Trebuchet MS", Verdana, sans-serif; font-weight: bold; }
+        @media (max-width: 600px) {
+            body { font-size: 16px; line-height: 1.55; }
+            main { width: min(100% - 24px, 980px); padding: 20px 0 42px; }
+            header { margin-bottom: 24px; padding-bottom: 18px; }
+            h1 { font-size: clamp(2.25rem, 12vw, 3.25rem); }
+            h2 { margin: 32px 0 14px; font-size: 1.55rem; }
+            h3 { font-size: 1.1rem; }
+            .lead { margin-bottom: 0; font-size: 1.05rem; }
+            .grid { gap: 12px; }
+            section, .card { padding: 16px; box-shadow: 0 5px 14px rgba(24, 33, 43, .06); }
+            section > :first-child { margin-top: 0; }
+            section > :last-child { margin-bottom: 0; }
+            pre {
+                margin: 12px -2px 22px;
+                padding: 12px;
+                border-left-width: 4px;
+                border-radius: 4px;
+                font-size: 0.75rem;
+                line-height: 1.45;
+                -webkit-overflow-scrolling: touch;
+            }
+            ol { padding-left: 1.35rem; }
+            li { margin: 8px 0; }
+            .notice { margin-top: 18px; padding: 12px 14px; }
+            .back { margin-bottom: 18px; }
+        }
+    </style>
+</head>
+<body>
+<main>
+    <a class="back" href="index.html">&#8592; Back to schedule</a>
+    <header>
+        <h1>CSV Upload Tutorial</h1>
+        <p class="lead">Use this guide to edit schedule data safely and upload it to the website.</p>
+    </header>
+
+    <h2>The four file types</h2>
+    <div class="grid">
+        <article class="card"><h3>Main Schedule</h3><p>Controls the normal start and end times for each period on Monday through Friday.</p></article>
+        <article class="card"><h3>Countdown</h3><p>Controls countdown events such as breaks, quarter ends, and the end of the year.</p></article>
+        <article class="card"><h3>Special Days</h3><p>Controls no-school days, breaks, early releases, finals, and special weeks.</p></article>
+        <article class="card"><h3>Period Text</h3><p>Converts period codes such as <code>WH</code> or <code>L</code> into display names.</p></article>
+    </div>
+
+    <h2>What each file contains</h2>
+    <section>
+        <h3>Main Schedule</h3>
+        <p>Columns: Campus, Grade Level Category/Group, Days, Hour/Period, Start Time, End Time. All files use commas, and day lists containing commas must be quoted.</p>
+        <pre>Campus,Grade Level Category/Group,Day/s of the Week(M,T,W,Th, and/or F),Hour/Period,Start Time (24 hr),End Time (24 hr)
+    Vinland,High School,"M, T, Th",1,8:15:01,8:58</pre>
+
+        <h3>Countdown</h3>
+        <p>Columns: Name, Campus, Grade Level Category/Group, Date, Time, Name in Spanish.</p>
+        <pre>Name,Campus,Grade Level Category/Group,"Date (Month Day, Year)",Time (24 hrs), Name in Spanish
+End of QTR 1,Vinland,High School,"October 16, 2026",15:25:00,Fin del trimestre 1</pre>
+
+        <h3>Special Days</h3>
+        <p>Columns: Name, Campus, Grade Level Category/Group, Date/s, Hour/Period, Start Time, End Time, Name in Spanish.</p>
+        <pre>Name,Campus,Grade Level Category/Group,Date/s (mm/dd/yyyy),Hour/Period,Start Time (24 hr),End Time (24 hr), Name in Spanish
+Early Release,Vinland,High School,11/25/2026,Normal,8:15,12:00,Salida temprana</pre>
+
+        <h3>Period Text</h3>
+        <p>Columns: Code, Text, Text in Spanish. The Code must match the Main Schedule period code.</p>
+        <pre>Code,Text, Text in Spanish
+WH,Warrior Hour,Hora del Guerrero
+L,Lunch,Almuerzo</pre>
+    </section>
+
+    <h2>How to edit</h2>
+    <section>
+        <ol>
+            <li>Make a copy of the matching example file.</li>
+            <li>Keep the header row unchanged.</li>
+            <li>Edit one row per schedule item or event.</li>
+            <li>Use 24-hour times, such as <code>15:25:00</code> for 3:25 PM.</li>
+            <li>Use the date format shown for that file type.</li>
+            <li>Put quotation marks around any field containing commas.</li>
+            <li>Save as a UTF-8 <code>.csv</code> file. All four files use comma-separated columns.</li>
+        </ol>
+    </section>
+
+    <h2>How to upload</h2>
+    <section>
+        <ol>
+            <li>Open Settings, then open <strong>Schedule Data</strong>.</li>
+            <li>Choose the matching type in <strong>CSV type to upload</strong>.</li>
+            <li>Click <strong>Choose CSV File</strong> and select one CSV.</li>
+            <li>The site saves it in this browser and reloads the schedule.</li>
+        </ol>
+        <div class="notice"><strong>Important:</strong> Select the correct type before choosing the file. A Main Schedule CSV selected as Period Text will be rejected.</div>
+    </section>
+
+    <h2>Which data wins?</h2>
+    <section>
+        <ol>
+            <li>A valid uploaded CSV wins for its own type.</li>
+            <li>For types without an upload, Local uses the bundled CSV files.</li>
+            <li>For types without an upload, Global uses Google Sheets.</li>
+            <li>If Google Sheets fails, the bundled local CSV is used.</li>
+            <li>If an upload has an error, Local uses the bundled CSV and Global uses Google Sheets.</li>
+        </ol>
+        <p>Uploads are stored in browser storage. They remain after closing and reopening the site on the same browser and device, but they are not shared with other devices.</p>
+    </section>
+</main>
+</body>
+</html>

@@ -1,10 +1,14 @@
 html, body {
     overflow: hidden;
     height: 100%;
+    margin: 0;
     background-image: unset;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 50% 100%;
+}
+* {
+    box-sizing: border-box;
 }
 #video {
     left:0;
@@ -28,7 +32,7 @@ body {
     align-items: center;
 }
 .setText {
-    filter: invert(1)
+    filter: none;
 }
 .settings {
     margin-right: 4px;
@@ -39,36 +43,192 @@ body {
 * {
     user-select: none;
 }
-@keyframes moveRight {
-    0%{right: 0%;}
-    100%{right: -36.6%;}
-}
-@keyframes moveLeft {
-    0% {right: -36.6%}
-    100% {right: 0%}
-}
 #settingsMenu {
     background-color: #202124;
-    width: 36%;
-    height: 55%;
+    color: #ffffff;
+    width: min(440px, 36vw);
+    height: min(72vh, 640px);
     position: absolute;
-    right: -36.6%;
-    z-index: 4;
+    right: 0;
     top: 10%;
-    filter: invert(1);
-    animation-timing-function: cubic-bezier(0.42, 0, 0.27, 1.02);
+    z-index: 4;
+    filter: none;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(110%);
+    transition: transform 400ms cubic-bezier(0.42, 0, 0.27, 1.02), opacity 220ms ease, visibility 0ms linear 220ms;
     border: 2px solid;
-    border-radius: 6px;
-    overflow-y: scroll;
+    border-color: #5c6d81;
+    border-radius: 14px;
+    overflow-y: auto;
     overflow-x: hidden;
+    padding: 12px;
+    box-sizing: border-box;
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.38);
+    scrollbar-width: thin;
+    scrollbar-color: #778693 transparent;
+}
+#settingsMenu.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(0);
+    transition: transform 400ms cubic-bezier(0.42, 0, 0.27, 1.02), opacity 220ms ease, visibility 0ms linear 0ms;
+}
+#settingsMenu::-webkit-scrollbar {
+    width: 8px;
+}
+#settingsMenu::-webkit-scrollbar-track {
+    background: transparent;
+}
+#settingsMenu::-webkit-scrollbar-thumb {
+    background: #778693;
+    border-radius: 4px;
+}
+#settingsMenu::-webkit-scrollbar-thumb:hover {
+    background: #b8cbe0;
 }
 .settingsContainer {
-    filter: invert(1);
-    padding: 10px;
     filter: none !important;
+    padding: 8px 10px;
     display: flex;
     flex-direction: row;
     align-items: center;
+    gap: 10px;
+    min-height: 38px;
+    box-sizing: border-box;
+}
+details {
+    margin: 0 0 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+details[open] {
+    padding-bottom: 6px;
+}
+summary {
+    padding: 11px 14px;
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    list-style: none;
+    color: #ffffff;
+    background: rgba(92, 109, 129, 0.42);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    transition: background 0.18s ease;
+}
+summary:hover,
+summary:focus-visible {
+    background: rgba(120, 142, 164, 0.52);
+}
+summary::-webkit-details-marker {
+    display: none;
+}
+summary::after {
+    content: "+";
+    float: right;
+    color: #d7e2ef;
+}
+details[open] summary::after {
+    content: "-";
+}
+.settingsContainer label {
+    flex: 1;
+    color: inherit;
+    line-height: 1.2;
+}
+.settingsContainer select,
+.settingsContainer button,
+.settingsContainer input[type="file"] {
+    font: inherit;
+    font-weight: normal;
+    color: #ffffff;
+    background: #30343b;
+    border: 1px solid #778693;
+    border-radius: 4px;
+    padding: 5px 7px;
+}
+.settingsContainer select {
+    max-width: 62%;
+}
+.settingsContainer select option {
+    font-family: inherit !important;
+    font-weight: normal !important;
+}
+.settingsContainer button {
+    cursor: pointer;
+}
+.settingsContainer .tutorial-button {
+    display: inline-block;
+    color: #ffffff;
+    background: #30343b;
+    border: 1px solid #778693;
+    border-radius: 4px;
+    padding: 5px 7px;
+    text-decoration: none;
+}
+.settingsContainer button:hover,
+.settingsContainer .tutorial-button:hover,
+.settingsContainer .tutorial-button:focus,
+.settingsContainer select:focus,
+.settingsContainer input[type="file"]:focus {
+    border-color: #b8cbe0;
+    outline: 2px solid rgba(184, 203, 224, 0.25);
+}
+.settingsContainer input[type="color"] {
+    filter: none;
+    width: 42px;
+    height: 28px;
+    padding: 2px;
+    border: 1px solid #778693;
+    border-radius: 4px;
+    background: #30343b;
+}
+.file-input-control {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    max-width: 62%;
+    min-width: 0;
+}
+.file-input-control input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+.file-input-button {
+    flex: 0 0 auto;
+    padding: 5px 7px;
+    color: #ffffff;
+    background: #30343b;
+    border: 1px solid #778693;
+    border-radius: 4px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+.file-input-button:hover,
+.file-input-button:focus-within {
+    border-color: #b8cbe0;
+    outline: 2px solid rgba(184, 203, 224, 0.25);
+}
+.file-input-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#navbar-opacity {
+    filter: none;
+    accent-color: #0086ba;
+}
+#span {
+    accent-color: #ff7945;
 }
 #teachers {
     text-align: center;
@@ -292,11 +452,22 @@ footer {
     --font: 'Borton' !important;
     font-family: "Borton" !important;
 }
+#prompt.Christmas,
+#prompt.LOTR {
+    gap: 0.5rem !important;
+    --margin: 0 !important;
+}
+#prompt.Christmas:before,
+#prompt.Christmas:after,
+#prompt.LOTR:before,
+#prompt.LOTR:after {
+    top: auto;
+}
 #prompt {
     display: grid;
     user-select: none;
     gap: calc(80vmin/10);
-    font-size: 15vmin;
+    font-size: min(15vmin, 8rem);
     --size: 6vmin;
     font-weight: 800;--weight: normal;
     text-align: center;
@@ -356,9 +527,9 @@ footer {
 
 .navbar {
     width: 100%;
-    height: 10% !important;
+    height: 56px !important;
     opacity: 1;
-    display: block;
+    display: flex;
     z-index: 1;
 }
 
@@ -403,6 +574,101 @@ footer {
     margin-top: -10pt;
 }
 
+@media (max-width: 768px) {
+    html, body {
+        overflow: hidden;
+    }
+    body {
+        align-items: flex-start;
+        padding-top: 0;
+    }
+    #settingsMenu {
+        width: min(92vw, 420px);
+        height: calc(100vh - 76px);
+        top: 64px;
+        right: 0;
+        border-radius: 10px;
+        padding: 10px;
+        transform: translateX(110%);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+    #settingsMenu.open {
+        transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+    #content {
+        width: 100%;
+        height: calc(100vh - 12vh);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 10px;
+    }
+    #schedule {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #prompt {
+        font-size: clamp(2.6rem, 12vw, 5.3rem) !important;
+        margin: 0;
+        gap: 0.5rem !important;
+        line-height: 1.05;
+        --size: clamp(0.9rem, 3.5vw, 1.5rem) !important;
+        --margin: 0 !important;
+    }
+    #prompt:before,
+    #prompt:after {
+        margin: var(--margin) !important;
+        top: auto;
+    }
+    #prompt:before {
+        font-size: clamp(1.2rem, 5.4vw, 1.6rem) !important;
+    }
+    #prompt:after {
+        font-size: clamp(1rem, 4.2vw, 1.25rem) !important;
+    }
+    .navbar {
+        height: 56px !important;
+    }
+    #import-box {
+        width: 50px;
+        height: 50px;
+        top: auto;
+        left: auto;
+    }
+    #allsun {
+        width: 32px;
+        height: 32px;
+    }
+    .settingsContainer {
+        gap: 8px;
+        padding: 10px 8px;
+        flex-wrap: wrap;
+    }
+    .settingsContainer select,
+    .settingsContainer .tutorial-button,
+    .settingsContainer button,
+    .file-input-control {
+        max-width: 100%;
+        width: 100%;
+    }
+    .file-input-control {
+        min-width: 0;
+    }
+    .settingsContainer label {
+        width: 100%;
+    }
+    .file-input-name {
+        max-width: 100%;
+    }
+}
+
 #text:hover {
     transform: scaleX(1.1);
     filter: drop-shadow(0px 0px 3px var(--background-color));
@@ -432,12 +698,12 @@ div#text > span.icon {
     aspect-ratio: 1/1;
 }
 #import-box {
-    width: 10vh;
-    height: 10vh;
-    top: .5%;
-    left: 1%;
+    width: 50px;
+    height: 50px;
+    top: auto;
+    left: auto;
     cursor: pointer;
-    position: absolute;
+    position: static;
     display: flex;
 }
 .icecream {
@@ -468,6 +734,8 @@ div#text > .icecream:nth-child(3) {
     border-style: solid;
     border-color: rgb(40, 10, 108);
     border-width: 3px;
+    padding: 8px 12px;
+    box-sizing: border-box;
     margin-left: 10px;
     margin-bottom: 10px;
 }
@@ -475,8 +743,40 @@ div#text > .icecream:nth-child(3) {
     font-size: 130% !important;
     text-align: center;
     width: 100%;
+    box-sizing: border-box;
     margin: 0;
     cursor: pointer;
+}
+@keyframes countdownModeChange {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes languageChange {
+    from {
+        opacity: 0.35;
+        transform: translateY(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+body.language-change #prompt,
+body.language-change #count-text,
+body.language-change #settingsMenu label,
+body.language-change #settingsMenu summary,
+body.language-change #settingsMenu button,
+body.language-change #settingsMenu .file-input-name {
+    animation: languageChange 320ms ease-out;
+}
+#count-text.mode-change {
+    animation: countdownModeChange 220ms ease-out;
 }
 #count-text.compact {
     font-size: 105% !important;

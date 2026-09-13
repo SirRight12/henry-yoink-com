@@ -14,26 +14,44 @@
         <p id="count-text">0:00:00 until the year is over</p>
     </div>
     <div id="settingsMenu">
-        <div class="settingsContainer">
-            <input class="settings" tabindex="-1"id="navbarColor" type="color" value="#5c6d81" onfocus="autoUpdNavbar(this)"/> <label class="setText">Navbar Color</label>
-        </div>
-        <div class="settingsContainer">
-            <input class="settings" tabindex="-1" id="bg" type="color" value="#202124" onfocus="autoUpd(this)"/> <label class="setText">Background Color</label>
-        </div>
-        <div class="settingsContainer">
-            <input class="settings setText" tabindex="-1" id="bg-img" type="file" accept="image/*" onchange="updateBGImage(this)"/> <label class="setText">ALT bg Image</label>
-        </div>
-        <div class="settingsContainer">
-            <input class="settings" id="textism" tabindex="-1"type="color" value="#ffffff" onfocus="autoUpdText(this)"/> <label class="setText">Text Color</label>
-        </div>
-        <div class="settingsContainer">
-            <input class="settings" tabindex="-1" id="iconcolor" type="color" value="#ffffff" onfocus="autoUpdIconColor(this)"/> <label class="setText">Icon Color</label>
-        </div>
-        <div class="settingsContainer" tabindex="-1">
-            <select id="myDropdown"><option value="">None</option></select><label class="setText">Count Down to Date</label>
-        </div>
-        <div class="settingsContainer" tabindex="-1">
-            <select class="settings" tabindex="-1" id="fonts" onchange="changeFont(this)">
+        <details open>
+            <summary class="setText">Schedule</summary>
+            <div class="settingsContainer" tabindex="-1">
+                <select id="myDropdown"><option value="">None</option></select><label class="setText">Count Down to Date</label>
+            </div>
+            <div class="settingsContainer" tabindex="-1">
+                <select id="schedule-selection" class="settings"><option value="">None</option></select>
+                <label class="setText">Campus / Grade</label>
+            </div>
+            <div tabindex="-1" class="settingsContainer">
+                <select tabindex="-1" class="settings" id="database-source">
+                    <option value="local">Local</option>
+                    <option value="global">Global</option>
+                </select> <label class="setText">Schedule Data Source</label>
+            </div>
+        </details>
+        <details open>
+            <summary class="setText">Appearance</summary>
+            <div class="settingsContainer">
+                <input class="settings" tabindex="-1"id="navbarColor" type="color" value="#5c6d81" onfocus="autoUpdNavbar(this)"/> <label class="setText">Navbar Color</label>
+            </div>
+            <div class="settingsContainer">
+                <input class="settings" id="textism" tabindex="-1"type="color" value="#ffffff" onfocus="autoUpdText(this)"/> <label class="setText">Text Color</label>
+            </div>
+            <div class="settingsContainer">
+                <input class="settings" id="countdown-color" tabindex="-1" type="color" value="#ffffff"/> <label class="setText">Countdown Text Color</label>
+            </div>
+            <div class="settingsContainer">
+                <input class="settings" id="countdown-background-color" tabindex="-1" type="color" value="#0086ba"/> <label class="setText">Countdown Background Color</label>
+            </div>
+            <div class="settingsContainer">
+                <input class="settings" tabindex="-1" id="iconcolor" type="color" value="#ffffff" onfocus="autoUpdIconColor(this)"/> <label class="setText">Icon Color</label>
+            </div>
+            <div class="settingsContainer">
+                <input class="settings" tabindex="-1" id="bg" type="color" value="#202124" onfocus="autoUpd(this)"/> <label class="setText">Background Color</label>
+            </div>
+            <div class="settingsContainer" tabindex="-1">
+                <select class="settings" tabindex="-1" id="fonts" onchange="changeFont(this)">
                 <option class="optionSettings Default"><p>Default</p></option>
                 <option class="optionSettings Hylian"><p>Hylian</p></option>
                 <option class="optionSettings Apple"><p>Apple</p></option>
@@ -60,15 +78,15 @@
                 <option class="optionSettings Knee"><p>Knee</p></option>
             </select>  <label class="setText">Font Style</label>
         </div>
-        <div class="settingsContainer" tabindex="-1">
-            <select class="settings" tabindex="-1" id="fx" onchange="changeFX(this)">
-                <option class="optionSettings Mason">None</option>
-                <option class="optionSettings Mason">Daniella</option>
-                <option class="optionSettings Mason">Christmas</option>
-            </select>  <label class="setText">Custom FX</label>
-        </div>
-        <div tabindex="-1" class="settingsContainer">
-            <select tabindex="-1"  class="settings" id="presets" onchange="changePreset(this)">
+            <div class="settingsContainer" tabindex="-1">
+                <select class="settings" tabindex="-1" id="fx" onchange="changeFX(this)">
+                    <option class="optionSettings Mason">None</option>
+                    <option class="optionSettings Mason">Daniella</option>
+                    <option class="optionSettings Mason">Christmas</option>
+                </select>  <label class="setText">Custom FX</label>
+            </div>
+            <div tabindex="-1" class="settingsContainer">
+                <select tabindex="-1"  class="settings" id="presets" onchange="changePreset(this)">
                 <option class="optionSettings Mason">None</option>
                 <option class="optionSettings Mason">Christmas</option> 
                 <option class="optionSettings Mason">Thanksgiving</option>
@@ -101,70 +119,103 @@
                 <option class="optionSettings Mason">Bill</option> 
                 <option class="optionSettings Mason">Tales</option> 
                 
-            </select>
-            <label class="setText">Presets</label>
-        </div>
+                </select>
+                <label class="setText">Presets</label>
+            </div>
 
-        <div tabindex="-1" class="settingsContainer">
-            <select id="timeControls" class="settings" title="Changes which time renderer the site should use, defaults to 'Classic' Milliseconds will return after spirit week" onchange="changeTimeControl(this)">
-                <option title="Displays regular times, very consistant">Classic</option>
-                <option title="Displays milliseconds, can be volitile">Milliseconds</option>
-            </select> <label class="setText">Time Controller</label>
-        </div>
-        <div tabindex="-1" class="settingsContainer">
-            <button tabindex="-1" onclick="downloadCST()">Download CST</button>
-        </div>
-        <div tabindex="-1" class="settingsContainer">
-            <button tabindex="-1" onclick="clearBGImg()">Clear Image</button>
-        </div>
-        <div tabindex="-1" class="settingsContainer">
-            <button tabindex="-1" onclick="clearFonts()">Clear Saved Fonts</button>
-        </div>
-        <div tabindex="-1" class="settingsContainer">
-            <input tabindex="-1" type="checkbox" id="span" value="false"><label class="setText">Use Spanish</label>
-        </div>
-        <div tabindex="-1" class="settingsContainer">
-            <input tabindex="-1" type="range" min="0" step=".01" max="1" value="1" onfocus="updateNbOp(this)" onblur="cancelUpdateNbOp()"><label class="setText">Navbar Opacity</label>
-        </div>
-        <div tabindex="-1" class="settingsContainer">
-            <select tabindex="-1" class="settings" id="database-source">
-                <option value="local">Local</option>
-                <option value="global">Global</option>
-            </select> <label class="setText">Schedule Data Source</label>
-        </div>
-        <div tabindex="-1" class="settingsContainer">
-            <label class="setText">Background Image settings</label>
-        </div>
-        
-        <div tabindex="-1" class="settingsContainer" title="Change how the background image fits the page">
-            <select tabindex="-1" id="sizing" class="settings" onchange="changeSizingStyle(this)">
-                <option class="Mason" title="Fill the entire screen no matter if the image actually fits">Cover</option>
-                <option class="Mason" title="Fit the image so it doesn't go too far in any direction">Contain</option>
-                <option class="Mason" title="Set a custom Image Size">Custom</option>
-            </select> <label class="setText">  Background Image Sizing</label>
-        </div>
-        <div tabindex="-1" class="settingsContainer" title="Change the size" id="custom-position">
-            <input type="range" min="1" max="100" step="1" id="value-x" onchange="changeCustomSize(this)"> <label>Custom Width</label> <br>
-        </div>
-        <div tabindex="-1" class="settingsContainer" title="Change how the background image repeats">
-            <select tabindex="-1" id="repeating" class="settings" onchange="changeRepeatStyle(this)">
-                <option class="Mason" title="Don't repeat the image">No-Repeat</option>
-                <option class="Mason" title="Repeat the image across the width">Repeat-X</option>
-                <option class="Mason" title="Repeat the image across the height">Repeat-Y</option>
-                <option class="Mason" title="Repeat the image across both directions">Repeat</option>
-            </select> <label class="setText">Background Image Repeating</label>
+            <div tabindex="-1" class="settingsContainer">
+                <select id="timeControls" class="settings" title="Changes which time renderer the site should use, defaults to 'Classic' Milliseconds will return after spirit week" onchange="changeTimeControl(this)">
+                <option value="Classic" title="Displays regular times, very consistant">Classic</option>
+                <option value="Milliseconds" title="Displays milliseconds, can be volitile">Milliseconds</option>
+                </select> <label class="setText">Time Controller</label>
+            </div>
+            <div tabindex="-1" class="settingsContainer">
+                <button tabindex="-1" onclick="downloadCST()">Download CST</button>
+            </div>
+            <div tabindex="-1" class="settingsContainer">
+                <button tabindex="-1" onclick="clearBGImg()">Clear Image</button>
+            </div>
+            <div tabindex="-1" class="settingsContainer">
+                <button tabindex="-1" onclick="clearFonts()">Clear Saved Fonts</button>
+            </div>
+            <div tabindex="-1" class="settingsContainer">
+                <input tabindex="-1" type="checkbox" id="span" value="false"><label class="setText">Use Spanish</label>
+            </div>
+            <div tabindex="-1" class="settingsContainer">
+                <input tabindex="-1" id="navbar-opacity" type="range" min="0" step=".01" max="1" value="1" onfocus="updateNbOp(this)" onblur="cancelUpdateNbOp()" onchange="saveNavbarOpacity(this)"><label class="setText">Navbar Opacity</label>
+            </div>
+            <div tabindex="-1" class="settingsContainer">
+                <button tabindex="-1" type="button" onclick="resetSettings()">Reset Settings</button>
+            </div>
+        </details>
+        <details open>
+            <summary class="setText">Background Image</summary>
+            <div class="settingsContainer">
+                <div class="file-input-control">
+                    <input class="settings" tabindex="-1" id="bg-img" type="file" accept="image/*" onchange="updateBGImage(this)"/>
+                    <label class="file-input-button" for="bg-img">Choose File</label>
+                    <span class="file-input-name">No file selected</span>
+                    <span id="bg-image-status" class="file-upload-status" role="status" aria-live="polite"></span>
+                </div>
+                <label class="setText">ALT Background Image</label>
+            </div>
+            <div tabindex="-1" class="settingsContainer" title="Change how the background image fits the page">
+                <select tabindex="-1" id="sizing" class="settings" onchange="changeSizingStyle(this)">
+                    <option class="Mason" title="Fill the entire screen no matter if the image actually fits">Cover</option>
+                    <option class="Mason" title="Fit the image so it doesn't go too far in any direction">Contain</option>
+                    <option class="Mason" title="Set a custom Image Size">Custom</option>
+                </select> <label class="setText">  Background Image Sizing</label>
+            </div>
+            <div tabindex="-1" class="settingsContainer" title="Change the size" id="custom-position">
+                <input type="range" min="1" max="100" step="1" id="value-x" onchange="changeCustomSize(this)"> <label>Custom Width</label> <br>
+            </div>
+            <div tabindex="-1" class="settingsContainer" title="Change how the background image repeats">
+                <select tabindex="-1" id="repeating" class="settings" onchange="changeRepeatStyle(this)">
+                    <option class="Mason" value="no-repeat" title="Don't repeat the image">No-Repeat</option>
+                    <option class="Mason" value="repeat-x" title="Repeat the image across the width">Repeat-X</option>
+                    <option class="Mason" value="repeat-y" title="Repeat the image across the height">Repeat-Y</option>
+                    <option class="Mason" value="repeat" title="Repeat the image across both directions">Repeat</option>
+                </select> <label class="setText">Background Image Repeating</label>
+            </div>
+        </details>
+        <details open>
+            <summary class="setText">Schedule Data</summary>
+            <div class="settingsContainer" tabindex="-1">
+                <select id="custom-schedule-sheet" class="settings">
+                    <option value="mainSchedule">Main Schedule</option>
+                    <option value="countdown">Countdown</option>
+                    <option value="specialScheduleDays">Special Days</option>
+                    <option value="periodText">Period Text</option>
+                </select>
+                <label class="setText">CSV type to upload</label>
+            </div>
+            <div class="settingsContainer" tabindex="-1">
+                <button type="button" id="download-schedule-example">Download Example Data</button>
+            </div>
+            <div class="settingsContainer" tabindex="-1">
+                <a class="tutorial-button" href="CSV_Upload_Tutorial.html" target="_blank" rel="noopener">Open CSV Tutorial</a>
+            </div>
+            <div class="settingsContainer" tabindex="-1">
+                <div class="file-input-control">
+                    <input id="custom-schedule-file" type="file" accept=".csv,text/csv" class="settings">
+                    <label class="file-input-button" for="custom-schedule-file">Choose CSV File</label>
+                    <span class="file-input-name">No file selected</span>
+                    <span id="schedule-upload-status" class="file-upload-status" role="status" aria-live="polite"></span>
+                </div>
+                <label class="setText">Upload Schedule Data</label>
+            </div>
+        </details>
         </div>
     </div>
     <div class="navbar" id="navbarspace"></div>
-    <!-- <img src="icons/snow.svg" class="snow"> -->
-    <div class="navbar" id="navbar"></div>
-        <svg class="icon darkmode" id="allsun" onclick="toggleSettings()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <div class="navbar" id="navbar">
+            <div class="icon" id="import-box">
+                <img id="import" class="s-icon" onclick="importFont()" src="icons/import.svg">
+            </div>
+        <svg class="icon darkmode" id="allsun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path d="M0 0h24v24H0z" fill="none"></path>
             <path id="sunrays" d="M20 15.31L23.31 12 20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69zM12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z" style="transition-duration: 350ms;"></path>
         </svg>
-        <div class="icon" id="import-box">
-            <img id="import" class="s-icon" onclick="importFont()" src="icons/import.svg">
-        </div>
     </div>
     <div id="sub-console"></div>
     <div id="content">
@@ -198,9 +249,6 @@
     <script src="Scripts/files.js"></script>
     <script src="Scripts/cstParser.js"></script>
     <script src="Scripts/timeControls.js" defer></script>
-    <script src="Scripts/LoadCountDownToDate.js"></script>
+    <script src="Scripts/countdownDropdown.js"></script>
     <script src="Scripts/nextClass.js"></script>
-    <script>
-        // localStorage.clear()
-    </script>
 </body></html>

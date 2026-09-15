@@ -19,37 +19,12 @@ googleCacheKeys.forEach(sheetKey => {
     if (cachedValue) googleDataCache[sheetKey] = cachedValue;
 });
 
-function getCustomCsvText(sheetKey) {
-    try {
-        const key = `customSchedule_${sheetKey}`;
-        const value = localStorage.getItem(key);
-        return value && value.trim() ? value : null;
-    } catch {
-        return null;
-    }
-}
-
-function hasCustomCsvError(sheetKey) {
-    return localStorage.getItem(`customScheduleError_${sheetKey}`) === "true";
-}
-
 function loadDatabaseText(localPath, sheetKey) {
-    const customText = getCustomCsvText(sheetKey);
-    if (customText) return customText;
-
-    if (hasCustomCsvError(sheetKey) && window.databaseSource === "local") {
-        return loadLocalDatabaseText(localPath);
-    }
-
     const config = window.googleSheetsConfig;
     if (window.databaseSource === "google") {
         if (googleDataCache[sheetKey]) return googleDataCache[sheetKey];
     }
 
-    return loadLocalDatabaseText(localPath);
-}
-
-function loadLocalDatabaseText(localPath) {
     const localRequest = new XMLHttpRequest();
     localRequest.open("GET", localPath, false);
     localRequest.send();
@@ -57,21 +32,6 @@ function loadLocalDatabaseText(localPath) {
         throw new Error(`Could not load ${localPath}`);
     }
     return localRequest.responseText;
-}
-
-async function fetchGoogleSheetData(sheetKey) {
-    const config = window.googleSheetsConfig;
-    const url = new URL(config.endpoint);
-    url.searchParams.set("sheet", config.sheetNames[sheetKey]);
-    url.searchParams.set("format", "csv");
-    url.searchParams.set("cacheBust", Date.now().toString());
-
-    const response = await fetch(url);
-    const text = await response.text();
-    if (!response.ok || !text.trim()) {
-        throw new Error(`Google Sheet ${config.sheetNames[sheetKey]} returned no data`);
-    }
-    return { sheetKey, text };
 }
 
 function preloadGoogleData() {
@@ -86,7 +46,19 @@ function preloadGoogleData() {
     const missingSheetKeys = googleCacheKeys.filter(sheetKey => !googleDataCache[sheetKey]);
     if (!missingSheetKeys.length) return;
 
-    Promise.all(missingSheetKeys.map(fetchGoogleSheetData))
+    Promise.all(missingSheetKeys.map(async sheetKey => {
+        const url = new URL(config.endpoint);
+        url.searchParams.set("sheet", config.sheetNames[sheetKey]);
+        url.searchParams.set("format", "csv");
+        url.searchParams.set("cacheBust", Date.now().toString());
+
+        const response = await fetch(url);
+        const text = await response.text();
+        if (!response.ok || !text.trim()) {
+            throw new Error(`Google Sheet ${config.sheetNames[sheetKey]} returned no data`);
+        }
+        return { sheetKey, text };
+    }))
         .then(results => {
             results.forEach(({ sheetKey, text }) => {
                 googleDataCache[sheetKey] = text;
@@ -95,24 +67,6 @@ function preloadGoogleData() {
             window.location.reload();
         })
         .catch(error => switchToLocalData(`Google Sheets preload failed: ${error.message}`));
-}
-
-function refreshGoogleData() {
-    const config = window.googleSheetsConfig;
-    if (window.databaseSource !== "google" || !config.enabled || !config.endpoint) return;
-
-    Promise.all(googleCacheKeys.map(fetchGoogleSheetData))
-        .then(results => {
-            const hasChanges = results.some(({ sheetKey, text }) => googleDataCache[sheetKey] !== text);
-            if (!hasChanges) return;
-
-            results.forEach(({ sheetKey, text }) => {
-                googleDataCache[sheetKey] = text;
-                sessionStorage.setItem(`googleData_${sheetKey}`, text);
-            });
-            window.location.reload();
-        })
-        .catch(error => console.warn(`Google Sheets refresh failed: ${error.message}`));
 }
 
 function clearGoogleDataCache() {
@@ -142,4 +96,3 @@ if (databaseSourceSelect) {
 }
 
 preloadGoogleData();
-window.setInterval(refreshGoogleData, 60_000);

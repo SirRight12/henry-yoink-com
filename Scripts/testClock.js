@@ -1,5 +1,5 @@
 // Temporary schedule testing: add ?testTime=2026-09-05T10:30 or ?testTime=2026-09-05T10:30:15 to the URL.
-var scheduleTestingEnabled = false; // Set to false to disable schedule testing, even if testTime is in the URL.
+var scheduleTestingEnabled = false;
 var scheduleTestDate = null;
 
 function setScheduleTestDate(date) {

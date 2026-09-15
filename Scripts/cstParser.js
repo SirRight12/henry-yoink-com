@@ -11,10 +11,11 @@ function parseAsCST(settings = {}) {
         ctc: settings.ctc || "#ffffff",
         cbc: settings.cbc || "#0086ba",
         no: settings.no ?? 1,
-        ss: settings.ss || "cover",
+        ss: (settings.ss || "cover").toLowerCase(),
         cw: settings.cw || 100,
         rs: settings.rs || "no-repeat",
-        fx: settings.fx || "None"
+        fx: settings.fx || "None",
+        bi: settings.bi || ""
     })
 }
 function parseCST(string) {
@@ -37,6 +38,7 @@ function parseCST(string) {
     values['cw'] = 100
     values['rs'] = "no-repeat"
     values['fx'] = "None"
+    values['bi'] = ""
     return values
 }
 function downloadCST() {
@@ -52,7 +54,8 @@ function downloadCST() {
         ss: sizingStyle,
         cw: sizingWidth,
         rs: repeatingStyle,
-        fx: document.getElementById("fx")?.value || "None"
+        fx: document.getElementById("fx")?.value || "None",
+        bi: localStorage.getItem("bgImage") || ""
     })
     let file = new File([fileText],"theme.cst")
     const reader = new FileReader()

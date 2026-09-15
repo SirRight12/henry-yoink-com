@@ -1314,8 +1314,14 @@ function applyPreset(name) {
     settingsMenu.style.backgroundColor = preset['bg']
     document.body.style.backgroundColor = preset['bg']
     setIconColor(preset['ic'] || 'white')
-    if (preset['bi']) {
-        setBG64(preset['bi'])
+    if (Object.prototype.hasOwnProperty.call(preset, 'bi')) {
+        if (preset['bi']) {
+            setBG64(preset['bi'])
+            localStorage['bgImage'] = preset['bi']
+        } else {
+            removeBGImg()
+            localStorage['bgImage'] = ""
+        }
     }
     colorBG = preset['bg']
     sText.style.color = preset['fc']
@@ -1329,14 +1335,17 @@ function applyPreset(name) {
         if (navbarOpacity) navbarOpacity.value = preset['no']
     }
     if (preset['ss'] && preset['ss'] != 'custom') {
-        document.body.style.backgroundSize = preset['ss']
+        setSizing(preset['ss'])
+        sizing.value = preset['ss'].replace(/^./, char => char.toUpperCase())
     } else if (preset['ss'] == 'custom') {
+        sizing.value = 'Custom'
         valX.value = preset['cw']
         changeCustomSize()
     }
 
     if (preset['rs']) {
-        document.body.style.backgroundRepeat = preset['rs']
+        setRepeating(preset['rs'])
+        repeating.value = preset['rs']
     }
     if (preset['ctc']) {
         if (countdownColor) countdownColor.value = preset['ctc']

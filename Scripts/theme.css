@@ -327,12 +327,13 @@
       -webkit-backdrop-filter: blur(4px) brightness(0.9);
       display: flex;
       align-items: center;
-      padding: 0px 5px;
+      padding: 0px 14px;
       justify-content: space-between;
       align-content: center;
       color: var(--color);
       font-variation-settings: "FILL" 1;
-      height: 11.2% !important;
+      height: 56px !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   }
   
   #navbar a {
@@ -348,9 +349,15 @@
       transition-property: transform, fill;
   }
   #allsun {
-    position: absolute;
-	top: 2.4%;
-	right: .5%;
+      position: static;
+      width: 34px;
+      height: 34px;
+      margin-left: auto;
+      transform-origin: center;
+      transition: transform 400ms ease;
+  }
+    #allsun.settings-open {
+        transform: rotate(180deg);
   }
   body.dark #sun {
       transform: translate(-15%, 0%) scale(120%) rotateY(41deg);

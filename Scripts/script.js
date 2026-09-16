@@ -34,7 +34,6 @@ const presets = {
         "nb" : "black",
         "fc": "white",
         "fn": "Borton",
-        "ic": "white",
         "no": 0,
         'bi': 'Backgrounds/Daniel.jpg',
         'ic': 'rgb(209,155,137)',
@@ -440,13 +439,32 @@ let colorBG = ""
 let colorNavBar = ""
 let colorIcon = ""
 let colorFont = ""
+let hasManualTextColor = localStorage.getItem("manualTextColor") === "true"
+let hasManualCountdownTextColor = localStorage.getItem("manualCountdownTextColor") === "true"
+
+function updateSettingsTextColor(value) {
+    for (let x = 0; x < setTexts.length; x++) {
+        setTexts[x].style.color = value
+    }
+}
+
+function getInverseSettingsTextColor(hex) {
+    const clean = (hex || "#202124").replace("#", "")
+    const full = clean.length === 3 ? clean.split("").map(value => value + value).join("") : clean
+    const color = parseInt(full, 16)
+    const red = (color >> 16) & 255
+    const green = (color >> 8) & 255
+    const blue = color & 255
+    const brightness = (red * 299 + green * 587 + blue * 114) / 1000
+
+    if (brightness < 130) return "#ffffff"
+    if (brightness < 175) return "#d0d0d0"
+    return "#000000"
+}
+
 function autoUpd(element) {
     isAutoUpdBg = true
     document.body.style.transitionDuration = "100ms"
-    for (let x = 0; x < setTexts.length; x++) {
-        const t = setTexts[x]
-        t.style.color = element.value
-    }
     requestAnimationFrame(anim)
     colorBG = element.value
     function anim() {
@@ -455,14 +473,23 @@ function autoUpd(element) {
         settingsMenu.style.backgroundColor = element.value
         document.body.style.backgroundColor = element.value
         colorBG = element.value
-        for (let x = 0; x < setTexts.length; x++) {
-            const t = setTexts[x]
-            t.style.color = element.value
+        if (!hasManualTextColor) {
+            const inverseTextColor = getInverseSettingsTextColor(element.value)
+            sText.style.color = inverseTextColor
+            updateSettingsTextColor(inverseTextColor)
         }
     }
 }
 function changePreset(element) {
     const val = element.value
+    localStorage.setItem("preset", val)
+    if (val === "None") {
+        const navbarOpacity = document.getElementById("navbar-opacity")
+        if (navbarOpacity) {
+            navbarOpacity.value = "1"
+            saveNavbarOpacity(navbarOpacity)
+        }
+    }
     usePreset(val)
 }
 function changeFont(element) {
@@ -495,6 +522,7 @@ function autoUpdText(element) {
         requestAnimationFrame(anim)
         colorFont = element.value
         sText.style.color = element.value
+        updateSettingsTextColor(element.value)
     }
 }
 function cancelUpdText() {
@@ -520,6 +548,9 @@ function cancelUpdNavBar() {
     actualNavBar.style.transitionDuration = "350ms"
 }
 const icon = document.getElementById("allsun")
+if (icon) {
+    icon.addEventListener("click", toggleSettings)
+}
 const icoChanger = document.getElementById("iconcolor")
 function autoUpdIconColor(element) {
     isAutoUpdIco = true
@@ -541,19 +572,31 @@ function cancelUpdIcon() {
     isAutoUpdIco = false
 }
 const space = document.getElementById("navbarspace")
-function updateBGImage(element) {
+function setBGImageStatus(message) {
+    const status = document.getElementById("bg-image-status")
+    if (status) status.textContent = message
+}
+async function updateBGImage(element) {
     try {
         if (!element) return
-        setBGImg(element)
+        await setBGImg(element)
     } catch (err) {
+        setBGImageStatus("The background image has an error. The previous image was kept.")
         con.innerHTML = err
     }
 }
 async function setBGImg(image) {
     const file = image.files[0]
+    if (!file || !file.type.startsWith("image/")) {
+        throw new Error("Choose a valid image file.")
+    }
     const b64 = await readFileAsB64(file)
+    if (typeof b64 !== "string" || !b64.startsWith("data:image/")) {
+        throw new Error("The selected image could not be read.")
+    }
     saveBGImage(b64)
     setBG64(b64)
+    setBGImageStatus("")
 }
 function setBG64(b64) {
     document.body.style.backgroundImage = `url("${b64}")`
@@ -572,6 +615,10 @@ async function readFileAsB64(file) {
         let failure = setTimeout(() => {
             reject("Could not read, exceeded 10000ms")
         },10000)
+        reader.onerror = () => {
+            clearTimeout(failure)
+            reject("Could not read the selected image")
+        }
         reader.onload = () => {
             resolve(reader.result)
             clearTimeout(failure)
@@ -583,19 +630,17 @@ let sizingWidth = 100
 
 let repeatingStyle = "no-repeat"
 function changeSizingStyle(element) {
-    console.log(element.value)
     setSizing(element.value)
     saveImageStyles()
 }
 const customPos = document.getElementById("custom-position")
 function setSizing(val) {
     if (val == "Custom") {
-        customPos.style.display = "block"   
+        customPos.style.display = "block"
         sizingStyle = val
         return
     }
     customPos.style.display = "none"
-
     document.body.style.backgroundSize = val.toLowerCase()
     sizingStyle = val
 }
@@ -610,13 +655,12 @@ function changeRepeatStyle(element) {
 function changeCustomSize() {
     setCustomSize()
     saveImageStyles()
-
 }
 const valX = document.getElementById("value-x")
 function setCustomSize() {
-    let val = `${valX.value}%,1%` 
+    const value = `${valX.value}%,1%`
     sizingWidth = valX.value
-    document.body.style.backgroundSize = val
+    document.body.style.backgroundSize = value
 }
 let isUpdNavBarOp = false
 function updateNbOp(element) {
@@ -628,9 +672,14 @@ function updateNbOp(element) {
         requestAnimationFrame(anim)
     }
     anim()
-} 
+}
 function cancelUpdateNbOp() {
     isAutoUpdNav = false
+}
+function saveNavbarOpacity(element) {
+    localStorage.setItem("navbarOpacity", element.value)
+    space.style.opacity = element.value
+    actualNavBar.style.opacity = element.value
 }
 let isInSettings = false
 let canClick = true
@@ -640,33 +689,60 @@ function toggleSettings() {
     canClick = false
     if (!isInSettings) {
         isInSettings = true
-        mainSettings.style.animationName = "moveLeft"
-        mainSettings.style.animationDuration =  "400ms"
         mainSettings.style.display = "block"
-        setTimeout(() => {
-            mainSettings.style.right = "0%"
-        },10)
+        mainSettings.classList.add("open")
+        mainSettings.setAttribute("aria-hidden", "false")
     } else {
         isInSettings = false
-        mainSettings.style.animationName = "moveRight"
-        mainSettings.style.animationDuration =  "400ms"
-        setTimeout(() => {
-            mainSettings.style.right = "-36.6%"
-        },10)
-        setTimeout(() => {
-            mainSettings.style.display = "none"
-        },400)
+        mainSettings.classList.remove("open")
+        mainSettings.setAttribute("aria-hidden", "true")
     }
+    icon.classList.toggle("settings-open", isInSettings)
     setTimeout(() => {
         canClick = true
-    },500)
+    }, 500)
 }
+window.addEventListener("resize", () => {
+    if (mainSettings && !isInSettings) {
+        mainSettings.classList.remove("open")
+    }
+})
+document.addEventListener("click", event => {
+    if (!isInSettings || mainSettings.contains(event.target) || event.target.closest("#allsun")) return;
+    toggleSettings();
+});
 bg.addEventListener("blur",cancelUpd)
 const textChanger = document.getElementById("textism")
 const navbar = document.querySelector("#navbarColor")
+const countdownColor = document.getElementById("countdown-color")
+const countdownBackgroundColor = document.getElementById("countdown-background-color")
 textChanger.addEventListener("blur",cancelUpdText)
 navbar.addEventListener("blur",cancelUpdNavBar)
 icoChanger.addEventListener('blur',cancelUpdIcon)
+textChanger.addEventListener("input", () => {
+    hasManualTextColor = true
+    localStorage.setItem("manualTextColor", "true")
+    sText.style.color = textChanger.value
+    updateSettingsTextColor(textChanger.value)
+})
+function updateCountdownColor(value, manual = false) {
+    if (!value || !counter) return
+    if (manual) {
+        hasManualCountdownTextColor = true
+        localStorage.setItem("manualCountdownTextColor", "true")
+    }
+    counter.style.color = value
+    if (manual) localStorage.setItem("countdownTextColor", value)
+}
+function updateCountdownBackgroundColor(value) {
+    countDown.style.backgroundColor = value
+    countDown.style.borderColor = value === "#0086ba" ? "rgb(40, 10, 108)" : value
+    counter.style.backgroundColor = "transparent"
+    if (!hasManualCountdownTextColor) counter.style.color = getInverseSettingsTextColor(value)
+    localStorage.setItem("countdownBackgroundColor", value)
+}
+countdownColor?.addEventListener("input", () => updateCountdownColor(countdownColor.value, true))
+countdownBackgroundColor?.addEventListener("input", () => updateCountdownBackgroundColor(countdownBackgroundColor.value))
 function saveBGColor() {
     localStorage['bgColor'] = bg.value
 }
@@ -688,14 +764,15 @@ function saveImageStyles() {
         localStorage['bgWidth'] = sizingWidth
     }
     localStorage['bgRepeat'] = repeatingStyle
-    console.log(sizingWidth)
 }
 function loadTextColor() {
     if (!localStorage['textColor']) return
     textChanger.value = localStorage['textColor']
     colorFont = localStorage['textColor']
-    autoUpdText(textChanger)
-    requestAnimationFrame(cancelUpdText)
+    if (hasManualTextColor) {
+        autoUpdText(textChanger)
+        requestAnimationFrame(cancelUpdText)
+    }
 }
 function loadBGColor() {
     if (!localStorage['bgColor']) return
@@ -728,20 +805,20 @@ function loadBGImage() {
 const sizing = document.getElementById("sizing")
 const repeating = document.getElementById("repeating")
 function loadImageStyles() {
-    console.log(localStorage)
     setSizing(localStorage['bgImageSize'] || "Cover")
     sizing.value = localStorage['bgImageSize'] || "Cover"
-    console.log(localStorage)
     
     if (localStorage['bgImageSize'] == 'Custom') {
         valX.value = localStorage['bgWidth'] || "100"
         setCustomSize()
     }
-    console.log(localStorage)
-
-    setRepeating(localStorage['bgRepeat'] || "no-repeat")
-    repeating.value = localStorage['bgRepeat'] || "no-repeat"
-    console.log(localStorage)
+    const savedRepeat = (localStorage['bgRepeat'] || "no-repeat").toLowerCase()
+    const repeatValue = ["no-repeat", "repeat-x", "repeat-y", "repeat"].includes(savedRepeat)
+        ? savedRepeat
+        : "no-repeat"
+    setRepeating(repeatValue)
+    repeating.value = repeatValue
+    localStorage['bgRepeat'] = repeatValue
 }
 const presetVal = document.getElementById("presets")
 loadFont()
@@ -751,86 +828,84 @@ loadTextColor()
 loadIcoColor()
 loadBGImage()
 loadImageStyles()
+if (countdownColor) {
+    countdownColor.value = hasManualCountdownTextColor
+        ? localStorage.getItem("countdownTextColor") || "#ffffff"
+        : "#ffffff"
+    if (hasManualCountdownTextColor) updateCountdownColor(countdownColor.value)
+}
+if (countdownBackgroundColor) {
+    countdownBackgroundColor.value = localStorage.getItem("countdownBackgroundColor") || "#0086ba"
+    updateCountdownBackgroundColor(countdownBackgroundColor.value)
+}
+const navbarOpacity = document.getElementById("navbar-opacity")
+if (navbarOpacity) {
+    navbarOpacity.value = localStorage.getItem("navbarOpacity") || "1"
+    saveNavbarOpacity(navbarOpacity)
+}
 function clearFonts() {
     localStorage['imported-fonts'] = ""
     localStorage['font-names'] = ""
     localStorage['font'] = "Default"
     location.reload()
 }
+
+function resetSettings() {
+    const settingKeys = [
+        "bgColor", "textColor", "navbar", "icon", "bgImage", "bgImageSize", "bgWidth", "bgRepeat",
+        "font", "preset", "fx", "timeControl", "useSpanish", "databaseSource", "scheduleSelection",
+        "countdownSelection", "manualTextColor", "navbarOpacity", "countdownTextColor", "manualCountdownTextColor", "countdownBackgroundColor"
+    ]
+
+    settingKeys.forEach(key => localStorage.removeItem(key))
+    Object.keys(sessionStorage)
+        .filter(key => key.startsWith("googleData_"))
+        .forEach(key => sessionStorage.removeItem(key))
+    window.location.reload()
+}
 function badrng(min,max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-function PlayChristmasMusic() {
-    const audio = new Audio('Music/18-AudioTrack1.wav')
+function playLoopingAudio(sourcePath) {
+    const audio = new Audio(sourcePath)
     audio.loop = true
-    
     audio.play()
 
     return () => {
         audio.pause()
         audio.remove()
     }
+}
+function PlayChristmasMusic() {
+    return playLoopingAudio('Music/18-AudioTrack1.wav')
 }
 function PlayNutsMusic() {
-    const audio = new Audio('Music/nuts.mp3')
-    audio.loop = true
-    
-    audio.play()
-
-    return () => {
-        audio.pause()
-        audio.remove()
-    }
+    return playLoopingAudio('Music/nuts.mp3')
 }
 function Monkey() {
-    const audio = new Audio('Music/monke.mp3')
-    audio.loop = true
-    
-    audio.play()
-
-    return () => {
-        audio.pause()
-        audio.remove()
-    }
+    return playLoopingAudio('Music/monke.mp3')
 }
 function JordanN() {
-    const audio = new Audio('Music/jordan.mp3')
-    audio.loop = true
-    audio.play()
-    return () => {
-        audio.pause()
-        audio.remove()
-    }
+    return playLoopingAudio('Music/jordan.mp3')
 }
 function PlaySkeletonsMusic() {
-    const audio = new Audio('Music/Skeletons.mp3')
-    audio.loop = true
-
-    audio.play()
-
-    return () => {
-        audio.pause()
-        audio.remove()
-    }
+    return playLoopingAudio('Music/Skeletons.mp3')
 }
-function Thanksgiving() {
-    let video = document.getElementById('video')
-    let source = document.getElementById('source')
-    source.src = 'charlie brown.mp4'
+function playBackgroundVideo(sourcePath) {
+    const video = document.getElementById('video')
+    const source = document.getElementById('source')
+    source.src = sourcePath
     video.style.display = 'block'
     video.load()
     video.play()
 
     return () => {
-        try {
-
         video.style.display = 'none'
         video.pause()
-        } catch (err) {
-            con.innerHTML = err
-        }
-        
-    } 
+    }
+}
+function Thanksgiving() {
+    return playBackgroundVideo('Videos/charlie brown.mp4')
 }
 function Christmas() {
     try {
@@ -863,7 +938,6 @@ function Christmas() {
             // rotation += 2 * (1 / 60)
             height += 10 * (1 / 60)
             element.style.top = height + "%"
-            con.innerHTML = element.style.transform
             // element.style.transform = `rotate(${rotation}deg)`
             if (height > 100) {
                 element.remove()
@@ -883,23 +957,7 @@ function Christmas() {
     }
 }
 function Cranberry() {
-    let video = document.getElementById('video')
-    let source = document.getElementById('source')
-    source.src = 'cranberry.mp4'
-    video.style.display = 'block'
-    video.load()
-    video.play()
-
-    return () => {
-        try {
-
-        video.style.display = 'none'
-        video.pause()
-        } catch (err) {
-            con.innerHTML = err
-        }
-        
-    }
+    return playBackgroundVideo('Videos/cranberry.mp4')
 }
 function Tales() {
     let audio = new Audio('Music/cruel_king.mp3')
@@ -1033,70 +1091,16 @@ document.addEventListener("keyup", () => {
     stringThing = ""
 })
 function KneeSurgery() {
-    const audio = new Audio('Music/surgery.mp3')
-    audio.loop = true
-    audio.play()
-
-    return () => {
-        audio.pause()
-        audio.remove()
-    }
+    return playLoopingAudio('Music/surgery.mp3')
 }
 function EthanRe() {
-    let video = document.getElementById('video')
-    let source = document.getElementById('source')
-    source.src = 'Backgrounds/EthanRe.mp4'
-    video.style.display = 'block'
-    video.load()
-    video.play()
-
-    return () => {
-        try {
-
-        video.style.display = 'none'
-        video.pause()
-        } catch (err) {
-            con.innerHTML = err
-        }
-        
-    }
+    return playBackgroundVideo('Backgrounds/EthanRe.mp4')
 }
 function WRXSTI() {
-    let video = document.getElementById('video')
-    let source = document.getElementById('source')
-    source.src = 'Backgrounds/racing.mp4'
-    video.style.display = 'block'
-    video.load()
-    video.play()
-
-    return () => {
-        try {
-
-        video.style.display = 'none'
-        video.pause()
-        } catch (err) {
-            con.innerHTML = err
-        }
-        
-    } 
+    return playBackgroundVideo('Backgrounds/racing.mp4')
 }
 function Moto() {
-    let video = document.getElementById('video')
-    let source = document.getElementById('source')
-    source.src = 'Backgrounds/moto.mp4'
-    video.style.display = 'block'
-    video.load()
-    video.play()
-    return () => {
-        try {
-
-        video.style.display = 'none'
-        video.pause()
-        } catch (err) {
-            con.innerHTML = err
-        }
-        
-    } 
+    return playBackgroundVideo('Backgrounds/moto.mp4')
 }
 function Massive() {
     const audio = new Audio('Music/what_if.mp3')
@@ -1119,35 +1123,14 @@ function Massive() {
     }
 }
 function ThickOfIt() {
-    const audio = new Audio('Music/thick_of_it.mp3')
-    audio.loop = true
-    audio.play()
-
-    return () => {
-        audio.pause()
-        audio.remove()
-    }
+    return playLoopingAudio('Music/thick_of_it.mp3')
 }
 
 function Skibidi() {
-    const audio = new Audio('Music/skibidi.mp3')
-    audio.loop = true
-    audio.play()
-
-    return () => {
-        audio.pause()
-        audio.remove()
-    }
+    return playLoopingAudio('Music/skibidi.mp3')
 }
 function Subnautica() {
-    const audio = new Audio('Music/subnautica.mp3')
-    audio.loop = true
-    audio.play()
-
-    return () => {
-        audio.pause()
-        audio.remove()
-    }
+    return playLoopingAudio('Music/subnautica.mp3')
 }
 function Daniella() {
     try {
@@ -1180,7 +1163,6 @@ function Daniella() {
             // rotation += 2 * (1 / 60)
             height += 10 * (1 / 60)
             element.style.top = height + "%"
-            con.innerHTML = element.style.transform
             // element.style.transform = `rotate(${rotation}deg)`
             if (height > 100) {
                 element.remove()
@@ -1246,30 +1228,38 @@ function onDocClicked() {
 }
 document.addEventListener('click',onDocClicked)
 async function Clicked() {
-    return new Promise((resolve,reject) => {
+    return new Promise(resolve => {
         if (clickedScreen) {
             resolve()
             return
         }
-        function anim() {
-            if (clickedScreen) {
-                clearInterval(interval)
-                resolve()
-                return
-            } 
+        const handleClick = () => {
+            clickedScreen = true
+            resolve()
         }
-        anim()
-        let interval = setInterval(anim,0)
+        document.addEventListener('click', handleClick, { once: true })
     })
 }
 let stopSpecial = null
+let fxStartToken = 0
+let presetStartToken = 0
+function stopBackgroundVideo() {
+    const video = document.getElementById("video")
+    if (!video) return
+    video.pause()
+    video.currentTime = 0
+    video.style.display = "none"
+}
 async function checkForSpecial(name,override=false) {
+    const startToken = ++presetStartToken
     if (stopSpecial) { 
         stopSpecial()
         stopSpecial = false
     }
+    stopBackgroundVideo()
     if (!specialThemes[name]) return
     await Clicked() 
+    if (startToken !== presetStartToken) return
     const keys = Object.keys(presets)
     if (keys[selectedPreset] != name && override) return
     stopSpecial = specialThemes[name]()
@@ -1284,7 +1274,8 @@ function usePreset(name) {
         loadFont()
         loadNavColor()
         loadTextColor()
-        loadBGColor()
+        removeBGImg()
+        loadBGImage()
         setIconColor(icoChanger.value)
     }
     checkForSpecial(name)
@@ -1295,12 +1286,15 @@ function usePreset(name) {
 }
 async function changeFX(element) {
     const fx = element.value
+    const startToken = ++fxStartToken
+    localStorage.setItem("fx", fx)
     if (stopSpecial) { 
         stopSpecial()
         stopSpecial = false
     }
     if (!specialThemes[fx]) return
     await Clicked() 
+    if (startToken !== fxStartToken || element.value !== fx || fx === "None") return
     stopSpecial = specialThemes[fx]()
 }
 
@@ -1320,8 +1314,14 @@ function applyPreset(name) {
     settingsMenu.style.backgroundColor = preset['bg']
     document.body.style.backgroundColor = preset['bg']
     setIconColor(preset['ic'] || 'white')
-    if (preset['bi']) {
-        setBG64(preset['bi'])
+    if (Object.prototype.hasOwnProperty.call(preset, 'bi')) {
+        if (preset['bi']) {
+            setBG64(preset['bi'])
+            localStorage['bgImage'] = preset['bi']
+        } else {
+            removeBGImg()
+            localStorage['bgImage'] = ""
+        }
     }
     colorBG = preset['bg']
     sText.style.color = preset['fc']
@@ -1331,16 +1331,44 @@ function applyPreset(name) {
     if (preset['no'] || preset['no'] == 0) {
         space.style.opacity = preset['no']
         actualNavBar.style.opacity = preset['no']
+        const navbarOpacity = document.getElementById("navbar-opacity")
+        if (navbarOpacity) navbarOpacity.value = preset['no']
     }
     if (preset['ss'] && preset['ss'] != 'custom') {
-        document.body.style.backgroundSize = preset['ss']
+        setSizing(preset['ss'])
+        sizing.value = preset['ss'].replace(/^./, char => char.toUpperCase())
     } else if (preset['ss'] == 'custom') {
+        sizing.value = 'Custom'
         valX.value = preset['cw']
         changeCustomSize()
     }
 
     if (preset['rs']) {
-        document.body.style.backgroundRepeat = preset['rs']
+        setRepeating(preset['rs'])
+        repeating.value = preset['rs']
+    }
+    if (preset['ctc']) {
+        if (countdownColor) countdownColor.value = preset['ctc']
+        updateCountdownColor(preset['ctc'])
+    }
+    if (preset['cbc']) {
+        if (countdownBackgroundColor) countdownBackgroundColor.value = preset['cbc']
+        updateCountdownBackgroundColor(preset['cbc'])
+    }
+    if (preset['ic']) setIconColor(preset['ic'])
+    if (preset['no'] !== undefined) {
+        const navbarOpacity = document.getElementById("navbar-opacity")
+        if (navbarOpacity) {
+            navbarOpacity.value = preset['no']
+            saveNavbarOpacity(navbarOpacity)
+        }
+    }
+    if (preset['fx']) {
+        const fxSelect = document.getElementById("fx")
+        if (fxSelect) {
+            fxSelect.value = preset['fx']
+            changeFX(fxSelect)
+        }
     }
     for (let x = 0; x < setTexts.length; x++) {
         const t = setTexts[x]
@@ -1349,6 +1377,21 @@ function applyPreset(name) {
 }
 
 let selectedPreset = 0
+const savedPreset = localStorage.getItem("preset")
+if (savedPreset && presets[savedPreset]) {
+    presetVal.value = savedPreset
+    applyPreset(savedPreset)
+}
+const savedFX = localStorage.getItem("fx")
+if (savedFX) {
+    const fxSelect = document.getElementById("fx")
+    if (fxSelect && Array.from(fxSelect.options).some(option => option.value === savedFX)) {
+        fxSelect.value = savedFX
+        if (savedFX !== "None") {
+            document.addEventListener("click", () => changeFX(fxSelect), { once: true })
+        }
+    }
+}
 document.addEventListener('keydown',(event) => {
     
     const key = event.key.toUpperCase()

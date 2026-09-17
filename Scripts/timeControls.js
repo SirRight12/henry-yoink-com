@@ -1,0 +1,64 @@
+try {
+
+    let time = timeControls()
+    let hTime = hTimeControls()
+let current = 1
+function changeTimeControl(element) {
+    if (element.value == "Classic") {
+        current = 1
+    } else if (element.value == "Milliseconds") {
+        current = 2
+    } else {
+        element.value = "Classic"
+        current = 1
+    }
+}
+function useTimeControl(controller) {
+    try {
+    // if (!isInsideSchool()) return
+    if (controller == 1) {
+        hTime()
+    } else if (controller == 2) {
+        time()
+    } else {
+        hTime()
+    }
+    } catch (err) {
+        con.innerHTML = err
+    }
+}
+//Parse Time
+function PT(TimeString) {
+    let [startTime,endTime] = TimeString.split("-")
+    
+    let [startHr,startMin,startSec = 0] = startTime.split(":")
+    let [endHr,endMin,endSec = 0] = endTime.split(":")
+    const start = getScheduleNow()
+    start.setHours(startHr,startMin,startSec,0)
+    const end = getScheduleNow()
+    end.setHours(endHr,endMin,endSec,0)
+    
+    return [start,end]
+}
+    
+    
+function isInsideSchool() {
+    let times = getScheduleForDate(getScheduleNow())
+    if (!times) return false
+    let lastPeriod = times[Object.keys(times)[Object.keys(times).length - 1]]
+    const [start,end] = PT(lastPeriod)
+    const now = getScheduleNow()
+
+    if (now < end) return true
+    return false
+}
+function timer() {
+    // hTime()
+    useTimeControl(current)
+    // con.innerHTML = "hi "
+}
+timer()
+setInterval(timer,0)
+} catch (err) {
+    con.innerHTML = err
+}
